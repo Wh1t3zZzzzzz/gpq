@@ -10,6 +10,7 @@ IConfiguration configuration = new ConfigurationBuilder()
                             .Build();
 
 var builder = WebApplication.CreateBuilder(args);
+//我没用
 
 builder.Services.AddSingleton(new Appsettings(configuration));
 
