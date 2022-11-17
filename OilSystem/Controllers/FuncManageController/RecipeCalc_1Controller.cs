@@ -25,18 +25,15 @@ public class RecipeCalc_1Controller : ControllerBase
     //配方优化场景1组分油产量范围设置表格
     public ApiModel Set1()//model里的名字 多个数据用IEnumberable，单个数据不用
     {
-        var ProdOilProductList = context.Schemeverify1s.ToList();
-        List<SchemeVerify_1_1> ResultList = new List<SchemeVerify_1_1>();//列表，里面可以添加很多个对象
-        for(int i = 0; i < ProdOilProductList.Count; i++){
-            SchemeVerify_1_1 result = new SchemeVerify_1_1();//实体，可以理解为一个对象  
-            result.ComOilName = ProdOilProductList[i].ComOilName;
-            result.AutoProduct = ProdOilProductList[i].AutoQualityProduct;
-            result.ExpProduct = ProdOilProductList[i].ExpQualityProduct;
-            result.Prod1Product = ProdOilProductList[i].Prod1QualityProduct;
-            result.Prod2Product = ProdOilProductList[i].Prod2QualityProduct;
+        var ComOilProductLimitList = context.Recipecalc1s.ToList();//
+        List<Recipecalc_1_1> ResultList = new List<Recipecalc_1_1>();//列表，里面可以添加很多个对象
+        for(int i = 0; i < ComOilProductLimitList.Count; i++){
+            Recipecalc_1_1 result = new Recipecalc_1_1();//实体，可以理解为一个对象  
+            result.ComOilName = ComOilProductLimitList[i].ComOilName;
+            result.ComOilProductHigh = ComOilProductLimitList[i].ComOilProductHigh;
+            result.ComOilProductLow = ComOilProductLimitList[i].ComOilProductLow;
             ResultList.Add(result);
-        }
-    
+        } 
         return new ApiModel()
         {
         code = 200,
@@ -51,17 +48,12 @@ public class RecipeCalc_1Controller : ControllerBase
     //配方优化场景1优化目标设置表格
     public ApiModel Set2()//model里的名字 多个数据用IEnumberable，单个数据不用
     {
-
-        var BottomInfoList = context.Schemeverify2s.ToList();
-        List<SchemeVerify_1_2> ResultList = new List<SchemeVerify_1_2>();//列表，里面可以添加很多个对象
-        for(int i = 0; i < BottomInfoList.Count; i++){
-            SchemeVerify_1_2 result = new SchemeVerify_1_2();//实体，可以理解为一个对象  
-            result.ProdOilName = BottomInfoList[i].ProdOilName;
-            result.BottomCapacity = BottomInfoList[i].BottomMass;
-            result.BottomCET = BottomInfoList[i].CetMass;
-            result.BottomD50 = BottomInfoList[i].D50Mass;
-            result.BottomPOL = BottomInfoList[i].PolMass;
-            result.BottomDEN = BottomInfoList[i].DenMass;
+        var OptimizeObjList = context.Recipecalc2s.Where(m => m.Apply == 1).ToList();
+        List<Recipecalc_1_2> ResultList = new List<Recipecalc_1_2>();//列表，里面可以添加很多个对象
+        for(int i = 0; i < OptimizeObjList.Count; i++){
+            Recipecalc_1_2 result = new Recipecalc_1_2();//实体，可以理解为一个对象  
+            result.WeightName = OptimizeObjList[i].WeightName;
+            result.Weight = OptimizeObjList[i].Weight;
             ResultList.Add(result);
         }
      
@@ -79,13 +71,12 @@ public class RecipeCalc_1Controller : ControllerBase
     //配方优化场景1成品油产量限制设置表格（上限）
     public ApiModel Set3()//model里的名字 多个数据用IEnumberable，单个数据不用
     {
-
-        var TotalBlendList = context.Schemeverify2s.ToList();
-        List<SchemeVerify_1_3> ResultList = new List<SchemeVerify_1_3>();//列表，里面可以添加很多个对象
-        for(int i = 0; i < TotalBlendList.Count; i++){
-            SchemeVerify_1_3 result = new SchemeVerify_1_3();//实体，可以理解为一个对象  
-            result.ProdOilName = TotalBlendList[i].ProdOilName;
-            result.ProdTotalBlend = TotalBlendList[i].TotalBlendMass;
+        var ProdOilProductLimitList = context.Recipecalc3s.Where(m => m.Apply == 1).ToList();
+        List<Recipecalc_1_3> ResultList = new List<Recipecalc_1_3>();//列表，里面可以添加很多个对象
+        for(int i = 0; i < ProdOilProductLimitList.Count; i++){
+            Recipecalc_1_3 result = new Recipecalc_1_3();//实体，可以理解为一个对象  
+            result.ProdOilName = ProdOilProductLimitList[i].ProdOilName;
+            result.ProdOilProduct = ProdOilProductLimitList[i].ProdOilProduct;
             ResultList.Add(result);
         }
      
@@ -103,13 +94,14 @@ public class RecipeCalc_1Controller : ControllerBase
     //配方优化场景1组分油罐容设置
     public ApiModel Set4()//model里的名字 多个数据用IEnumberable，单个数据不用
     {
-
-        var TotalBlendList = context.Schemeverify2s.ToList();
-        List<SchemeVerify_1_3> ResultList = new List<SchemeVerify_1_3>();//列表，里面可以添加很多个对象
-        for(int i = 0; i < TotalBlendList.Count; i++){
-            SchemeVerify_1_3 result = new SchemeVerify_1_3();//实体，可以理解为一个对象  
-            result.ProdOilName = TotalBlendList[i].ProdOilName;
-            result.ProdTotalBlend = TotalBlendList[i].TotalBlendMass;
+        var ComOilTankVolList = context.Recipecalc1s.ToList();
+        List<Recipecalc_1_4> ResultList = new List<Recipecalc_1_4>();//列表，里面可以添加很多个对象
+        for(int i = 0; i < ComOilTankVolList.Count; i++){
+            Recipecalc_1_4 result = new Recipecalc_1_4();//实体，可以理解为一个对象  
+            result.ComOilName = ComOilTankVolList[i].ComOilName;
+            result.IniVolume = ComOilTankVolList[i].IniVolume;
+            result.HighVolume = ComOilTankVolList[i].VolumeHigh;
+            result.LowVolume = ComOilTankVolList[i].VolumeLow;
             ResultList.Add(result);
         }
      

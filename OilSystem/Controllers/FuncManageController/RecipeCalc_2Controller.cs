@@ -25,15 +25,19 @@ public class RecipeCalc_2Controller : ControllerBase
     //配方优化场景2配方上下限设置表格
     public ApiModel Set1()//model里的名字 多个数据用IEnumberable，单个数据不用
     {
-        var ProdOilProductList = context.Schemeverify1s.ToList();
-        List<SchemeVerify_1_1> ResultList = new List<SchemeVerify_1_1>();//列表，里面可以添加很多个对象
-        for(int i = 0; i < ProdOilProductList.Count; i++){
-            SchemeVerify_1_1 result = new SchemeVerify_1_1();//实体，可以理解为一个对象  
-            result.ComOilName = ProdOilProductList[i].ComOilName;
-            result.AutoProduct = ProdOilProductList[i].AutoQualityProduct;
-            result.ExpProduct = ProdOilProductList[i].ExpQualityProduct;
-            result.Prod1Product = ProdOilProductList[i].Prod1QualityProduct;
-            result.Prod2Product = ProdOilProductList[i].Prod2QualityProduct;
+        var RecipeLimitList = context.Recipecalc1s.ToList();
+        List<Recipecalc_2_1> ResultList = new List<Recipecalc_2_1>();//列表，里面可以添加很多个对象
+        for(int i = 0; i < RecipeLimitList.Count; i++){
+            Recipecalc_2_1 result = new Recipecalc_2_1();//实体，可以理解为一个对象  
+            result.ComOilName = RecipeLimitList[i].ComOilName;
+            result.AutoRecipeHigh = RecipeLimitList[i].AutoFlowHigh;
+            result.AutoRecipeLow = RecipeLimitList[i].AutoFlowLow;
+            result.ExpRecipeHigh = RecipeLimitList[i].ExpFlowHigh;
+            result.ExpRecipeLow = RecipeLimitList[i].ExpFlowLow;
+            result.Prod1RecipeHigh = RecipeLimitList[i].Prod1FlowHigh;
+            result.Prod1RecipeLow = RecipeLimitList[i].Prod1FlowLow;
+            result.Prod2RecipeHigh = RecipeLimitList[i].Prod2FlowHigh;
+            result.Prod2RecipeLow = RecipeLimitList[i].Prod2FlowLow;
             ResultList.Add(result);
         }
     
@@ -52,16 +56,12 @@ public class RecipeCalc_2Controller : ControllerBase
     public ApiModel Set2()//model里的名字 多个数据用IEnumberable，单个数据不用
     {
 
-        var BottomInfoList = context.Schemeverify2s.ToList();
-        List<SchemeVerify_1_2> ResultList = new List<SchemeVerify_1_2>();//列表，里面可以添加很多个对象
-        for(int i = 0; i < BottomInfoList.Count; i++){
-            SchemeVerify_1_2 result = new SchemeVerify_1_2();//实体，可以理解为一个对象  
-            result.ProdOilName = BottomInfoList[i].ProdOilName;
-            result.BottomCapacity = BottomInfoList[i].BottomMass;
-            result.BottomCET = BottomInfoList[i].CetMass;
-            result.BottomD50 = BottomInfoList[i].D50Mass;
-            result.BottomPOL = BottomInfoList[i].PolMass;
-            result.BottomDEN = BottomInfoList[i].DenMass;
+        var TotalFlowList = context.Recipecalc3s.Where(m => m.Apply == 1).ToList();
+        List<Recipecalc_2_2> ResultList = new List<Recipecalc_2_2>();//列表，里面可以添加很多个对象
+        for(int i = 0; i < TotalFlowList.Count; i++){
+            Recipecalc_2_2 result = new Recipecalc_2_2();//实体，可以理解为一个对象  
+            result.ProdOilName = TotalFlowList[i].ProdOilName;
+            result.ProdTotalFlow = TotalFlowList[i].TotalFlow;
             ResultList.Add(result);
         }
      
@@ -79,32 +79,39 @@ public class RecipeCalc_2Controller : ControllerBase
     //配方优化场景2组分油参调流量表格
     public ApiModel Set3()//model里的名字 多个数据用IEnumberable，单个数据不用
     {
-        IProdOilConfig _ProdOilConfig = new ProdOilConfig(context);
-        IProperty _Property = new PropertyApply(context);
         IRecipeCalc _RecipeCalc = new RecipeCalc(context);
-        ICompOilConfig _CompOilConfig = new CompOilConfig(context);
-
-        var CompOilList = _CompOilConfig.GetAllCompOilConfigList().ToList();//组分油参调流量的高低限，场景三按流量优化会用到
-        var ProdOilList = _ProdOilConfig.GetAllProdOilConfigList().ToList();
-        var PropertyList = _Property.GetAllPropertyList().ToList();
         var CompOilConstraint = _RecipeCalc.GetRecipeCalc1().ToList();//场景二配方的高低限，转化为流量高低限，场景二用到
-        var Weight = _RecipeCalc.GetRecipeCalc2().ToList();//权值
-        var ProdOilProduct = _RecipeCalc.GetRecipeCalc3().ToList();//成品油总量
+        var ProdOilProduct = _RecipeCalc.GetRecipeCalc3().Where(m => m.Apply == 1).ToList();//成品油调合总量
 
         List<Recipecalc_2_3> ResultList = new List<Recipecalc_2_3>();//新建一个List用来append的,返回的是list形式
-
-        for(int i = 0; i < 8; i++){     
-
+        for(int i = 0; i < CompOilConstraint.Count; i++){     
             Recipecalc_2_3 Result = new Recipecalc_2_3();//
+            Result.ComOilName = CompOilConstraint[i].ComOilName;
+            for(int j = 0; j < ProdOilProduct.Count; j++){
+                if(ProdOilProduct[j].Id == 1){
+                    Result.AutoFlowLow = CompOilConstraint[i].AutoFlowLow / 100 * ProdOilProduct[j].TotalFlow;
+                    Result.AutoFlowHigh = CompOilConstraint[i].AutoFlowHigh / 100 * ProdOilProduct[j].TotalFlow;
+                }
 
-            Result.AutoFlowLow = CompOilConstraint[i].AutoFlowLow / 100 * ProdOilProduct[0].TotalFlow;//车柴 0 2 4 6 8
-            Result.ExpFlowLow  = CompOilConstraint[i].ExpFlowLow / 100 * ProdOilProduct[1].TotalFlow;//出柴 1 3 5 7 
-            Result.AutoFlowHigh = CompOilConstraint[i].AutoFlowHigh / 100 * ProdOilProduct[0].TotalFlow;
-            Result.ExpFlowHigh  = CompOilConstraint[i].ExpFlowHigh / 100 * ProdOilProduct[1].TotalFlow;
-            ResultList.Add(Result);
+                if(ProdOilProduct[j].Id == 2){
+                    Result.ExpFlowLow = CompOilConstraint[i].ExpFlowLow / 100 * ProdOilProduct[j].TotalFlow;
+                    Result.ExpFlowHigh = CompOilConstraint[i].ExpFlowHigh / 100 * ProdOilProduct[j].TotalFlow;
+                }
+
+                if(ProdOilProduct[j].Id == 3){
+                    Result.Prod1FlowLow = CompOilConstraint[i].Prod1FlowLow / 100 * ProdOilProduct[j].TotalFlow;
+                    Result.Prod1FlowHigh = CompOilConstraint[i].Prod1FlowHigh / 100 * ProdOilProduct[j].TotalFlow;
+                }
+
+                if(ProdOilProduct[j].Id == 4){
+                    Result.Prod2FlowLow = CompOilConstraint[i].Prod2FlowLow / 100 * ProdOilProduct[j].TotalFlow;
+                    Result.Prod2FlowHigh = CompOilConstraint[i].Prod2FlowHigh / 100 * ProdOilProduct[j].TotalFlow;
+                }
+                ResultList.Add(Result);
+            }
+
         }
-
-     
+  
         return new ApiModel()
         {
         code = 200,
@@ -120,12 +127,12 @@ public class RecipeCalc_2Controller : ControllerBase
     public ApiModel Set4()//model里的名字 多个数据用IEnumberable，单个数据不用
     {
 
-        var TotalBlendList = context.Schemeverify2s.ToList();
-        List<SchemeVerify_1_3> ResultList = new List<SchemeVerify_1_3>();//列表，里面可以添加很多个对象
-        for(int i = 0; i < TotalBlendList.Count; i++){
-            SchemeVerify_1_3 result = new SchemeVerify_1_3();//实体，可以理解为一个对象  
-            result.ProdOilName = TotalBlendList[i].ProdOilName;
-            result.ProdTotalBlend = TotalBlendList[i].TotalBlendMass;
+        var OptimizeObjList = context.Recipecalc2s.Where(m => m.Apply == 1).ToList();
+        List<Recipecalc_2_4> ResultList = new List<Recipecalc_2_4>();//列表，里面可以添加很多个对象
+        for(int i = 0; i < OptimizeObjList.Count; i++){
+            Recipecalc_2_4 result = new Recipecalc_2_4();//实体，可以理解为一个对象  
+            result.WeightName = OptimizeObjList[i].WeightName;
+            result.Weight = OptimizeObjList[i].Weight;
             ResultList.Add(result);
         }
      
