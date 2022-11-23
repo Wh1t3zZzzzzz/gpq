@@ -107,9 +107,8 @@ public class RecipeCalc_2Controller : ControllerBase
                     Result.Prod2FlowLow = CompOilConstraint[i].Prod2FlowLow / 100 * ProdOilProduct[j].TotalFlow;
                     Result.Prod2FlowHigh = CompOilConstraint[i].Prod2FlowHigh / 100 * ProdOilProduct[j].TotalFlow;
                 }
-                ResultList.Add(Result);
             }
-
+            ResultList.Add(Result);
         }
   
         return new ApiModel()

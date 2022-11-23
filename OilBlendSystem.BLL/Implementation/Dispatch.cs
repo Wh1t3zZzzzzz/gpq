@@ -13,21 +13,23 @@ namespace OilBlendSystem.BLL.Implementation
     public partial class Dispatch : IDispatch
     {
         private readonly oilblendContext context;//带问号是可以为空
-        // string CMD_OutPut;
         public Dispatch(oilblendContext _context)
         {
-           //oilblendContext _context = new();
            context = _context;
         }
 
+        string[] Status;//求解标志
+        int[] flow_nums;//组分油参调流量
+        int[] ComOil_Inv_nums;//组分油库存
+        int[] ProdOil_Inv_nums;//成品油库存
+        int[] Prod_LP_nums;//成品油提货量
+        int[] Obj_nums;//目标函数值
 
-        public void RunPythonScript()//string sArgName, string args = ""
+        public void RunPythonScript()//决策计算里的按钮调用这个接口 求解结果
         {
-            string sArgName = @"diesel.py";
+            string sArgName = @"dieselCalc.py";//diesel
             string args = "-u";
             Process p = new Process();
-            //string path = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + sArgName;// 获得python文件的绝对路径（将文件放在c#的debug文件夹中可以这样操作）
-            //string path = "diesel_combsql.py";//D:\GASHLCY_new\GASHLCY  D:\diesel\
             string path = @"E:\Python_env\" + sArgName;//(因为我没放debug下，所以直接写的绝对路径,替换掉上面的路径了)
             p.StartInfo.FileName = @"E:\Python_env\venv\Scripts\python.exe";//(注意：用的话需要换成自己的)没有配环境变量的话，可以像我这样写python.exe的绝对路径(用的话需要换成自己的)。如果配了，直接写"python.exe"即可
             string sArguments = path;
@@ -40,106 +42,1599 @@ namespace OilBlendSystem.BLL.Implementation
 
             p.StartInfo.RedirectStandardOutput = true;
 
-            p.StartInfo.RedirectStandardInput = true;
+            // p.StartInfo.RedirectStandardOutput = false;
 
-            // p.StartInfo.RedirectStandardError = true;
+            p.StartInfo.RedirectStandardInput = true;
 
             p.StartInfo.CreateNoWindow = true;
 
             p.Start();
 
-            // p.BeginOutputReadLine();
-
-            // string output = p.StandardOutput.ReadToEnd();
-
-            // // p.OutputDataReceived += new DataReceivedEventHandler(p_OutputDataReceived);
-
-            // // Console.ReadLine();
+            p.BeginOutputReadLine();
 
             p.WaitForExit();
 
-            // Console.Write(output);//输出
-
-            // CMD_OutPut = output;
-
-            // CMD_OutPut = output.TrimEnd((char[])"\r\n".ToCharArray());//去掉末尾的换行符
-            
-            // CMD_OutPut = CMD_OutPut.Replace(" ", "");//剔除字符串中的空格
-
-            //textStr = Regex.Replace(textStr, @"[/n/r]", ""); 
-                  
-            // iNums = Array.ConvertAll<string, int>(CMD_OutPut , int.Parse);
-
-            // p.Close(); 
-
         }
-
-
-        public IEnumerable<DispatchComFlowRes> GetDispatchComFlowRes1(){
-
+        public void RunIOFromtxt()
+        {
             RunPythonScript();
-
-            string[] flow_strs = File.ReadAllLines(@"E:\Python_env\Flow_txt.txt");//这个字符串数组只有一行
-            Console.WriteLine(flow_strs[0]);
-            Console.WriteLine(flow_strs[0]);
-            // Console.WriteLine(flow_strs[1]);
-            // Console.WriteLine(flow_strs[2]);
+            string[] flow_strs = File.ReadAllLines(@"E:\Python_env\Flow_txt.txt");//组分油参调流量
+            string[] ComOil_Inv_strs = File.ReadAllLines(@"E:\Python_env\ComOil_Inv_txt.txt");//组分油库存
+            string[] ProdOil_Inv_strs = File.ReadAllLines(@"E:\Python_env\ProdOil_Inv_txt.txt");//成品油库存
+            string[] Prod_LP_strs = File.ReadAllLines(@"E:\Python_env\Prod_LP_txt.txt");//成品油提货量
+            string[] Status_strs = File.ReadAllLines(@"E:\Python_env\Status_txt.txt");//求解标志
+            string[] Obj_strs = File.ReadAllLines(@"E:\Python_env\Obj_txt.txt");//目标函数值
 
             string flow_str = string.Join("", flow_strs);//字符串数组转成字符串
+            string ComOil_Inv_str = string.Join("", ComOil_Inv_strs);
+            string ProdOil_Inv_str = string.Join("", ProdOil_Inv_strs);
+            string Prod_LP_str = string.Join("", Prod_LP_strs);
+            string Status_str = string.Join("", Status_strs);
+            string Obj_str = string.Join("", Obj_strs);
 
-            // FileStream fileStream = new FileStream(filePath, FileMode.Open);
-            // StreamReader sr = new StreamReader(fileStream);
-            // string line;
-            // while((line=sr.ReadLine())!=null)
-            // {
-            //     Console.WriteLine(line.ToString());
-            // }
             flow_strs = flow_str.Split(',');//字符串转化为字符串数组
-            // CMD_OutPut.TrimStart();
-            // CMD_OutPut.Trim();
-            // CMD_OutPut.TrimEnd();
-            // string[] CMD_OutPutList = CMD_OutPut.Split(new char[]{',','[',']'});//字符串转化为字符串数组
+            ComOil_Inv_strs = ComOil_Inv_str.Split(',');
+            ProdOil_Inv_strs = ProdOil_Inv_str.Split(',');
+            Prod_LP_strs = Prod_LP_str.Split(',');
+            Status_strs = Status_str.Split(',');
+            Obj_strs = Obj_str.Split(',');
 
-            // // CMD_OutPutList[0] = Regex.Replace(CMD_OutPutList[0], @"[\r\n]", ""); 
-            // // CMD_OutPutList[CMD_OutPutList.Length - 1] = Regex.Replace(CMD_OutPutList[CMD_OutPutList.Length - 1], @"[\[\]]", ""); 
-
-            // // 在这一块换成，将所有字符数组里的空格去掉
-
-            // CMD_OutPutList[0] = CMD_OutPutList[0].Replace("[","");
-            // CMD_OutPutList[CMD_OutPutList.Length - 1] = CMD_OutPutList[CMD_OutPutList.Length - 1].Replace("]","");
-
-            // CMD_OutPutList = CMD_OutPutList.Where(s => !string.IsNullOrEmpty(s)).ToArray();
-            // textStr = Regex.Replace(textStr, @"[/n/r]", ""); 
-
-            int [] iNums = Array.ConvertAll(flow_strs, int.Parse);
-
-            // Console.Write(iNums);
-
-            List<DispatchComFlowRes> ResultList = new List<DispatchComFlowRes>();//新建一个List用来append的,返回的是list形式
-            var comFlowList = context.Dispatchcomflows.ToList();
-            var dispatchWeight = context.Dispatchweights.ToList();
-            var comList = context.Compoilconfigs.ToList();
-
-            for(int i = 0; i < comFlowList.Count / 2; i++){
-                DispatchComFlowRes Result = new DispatchComFlowRes();//
-                Result.ComOilNum = comFlowList.Count / 2;
-                Result.Time = (int)dispatchWeight[0].Weight;// Convert.ToInt32
-                // Result.ComOilName = comList[i].ComOilName;
-                // Result.ComOilName = CMD_OutPutList[4];
-                Result.ComOilFlow1 = comFlowList[i].ComFlowT1;
-                Result.ComOilFlow2 = comFlowList[i].ComFlowT2;
-                Result.ComOilFlow3 = comFlowList[i].ComFlowT3;
-                Result.ComOilFlow4 = comFlowList[i].ComFlowT4;
-                Result.ComOilFlow5 = comFlowList[i].ComFlowT5;
-                Result.ComOilFlow6 = comFlowList[i].ComFlowT6;
-                Result.ComOilFlow7 = comFlowList[i].ComFlowT7;
-                ResultList.Add(Result);
-            }
-
+            flow_nums = Array.ConvertAll(flow_strs, int.Parse);
+            ComOil_Inv_nums = Array.ConvertAll(ComOil_Inv_strs, int.Parse);
+            ProdOil_Inv_nums = Array.ConvertAll(ProdOil_Inv_strs, int.Parse);
+            Prod_LP_nums = Array.ConvertAll(Prod_LP_strs, int.Parse);
+            Obj_nums = Array.ConvertAll(Obj_strs, int.Parse);
+            Status = Status_strs;
+        }
+        public IEnumerable<Dispatch_decsCalc> GetDispatch_decsCalc()
+        {
+            RunIOFromtxt();
+            List<Dispatch_decsCalc> ResultList = new List<Dispatch_decsCalc>();//新建一个List用来append的,返回的是list形式
+            Dispatch_decsCalc Result = new Dispatch_decsCalc();
+            Result.status = Status[0];
+            Result.objValue = Obj_nums[0];
+            ResultList.Add(Result);
             return ResultList;
         }
+        public IEnumerable<Dispatch_decsScheme_comFlowInfo_divProd> GetDispatch_decsScheme_comFlowInfo_divProd1()//第一个成品油的组分油参调流量（七天）
+        {
+            RunIOFromtxt();
+            ICompOilConfig _CompOilConfig = new CompOilConfig(context);
 
-        // void DispatchDecision();
-        // IEnumerable<DispatchComFlowRes> GetDispatchComFlowRes();
+            var CompOilList = _CompOilConfig.GetAllCompOilConfigList().ToList();
+            var Weight = context.Dispatchweights.ToList();
+
+            int ComOilNum = CompOilList.Count;//组分油个数
+            int ProdOilNum = (int)Weight[5].Weight;//成品油个数
+            int Period = (int)Weight[0].Weight;//调度周期
+
+            List<Dispatch_decsScheme_comFlowInfo_divProd> ResultList = new List<Dispatch_decsScheme_comFlowInfo_divProd>();//新建一个List用来append的,返回的是list形式
+            //第一个成品油 第一个周期 0-7 第二个周期 24-31 第三个周期 48-55...
+            //第二个成品油 第一个周期 8-15 第二个周期 32-39 第三个周期 56-63...
+            //第三个成品油 第一个周期 16-23 第三个周期 40 -47 第三个周期 64 -71...
+            if(ProdOilNum > 0){
+                for(int i = 0; i < ComOilNum; i++){
+                    Dispatch_decsScheme_comFlowInfo_divProd Result = new Dispatch_decsScheme_comFlowInfo_divProd();
+                    Result.ComOilName = CompOilList[i].ComOilName;
+                    if(Period > 0){
+                        Result.comFlowT1 = flow_nums[ComOilNum * ProdOilNum * 0 + i];
+                    }
+                    if(Period > 1){
+                        Result.comFlowT2 = flow_nums[ComOilNum * ProdOilNum * 1 + i];
+                    }
+                    if(Period > 2){
+                        Result.comFlowT3 = flow_nums[ComOilNum * ProdOilNum * 2 + i];
+                    }
+                    if(Period > 3){
+                        Result.comFlowT4 = flow_nums[ComOilNum * ProdOilNum * 3 + i];
+                    }
+                    if(Period > 4){
+                        Result.comFlowT5 = flow_nums[ComOilNum * ProdOilNum * 4 + i];
+                    }
+                    if(Period > 5){
+                        Result.comFlowT6 = flow_nums[ComOilNum * ProdOilNum * 5 + i];
+                    }
+                    if(Period > 6){
+                        Result.comFlowT7 = flow_nums[ComOilNum * ProdOilNum * 6 + i];
+                    }
+                    ResultList.Add(Result);
+                }
+            }
+            else{     
+                for(int i = 0; i < ComOilNum; i++){           
+                    Dispatch_decsScheme_comFlowInfo_divProd Result = new Dispatch_decsScheme_comFlowInfo_divProd();
+                    Result.ComOilName = CompOilList[i].ComOilName;
+                    Result.comFlowT1 = 0;
+                    Result.comFlowT3 = 0;
+                    Result.comFlowT4 = 0;
+                    Result.comFlowT5 = 0;
+                    Result.comFlowT6 = 0;
+                    Result.comFlowT7 = 0;
+                    ResultList.Add(Result);
+                }
+            }
+            return ResultList;
+        }
+        public IEnumerable<Dispatch_decsScheme_comFlowInfo_divProd> GetDispatch_decsScheme_comFlowInfo_divProd2()//第二个成品油的组分油参调流量
+        {
+            RunIOFromtxt();
+            ICompOilConfig _CompOilConfig = new CompOilConfig(context);
+
+            var CompOilList = _CompOilConfig.GetAllCompOilConfigList().ToList();
+            var Weight = context.Dispatchweights.ToList();
+
+            int ComOilNum = CompOilList.Count;//组分油个数
+            int ProdOilNum = (int)Weight[5].Weight;//成品油个数
+            int Period = (int)Weight[0].Weight;//调度周期
+
+            List<Dispatch_decsScheme_comFlowInfo_divProd> ResultList = new List<Dispatch_decsScheme_comFlowInfo_divProd>();//新建一个List用来append的,返回的是list形式
+            //第一个成品油 第一个周期 0-7 第二个周期 24-31 第三个周期 48-55...
+            //第二个成品油 第一个周期 8-15 第二个周期 32-39 第三个周期 56-63...
+            //第三个成品油 第一个周期 16-23 第三个周期 40 -47 第三个周期 64 -71...
+            if(ProdOilNum > 1){
+                for(int i = 0; i < ComOilNum; i++){
+                    Dispatch_decsScheme_comFlowInfo_divProd Result = new Dispatch_decsScheme_comFlowInfo_divProd();
+                    Result.ComOilName = CompOilList[i].ComOilName;
+                    if(Period > 0){
+                        Result.comFlowT1 = flow_nums[ComOilNum * ProdOilNum * 0 + i + ComOilNum];
+                    }
+                    if(Period > 1){
+                        Result.comFlowT2 = flow_nums[ComOilNum * ProdOilNum * 1 + i + ComOilNum];
+                    }
+                    if(Period > 2){
+                        Result.comFlowT3 = flow_nums[ComOilNum * ProdOilNum * 2 + i + ComOilNum];
+                    }
+                    if(Period > 3){
+                        Result.comFlowT4 = flow_nums[ComOilNum * ProdOilNum * 3 + i + ComOilNum];
+                    }
+                    if(Period > 4){
+                        Result.comFlowT5 = flow_nums[ComOilNum * ProdOilNum * 4 + i + ComOilNum];
+                    }
+                    if(Period > 5){
+                        Result.comFlowT6 = flow_nums[ComOilNum * ProdOilNum * 5 + i + ComOilNum];
+                    }
+                    if(Period > 6){
+                        Result.comFlowT7 = flow_nums[ComOilNum * ProdOilNum * 6 + i + ComOilNum];
+                    }
+                    ResultList.Add(Result);
+                }
+            }
+            else{     
+                for(int i = 0; i < ComOilNum; i++){           
+                    Dispatch_decsScheme_comFlowInfo_divProd Result = new Dispatch_decsScheme_comFlowInfo_divProd();
+                    Result.ComOilName = CompOilList[i].ComOilName;
+                    Result.comFlowT1 = 0;
+                    Result.comFlowT3 = 0;
+                    Result.comFlowT4 = 0;
+                    Result.comFlowT5 = 0;
+                    Result.comFlowT6 = 0;
+                    Result.comFlowT7 = 0;
+                    ResultList.Add(Result);
+                }
+            }
+            return ResultList;
+        }
+        public IEnumerable<Dispatch_decsScheme_comFlowInfo_divProd> GetDispatch_decsScheme_comFlowInfo_divProd3()//第三个成品油的组分油参调流量
+        {
+            RunIOFromtxt();
+            ICompOilConfig _CompOilConfig = new CompOilConfig(context);
+
+            var CompOilList = _CompOilConfig.GetAllCompOilConfigList().ToList();
+            var Weight = context.Dispatchweights.ToList();
+
+            int ComOilNum = CompOilList.Count;//组分油个数
+            int ProdOilNum = (int)Weight[5].Weight;//成品油个数
+            int Period = (int)Weight[0].Weight;//调度周期
+
+            List<Dispatch_decsScheme_comFlowInfo_divProd> ResultList = new List<Dispatch_decsScheme_comFlowInfo_divProd>();//新建一个List用来append的,返回的是list形式
+            //第一个成品油 第一个周期 0-7 第二个周期 24-31 第三个周期 48-55...
+            //第二个成品油 第一个周期 8-15 第二个周期 32-39 第三个周期 56-63...
+            //第三个成品油 第一个周期 16-23 第三个周期 40 -47 第三个周期 64 -71...
+            if(ProdOilNum > 2){
+                for(int i = 0; i < ComOilNum; i++){
+                    Dispatch_decsScheme_comFlowInfo_divProd Result = new Dispatch_decsScheme_comFlowInfo_divProd();
+                    Result.ComOilName = CompOilList[i].ComOilName;
+                    if(Period > 0){
+                        Result.comFlowT1 = flow_nums[ComOilNum * ProdOilNum * 0 + i + ComOilNum * 2];
+                    }
+                    if(Period > 1){
+                        Result.comFlowT2 = flow_nums[ComOilNum * ProdOilNum * 1 + i + ComOilNum * 2];
+                    }
+                    if(Period > 2){
+                        Result.comFlowT3 = flow_nums[ComOilNum * ProdOilNum * 2 + i + ComOilNum * 2];
+                    }
+                    if(Period > 3){
+                        Result.comFlowT4 = flow_nums[ComOilNum * ProdOilNum * 3 + i + ComOilNum * 2];
+                    }
+                    if(Period > 4){
+                        Result.comFlowT5 = flow_nums[ComOilNum * ProdOilNum * 4 + i + ComOilNum * 2];
+                    }
+                    if(Period > 5){
+                        Result.comFlowT6 = flow_nums[ComOilNum * ProdOilNum * 5 + i + ComOilNum * 2];
+                    }
+                    if(Period > 6){
+                        Result.comFlowT7 = flow_nums[ComOilNum * ProdOilNum * 6 + i + ComOilNum * 2];
+                    }
+                    ResultList.Add(Result);
+                }
+            }
+            else{     
+                for(int i = 0; i < ComOilNum; i++){           
+                    Dispatch_decsScheme_comFlowInfo_divProd Result = new Dispatch_decsScheme_comFlowInfo_divProd();
+                    Result.ComOilName = CompOilList[i].ComOilName;
+                    Result.comFlowT1 = 0;
+                    Result.comFlowT3 = 0;
+                    Result.comFlowT4 = 0;
+                    Result.comFlowT5 = 0;
+                    Result.comFlowT6 = 0;
+                    Result.comFlowT7 = 0;
+                    ResultList.Add(Result);
+                }
+            }
+            return ResultList;
+        }
+        public IEnumerable<Dispatch_decsScheme_comFlowInfo_divProd> GetDispatch_decsScheme_comFlowInfo_divProd4()//第四个成品油的组分油参调流量
+        {
+            RunIOFromtxt();
+            ICompOilConfig _CompOilConfig = new CompOilConfig(context);
+
+            var CompOilList = _CompOilConfig.GetAllCompOilConfigList().ToList();
+            var Weight = context.Dispatchweights.ToList();
+
+            int ComOilNum = CompOilList.Count;//组分油个数
+            int ProdOilNum = (int)Weight[5].Weight;//成品油个数
+            int Period = (int)Weight[0].Weight;//调度周期
+
+            List<Dispatch_decsScheme_comFlowInfo_divProd> ResultList = new List<Dispatch_decsScheme_comFlowInfo_divProd>();//新建一个List用来append的,返回的是list形式
+            //第一个成品油 第一个周期 0-7 第二个周期 24-31 第三个周期 48-55...
+            //第二个成品油 第一个周期 8-15 第二个周期 32-39 第三个周期 56-63...
+            //第三个成品油 第一个周期 16-23 第三个周期 40 -47 第三个周期 64 -71...
+            if(ProdOilNum > 3){
+                for(int i = 0; i < ComOilNum; i++){
+                    Dispatch_decsScheme_comFlowInfo_divProd Result = new Dispatch_decsScheme_comFlowInfo_divProd();
+                    Result.ComOilName = CompOilList[i].ComOilName;
+                    if(Period > 0){
+                        Result.comFlowT1 = flow_nums[ComOilNum * ProdOilNum * 0 + i + ComOilNum * 3];
+                    }
+                    if(Period > 1){
+                        Result.comFlowT2 = flow_nums[ComOilNum * ProdOilNum * 1 + i + ComOilNum * 3];
+                    }
+                    if(Period > 2){
+                        Result.comFlowT3 = flow_nums[ComOilNum * ProdOilNum * 2 + i + ComOilNum * 3];
+                    }
+                    if(Period > 3){
+                        Result.comFlowT4 = flow_nums[ComOilNum * ProdOilNum * 3 + i + ComOilNum * 3];
+                    }
+                    if(Period > 4){
+                        Result.comFlowT5 = flow_nums[ComOilNum * ProdOilNum * 4 + i + ComOilNum * 3];
+                    }
+                    if(Period > 5){
+                        Result.comFlowT6 = flow_nums[ComOilNum * ProdOilNum * 5 + i + ComOilNum * 3];
+                    }
+                    if(Period > 6){
+                        Result.comFlowT7 = flow_nums[ComOilNum * ProdOilNum * 6 + i + ComOilNum * 3];
+                    }
+                    ResultList.Add(Result);
+                }
+            }
+            else{     
+                for(int i = 0; i < ComOilNum; i++){           
+                    Dispatch_decsScheme_comFlowInfo_divProd Result = new Dispatch_decsScheme_comFlowInfo_divProd();
+                    Result.ComOilName = CompOilList[i].ComOilName;
+                    Result.comFlowT1 = 0;
+                    Result.comFlowT3 = 0;
+                    Result.comFlowT4 = 0;
+                    Result.comFlowT5 = 0;
+                    Result.comFlowT6 = 0;
+                    Result.comFlowT7 = 0;
+                    ResultList.Add(Result);
+                }
+            }
+            return ResultList;
+        }
+        public IEnumerable<Dispatch_decsScheme_comFlowInfo_divT> GetDispatch_decsScheme_comFlowInfo_divT1()//第一天的组分油参调流量（四个成品油）
+        {
+            RunIOFromtxt();
+            ICompOilConfig _CompOilConfig = new CompOilConfig(context);
+
+            var CompOilList = _CompOilConfig.GetAllCompOilConfigList().ToList();
+            var Weight = context.Dispatchweights.ToList();
+
+            int ComOilNum = CompOilList.Count;//组分油个数
+            int ProdOilNum = (int)Weight[5].Weight;//成品油个数
+            int Period = (int)Weight[0].Weight;//调度周期
+
+            List<Dispatch_decsScheme_comFlowInfo_divT> ResultList = new List<Dispatch_decsScheme_comFlowInfo_divT>();//新建一个List用来append的,返回的是list形式
+            //第一个成品油 第一个周期 0-7 第二个周期 24-31 第三个周期 48-55...
+            //第二个成品油 第一个周期 8-15 第二个周期 32-39 第三个周期 56-63...
+            //第三个成品油 第一个周期 16-23 第三个周期 40 -47 第三个周期 64 -71...
+            if(Period > 0){
+                for(int i = 0; i < ComOilNum; i++){
+                    Dispatch_decsScheme_comFlowInfo_divT Result = new Dispatch_decsScheme_comFlowInfo_divT();
+                    Result.ComOilName = CompOilList[i].ComOilName;
+                    if(ProdOilNum > 0){
+                        Result.prod1ComFlow = flow_nums[ComOilNum * 0 + i + ComOilNum * ProdOilNum * 0];
+                    }
+                    if(ProdOilNum > 1){
+                        Result.prod2ComFlow = flow_nums[ComOilNum * 1 + i + ComOilNum * ProdOilNum * 0];
+                    }
+                    if(ProdOilNum > 2){
+                        Result.prod3ComFlow = flow_nums[ComOilNum * 2 + i + ComOilNum * ProdOilNum * 0];
+                    }
+                    if(ProdOilNum > 3){
+                        Result.prod4ComFlow = flow_nums[ComOilNum * 3 + i + ComOilNum * ProdOilNum * 0];
+                    }
+                    ResultList.Add(Result);
+                }
+            }
+            else{     
+                for(int i = 0; i < ComOilNum; i++){           
+                    Dispatch_decsScheme_comFlowInfo_divT Result = new Dispatch_decsScheme_comFlowInfo_divT();
+                    Result.ComOilName = CompOilList[i].ComOilName;
+                    Result.prod1ComFlow = 0;
+                    Result.prod2ComFlow = 0;
+                    Result.prod3ComFlow = 0;
+                    Result.prod4ComFlow = 0;
+                    ResultList.Add(Result);
+                }
+            }
+            return ResultList;
+        }
+        public IEnumerable<Dispatch_decsScheme_comFlowInfo_divT> GetDispatch_decsScheme_comFlowInfo_divT2()//第二天的组分油参调流量（四个成品油）
+        {
+            RunIOFromtxt();
+            ICompOilConfig _CompOilConfig = new CompOilConfig(context);
+
+            var CompOilList = _CompOilConfig.GetAllCompOilConfigList().ToList();
+            var Weight = context.Dispatchweights.ToList();
+
+            int ComOilNum = CompOilList.Count;//组分油个数
+            int ProdOilNum = (int)Weight[5].Weight;//成品油个数
+            int Period = (int)Weight[0].Weight;//调度周期
+
+            List<Dispatch_decsScheme_comFlowInfo_divT> ResultList = new List<Dispatch_decsScheme_comFlowInfo_divT>();//新建一个List用来append的,返回的是list形式
+            //第一个成品油 第一个周期 0-7 第二个周期 24-31 第三个周期 48-55...
+            //第二个成品油 第一个周期 8-15 第二个周期 32-39 第三个周期 56-63...
+            //第三个成品油 第一个周期 16-23 第三个周期 40 -47 第三个周期 64 -71...
+            if(Period > 1){
+                for(int i = 0; i < ComOilNum; i++){
+                    Dispatch_decsScheme_comFlowInfo_divT Result = new Dispatch_decsScheme_comFlowInfo_divT();
+                    Result.ComOilName = CompOilList[i].ComOilName;
+                    if(ProdOilNum > 0){
+                        Result.prod1ComFlow = flow_nums[ComOilNum * 0 + i + ComOilNum * ProdOilNum * 1];
+                    }
+                    if(ProdOilNum > 1){
+                        Result.prod2ComFlow = flow_nums[ComOilNum * 1 + i + ComOilNum * ProdOilNum * 1];
+                    }
+                    if(ProdOilNum > 2){
+                        Result.prod3ComFlow = flow_nums[ComOilNum * 2 + i + ComOilNum * ProdOilNum * 1];
+                    }
+                    if(ProdOilNum > 3){
+                        Result.prod4ComFlow = flow_nums[ComOilNum * 3 + i + ComOilNum * ProdOilNum * 1];
+                    }
+                    ResultList.Add(Result);
+                }
+            }
+            else{     
+                for(int i = 0; i < ComOilNum; i++){           
+                    Dispatch_decsScheme_comFlowInfo_divT Result = new Dispatch_decsScheme_comFlowInfo_divT();
+                    Result.ComOilName = CompOilList[i].ComOilName;
+                    Result.prod1ComFlow = 0;
+                    Result.prod2ComFlow = 0;
+                    Result.prod3ComFlow = 0;
+                    Result.prod4ComFlow = 0;
+                    ResultList.Add(Result);
+                }
+            }
+            return ResultList;
+        }
+        public IEnumerable<Dispatch_decsScheme_comFlowInfo_divT> GetDispatch_decsScheme_comFlowInfo_divT3()//第三天的组分油参调流量（四个成品油）
+        {
+            RunIOFromtxt();
+            ICompOilConfig _CompOilConfig = new CompOilConfig(context);
+
+            var CompOilList = _CompOilConfig.GetAllCompOilConfigList().ToList();
+            var Weight = context.Dispatchweights.ToList();
+
+            int ComOilNum = CompOilList.Count;//组分油个数
+            int ProdOilNum = (int)Weight[5].Weight;//成品油个数
+            int Period = (int)Weight[0].Weight;//调度周期
+
+            List<Dispatch_decsScheme_comFlowInfo_divT> ResultList = new List<Dispatch_decsScheme_comFlowInfo_divT>();//新建一个List用来append的,返回的是list形式
+            //第一个成品油 第一个周期 0-7 第二个周期 24-31 第三个周期 48-55...
+            //第二个成品油 第一个周期 8-15 第二个周期 32-39 第三个周期 56-63...
+            //第三个成品油 第一个周期 16-23 第三个周期 40 -47 第三个周期 64 -71...
+            if(Period > 2){
+                for(int i = 0; i < ComOilNum; i++){
+                    Dispatch_decsScheme_comFlowInfo_divT Result = new Dispatch_decsScheme_comFlowInfo_divT();
+                    Result.ComOilName = CompOilList[i].ComOilName;
+                    if(ProdOilNum > 0){
+                        Result.prod1ComFlow = flow_nums[ComOilNum * 0 + i + ComOilNum * ProdOilNum * 2];
+                    }
+                    if(ProdOilNum > 1){
+                        Result.prod2ComFlow = flow_nums[ComOilNum * 1 + i + ComOilNum * ProdOilNum * 2];
+                    }
+                    if(ProdOilNum > 2){
+                        Result.prod3ComFlow = flow_nums[ComOilNum * 2 + i + ComOilNum * ProdOilNum * 2];
+                    }
+                    if(ProdOilNum > 3){
+                        Result.prod4ComFlow = flow_nums[ComOilNum * 3 + i + ComOilNum * ProdOilNum * 2];
+                    }
+                    ResultList.Add(Result);
+                }
+            }
+            else{     
+                for(int i = 0; i < ComOilNum; i++){           
+                    Dispatch_decsScheme_comFlowInfo_divT Result = new Dispatch_decsScheme_comFlowInfo_divT();
+                    Result.ComOilName = CompOilList[i].ComOilName;
+                    Result.prod1ComFlow = 0;
+                    Result.prod2ComFlow = 0;
+                    Result.prod3ComFlow = 0;
+                    Result.prod4ComFlow = 0;
+                    ResultList.Add(Result);
+                }
+            }
+            return ResultList;
+        }
+        public IEnumerable<Dispatch_decsScheme_comFlowInfo_divT> GetDispatch_decsScheme_comFlowInfo_divT4()//第四天的组分油参调流量（四个成品油）
+        {
+            RunIOFromtxt();
+            ICompOilConfig _CompOilConfig = new CompOilConfig(context);
+
+            var CompOilList = _CompOilConfig.GetAllCompOilConfigList().ToList();
+            var Weight = context.Dispatchweights.ToList();
+
+            int ComOilNum = CompOilList.Count;//组分油个数
+            int ProdOilNum = (int)Weight[5].Weight;//成品油个数
+            int Period = (int)Weight[0].Weight;//调度周期
+
+            List<Dispatch_decsScheme_comFlowInfo_divT> ResultList = new List<Dispatch_decsScheme_comFlowInfo_divT>();//新建一个List用来append的,返回的是list形式
+            //第一个成品油 第一个周期 0-7 第二个周期 24-31 第三个周期 48-55...
+            //第二个成品油 第一个周期 8-15 第二个周期 32-39 第三个周期 56-63...
+            //第三个成品油 第一个周期 16-23 第三个周期 40 -47 第三个周期 64 -71...
+            if(Period > 3){
+                for(int i = 0; i < ComOilNum; i++){
+                    Dispatch_decsScheme_comFlowInfo_divT Result = new Dispatch_decsScheme_comFlowInfo_divT();
+                    Result.ComOilName = CompOilList[i].ComOilName;
+                    if(ProdOilNum > 0){
+                        Result.prod1ComFlow = flow_nums[ComOilNum * 0 + i + ComOilNum * ProdOilNum * 3];
+                    }
+                    if(ProdOilNum > 1){
+                        Result.prod2ComFlow = flow_nums[ComOilNum * 1 + i + ComOilNum * ProdOilNum * 3];
+                    }
+                    if(ProdOilNum > 2){
+                        Result.prod3ComFlow = flow_nums[ComOilNum * 2 + i + ComOilNum * ProdOilNum * 3];
+                    }
+                    if(ProdOilNum > 3){
+                        Result.prod4ComFlow = flow_nums[ComOilNum * 3 + i + ComOilNum * ProdOilNum * 3];
+                    }
+                    ResultList.Add(Result);
+                }
+            }
+            else{     
+                for(int i = 0; i < ComOilNum; i++){           
+                    Dispatch_decsScheme_comFlowInfo_divT Result = new Dispatch_decsScheme_comFlowInfo_divT();
+                    Result.ComOilName = CompOilList[i].ComOilName;
+                    Result.prod1ComFlow = 0;
+                    Result.prod2ComFlow = 0;
+                    Result.prod3ComFlow = 0;
+                    Result.prod4ComFlow = 0;
+                    ResultList.Add(Result);
+                }
+            }
+            return ResultList;
+        }
+        public IEnumerable<Dispatch_decsScheme_comFlowInfo_divT> GetDispatch_decsScheme_comFlowInfo_divT5()//第五天的组分油参调流量（四个成品油）
+        {
+            RunIOFromtxt();
+            ICompOilConfig _CompOilConfig = new CompOilConfig(context);
+
+            var CompOilList = _CompOilConfig.GetAllCompOilConfigList().ToList();
+            var Weight = context.Dispatchweights.ToList();
+
+            int ComOilNum = CompOilList.Count;//组分油个数
+            int ProdOilNum = (int)Weight[5].Weight;//成品油个数
+            int Period = (int)Weight[0].Weight;//调度周期
+
+            List<Dispatch_decsScheme_comFlowInfo_divT> ResultList = new List<Dispatch_decsScheme_comFlowInfo_divT>();//新建一个List用来append的,返回的是list形式
+            //第一个成品油 第一个周期 0-7 第二个周期 24-31 第三个周期 48-55...
+            //第二个成品油 第一个周期 8-15 第二个周期 32-39 第三个周期 56-63...
+            //第三个成品油 第一个周期 16-23 第三个周期 40 -47 第三个周期 64 -71...
+            if(Period > 4){
+                for(int i = 0; i < ComOilNum; i++){
+                    Dispatch_decsScheme_comFlowInfo_divT Result = new Dispatch_decsScheme_comFlowInfo_divT();
+                    Result.ComOilName = CompOilList[i].ComOilName;
+                    if(ProdOilNum > 0){
+                        Result.prod1ComFlow = flow_nums[ComOilNum * 0 + i + ComOilNum * ProdOilNum * 4];
+                    }
+                    if(ProdOilNum > 1){
+                        Result.prod2ComFlow = flow_nums[ComOilNum * 1 + i + ComOilNum * ProdOilNum * 4];
+                    }
+                    if(ProdOilNum > 2){
+                        Result.prod3ComFlow = flow_nums[ComOilNum * 2 + i + ComOilNum * ProdOilNum * 4];
+                    }
+                    if(ProdOilNum > 3){
+                        Result.prod4ComFlow = flow_nums[ComOilNum * 3 + i + ComOilNum * ProdOilNum * 4];
+                    }
+                    ResultList.Add(Result);
+                }
+            }
+            else{     
+                for(int i = 0; i < ComOilNum; i++){           
+                    Dispatch_decsScheme_comFlowInfo_divT Result = new Dispatch_decsScheme_comFlowInfo_divT();
+                    Result.ComOilName = CompOilList[i].ComOilName;
+                    Result.prod1ComFlow = 0;
+                    Result.prod2ComFlow = 0;
+                    Result.prod3ComFlow = 0;
+                    Result.prod4ComFlow = 0;
+                    ResultList.Add(Result);
+                }
+            }
+            return ResultList;
+        }
+        public IEnumerable<Dispatch_decsScheme_comFlowInfo_divT> GetDispatch_decsScheme_comFlowInfo_divT6()//第六天的组分油参调流量（四个成品油）
+        {
+            RunIOFromtxt();
+            ICompOilConfig _CompOilConfig = new CompOilConfig(context);
+
+            var CompOilList = _CompOilConfig.GetAllCompOilConfigList().ToList();
+            var Weight = context.Dispatchweights.ToList();
+
+            int ComOilNum = CompOilList.Count;//组分油个数
+            int ProdOilNum = (int)Weight[5].Weight;//成品油个数
+            int Period = (int)Weight[0].Weight;//调度周期
+
+            List<Dispatch_decsScheme_comFlowInfo_divT> ResultList = new List<Dispatch_decsScheme_comFlowInfo_divT>();//新建一个List用来append的,返回的是list形式
+            //第一个成品油 第一个周期 0-7 第二个周期 24-31 第三个周期 48-55...
+            //第二个成品油 第一个周期 8-15 第二个周期 32-39 第三个周期 56-63...
+            //第三个成品油 第一个周期 16-23 第三个周期 40 -47 第三个周期 64 -71...
+            if(Period > 5){
+                for(int i = 0; i < ComOilNum; i++){
+                    Dispatch_decsScheme_comFlowInfo_divT Result = new Dispatch_decsScheme_comFlowInfo_divT();
+                    Result.ComOilName = CompOilList[i].ComOilName;
+                    if(ProdOilNum > 0){
+                        Result.prod1ComFlow = flow_nums[ComOilNum * 0 + i + ComOilNum * ProdOilNum * 5];
+                    }
+                    if(ProdOilNum > 1){
+                        Result.prod2ComFlow = flow_nums[ComOilNum * 1 + i + ComOilNum * ProdOilNum * 5];
+                    }
+                    if(ProdOilNum > 2){
+                        Result.prod3ComFlow = flow_nums[ComOilNum * 2 + i + ComOilNum * ProdOilNum * 5];
+                    }
+                    if(ProdOilNum > 3){
+                        Result.prod4ComFlow = flow_nums[ComOilNum * 3 + i + ComOilNum * ProdOilNum * 5];
+                    }
+                    ResultList.Add(Result);
+                }
+            }
+            else{     
+                for(int i = 0; i < ComOilNum; i++){           
+                    Dispatch_decsScheme_comFlowInfo_divT Result = new Dispatch_decsScheme_comFlowInfo_divT();
+                    Result.ComOilName = CompOilList[i].ComOilName;
+                    Result.prod1ComFlow = 0;
+                    Result.prod2ComFlow = 0;
+                    Result.prod3ComFlow = 0;
+                    Result.prod4ComFlow = 0;
+                    ResultList.Add(Result);
+                }
+            }
+            return ResultList;
+        }
+        public IEnumerable<Dispatch_decsScheme_comFlowInfo_divT> GetDispatch_decsScheme_comFlowInfo_divT7()//第七天的组分油参调流量（四个成品油）
+        {
+            RunIOFromtxt();
+            ICompOilConfig _CompOilConfig = new CompOilConfig(context);
+
+            var CompOilList = _CompOilConfig.GetAllCompOilConfigList().ToList();
+            var Weight = context.Dispatchweights.ToList();
+
+            int ComOilNum = CompOilList.Count;//组分油个数
+            int ProdOilNum = (int)Weight[5].Weight;//成品油个数
+            int Period = (int)Weight[0].Weight;//调度周期
+
+            List<Dispatch_decsScheme_comFlowInfo_divT> ResultList = new List<Dispatch_decsScheme_comFlowInfo_divT>();//新建一个List用来append的,返回的是list形式
+            //第一个成品油 第一个周期 0-7 第二个周期 24-31 第三个周期 48-55...
+            //第二个成品油 第一个周期 8-15 第二个周期 32-39 第三个周期 56-63...
+            //第三个成品油 第一个周期 16-23 第三个周期 40 -47 第三个周期 64 -71...
+            if(Period > 6){
+                for(int i = 0; i < ComOilNum; i++){
+                    Dispatch_decsScheme_comFlowInfo_divT Result = new Dispatch_decsScheme_comFlowInfo_divT();
+                    Result.ComOilName = CompOilList[i].ComOilName;
+                    if(ProdOilNum > 0){
+                        Result.prod1ComFlow = flow_nums[ComOilNum * 0 + i + ComOilNum * ProdOilNum * 6];
+                    }
+                    if(ProdOilNum > 1){
+                        Result.prod2ComFlow = flow_nums[ComOilNum * 1 + i + ComOilNum * ProdOilNum * 6];
+                    }
+                    if(ProdOilNum > 2){
+                        Result.prod3ComFlow = flow_nums[ComOilNum * 2 + i + ComOilNum * ProdOilNum * 6];
+                    }
+                    if(ProdOilNum > 3){
+                        Result.prod4ComFlow = flow_nums[ComOilNum * 3 + i + ComOilNum * ProdOilNum * 6];
+                    }
+                    ResultList.Add(Result);
+                }
+            }
+            else{     
+                for(int i = 0; i < ComOilNum; i++){           
+                    Dispatch_decsScheme_comFlowInfo_divT Result = new Dispatch_decsScheme_comFlowInfo_divT();
+                    Result.ComOilName = CompOilList[i].ComOilName;
+                    Result.prod1ComFlow = 0;
+                    Result.prod2ComFlow = 0;
+                    Result.prod3ComFlow = 0;
+                    Result.prod4ComFlow = 0;
+                    ResultList.Add(Result);
+                }
+            }
+            return ResultList;
+        }
+        public IEnumerable<Dispatch_decsScheme_invInfo_comOil> GetDispatch_decsScheme_invInfo_comOil()//组分油库存信息
+        {
+            RunIOFromtxt();
+            ICompOilConfig _CompOilConfig = new CompOilConfig(context);
+
+            var CompOilList = _CompOilConfig.GetAllCompOilConfigList().ToList();
+            var Weight = context.Dispatchweights.ToList();
+
+            int ComOilNum = CompOilList.Count;//组分油个数
+            int Period = (int)Weight[0].Weight;//调度周期
+
+            List<Dispatch_decsScheme_invInfo_comOil> ResultList = new List<Dispatch_decsScheme_invInfo_comOil>();//新建一个List用来append的,返回的是list形式
+            for(int i = 0; i < ComOilNum; i++){
+                Dispatch_decsScheme_invInfo_comOil Result = new Dispatch_decsScheme_invInfo_comOil();
+                Result.ComOilName = CompOilList[i].ComOilName;
+                if(Period > 0){
+                    Result.volumeT1 = ComOil_Inv_nums[ComOilNum * 0 + i];
+                }
+                if(Period > 1){
+                    Result.volumeT2 = ComOil_Inv_nums[ComOilNum * 1 + i];
+                }
+                if(Period > 2){
+                    Result.volumeT3 = ComOil_Inv_nums[ComOilNum * 2 + i];
+                }
+                if(Period > 3){
+                    Result.volumeT4 = ComOil_Inv_nums[ComOilNum * 3 + i];
+                }
+                if(Period > 4){
+                    Result.volumeT5 = ComOil_Inv_nums[ComOilNum * 4 + i];
+                }
+                if(Period > 5){
+                    Result.volumeT6 = ComOil_Inv_nums[ComOilNum * 5 + i];
+                }
+                if(Period > 6){
+                    Result.volumeT7 = ComOil_Inv_nums[ComOilNum * 6 + i];
+                }
+                ResultList.Add(Result);
+            }   
+            return ResultList;
+        }
+        public IEnumerable<Dispatch_decsScheme_invInfo_prodOil> GetDispatch_decsScheme_invInfo_prodOil()//成品油库存信息
+        {
+            RunIOFromtxt();
+            ICompOilConfig _CompOilConfig = new CompOilConfig(context);
+            IProdOilConfig _ProdOilConfig = new ProdOilConfig(context);
+
+            var CompOilList = _CompOilConfig.GetAllCompOilConfigList().ToList();
+            var ProdOilList = _ProdOilConfig.GetAllProdOilConfigList().ToList();
+            var Weight = context.Dispatchweights.ToList();
+
+            int ComOilNum = CompOilList.Count;//组分油个数
+            int ProdOilNum = (int)Weight[5].Weight;//成品油个数
+            int Period = (int)Weight[0].Weight;//调度周期
+
+            List<Dispatch_decsScheme_invInfo_prodOil> ResultList = new List<Dispatch_decsScheme_invInfo_prodOil>();//新建一个List用来append的,返回的是list形式
+            for(int i = 0; i < ProdOilNum; i++){
+                Dispatch_decsScheme_invInfo_prodOil Result = new Dispatch_decsScheme_invInfo_prodOil();
+                Result.ProdOilName = ProdOilList[i].ProdOilName;
+                if(Period > 0){
+                    Result.volumeT1 = ComOil_Inv_nums[ProdOilNum * 0 + i];
+                }
+                if(Period > 1){
+                    Result.volumeT2 = ComOil_Inv_nums[ProdOilNum * 1 + i];
+                }
+                if(Period > 2){
+                    Result.volumeT3 = ComOil_Inv_nums[ProdOilNum * 2 + i];
+                }
+                if(Period > 3){
+                    Result.volumeT4 = ComOil_Inv_nums[ProdOilNum * 3 + i];
+                }
+                if(Period > 4){
+                    Result.volumeT5 = ComOil_Inv_nums[ProdOilNum * 4 + i];
+                }
+                if(Period > 5){
+                    Result.volumeT6 = ComOil_Inv_nums[ProdOilNum * 5 + i];
+                }
+                if(Period > 6){
+                    Result.volumeT7 = ComOil_Inv_nums[ProdOilNum * 6 + i];
+                }
+                ResultList.Add(Result);
+            }   
+            return ResultList;
+        }
+        public IEnumerable<Dispatch_decsScheme_prodInfo> GetDispatch_decsScheme_prod1Info()//第一个成品油的属性信息
+        {
+            IProdOilConfig _ProdOilConfig = new ProdOilConfig(context);
+            ICompOilConfig _CompOilConfig = new CompOilConfig(context);
+            IProperty _Property = new PropertyApply(context);
+
+            var FlowList = GetDispatch_decsScheme_comFlowInfo_divProd1().ToList();//第一个成品油的周期组分油参调流量数据
+            var CompOilList = _CompOilConfig.GetAllCompOilConfigList().ToList();
+            var ProdOilList = _ProdOilConfig.GetAllProdOilConfigList().ToList();
+            var PropertyList = _Property.GetAllPropertyList().ToList();
+            var Weight = context.Dispatchweights.ToList();
+
+            int ComOilNum = CompOilList.Count;//组分油个数
+            int ProdOilNum = (int)Weight[5].Weight;//成品油个数
+            int Period = (int)Weight[0].Weight;//调度周期
+
+            double[] ProdCET = new double[7];
+            double[] ProdD50 = new double[7];
+            double[] ProdPOL = new double[7];
+            double[] ProdDEN = new double[7];
+
+            #region 十六烷值
+            for(int i = 0; i < 7; i++){
+                double SumFlow = 0.0000000001;//每一个周期的总流量
+                for(int j = 0; j < FlowList.Count; j++){
+                    if(i == 0){
+                        SumFlow = SumFlow + FlowList[j].comFlowT1;
+                        ProdCET[i] = ProdCET[i] + FlowList[j].comFlowT1 * CompOilList[j].Cet;
+                    }
+                    if(i == 1){
+                        SumFlow = SumFlow + FlowList[j].comFlowT2;
+                        ProdCET[i] = ProdCET[i] + FlowList[j].comFlowT2 * CompOilList[j].Cet;                        
+                    }
+                    if(i == 2){
+                        SumFlow = SumFlow + FlowList[j].comFlowT3;
+                        ProdCET[i] = ProdCET[i] + FlowList[j].comFlowT3 * CompOilList[j].Cet;                        
+                    }
+                    if(i == 3){
+                        SumFlow = SumFlow + FlowList[j].comFlowT4;
+                        ProdCET[i] = ProdCET[i] + FlowList[j].comFlowT4 * CompOilList[j].Cet;                        
+                    }
+                    if(i == 4){
+                        SumFlow = SumFlow + FlowList[j].comFlowT5;
+                        ProdCET[i] = ProdCET[i] + FlowList[j].comFlowT5 * CompOilList[j].Cet;                        
+                    }
+                    if(i == 5){
+                        SumFlow = SumFlow + FlowList[j].comFlowT6;
+                        ProdCET[i] = ProdCET[i] + FlowList[j].comFlowT6 * CompOilList[j].Cet;                        
+                    }
+                    if(i == 6){
+                        SumFlow = SumFlow + FlowList[j].comFlowT7;
+                        ProdCET[i] = ProdCET[i] + FlowList[j].comFlowT7 * CompOilList[j].Cet;                        
+                    }
+                }
+                ProdCET[i] = Math.Round(ProdCET[i] / SumFlow, 2);
+            }
+            #endregion 
+
+            #region 50%回收温度
+            for(int i = 0; i < 7; i++){
+                double SumFlow = 0.0000000001;//每一个周期的总流量
+                for(int j = 0; j < FlowList.Count; j++){
+                    if(i == 0){
+                        SumFlow = SumFlow + FlowList[j].comFlowT1;
+                        ProdD50[i] = ProdD50[i] + FlowList[j].comFlowT1 * CompOilList[j].D50;
+                    }
+                    if(i == 1){
+                        SumFlow = SumFlow + FlowList[j].comFlowT2;
+                        ProdD50[i] = ProdD50[i] + FlowList[j].comFlowT2 * CompOilList[j].D50;                        
+                    }
+                    if(i == 2){
+                        SumFlow = SumFlow + FlowList[j].comFlowT3;
+                        ProdD50[i] = ProdD50[i] + FlowList[j].comFlowT3 * CompOilList[j].D50;                        
+                    }
+                    if(i == 3){
+                        SumFlow = SumFlow + FlowList[j].comFlowT4;
+                        ProdD50[i] = ProdD50[i] + FlowList[j].comFlowT4 * CompOilList[j].D50;                        
+                    }
+                    if(i == 4){
+                        SumFlow = SumFlow + FlowList[j].comFlowT5;
+                        ProdD50[i] = ProdD50[i] + FlowList[j].comFlowT5 * CompOilList[j].D50;                        
+                    }
+                    if(i == 5){
+                        SumFlow = SumFlow + FlowList[j].comFlowT6;
+                        ProdD50[i] = ProdD50[i] + FlowList[j].comFlowT6 * CompOilList[j].D50;                        
+                    }
+                    if(i == 6){
+                        SumFlow = SumFlow + FlowList[j].comFlowT7;
+                        ProdD50[i] = ProdD50[i] + FlowList[j].comFlowT7 * CompOilList[j].D50;                        
+                    }
+                }
+                ProdD50[i] = Math.Round(ProdD50[i] / SumFlow, 2);
+            }
+            #endregion
+
+            #region 多环芳烃含量
+            for(int i = 0; i < 7; i++){
+                double SumFlow = 0.0000000001;//每一个周期的总流量
+                for(int j = 0; j < FlowList.Count; j++){
+                    if(i == 0){
+                        SumFlow = SumFlow + FlowList[j].comFlowT1;
+                        ProdPOL[i] = ProdPOL[i] + FlowList[j].comFlowT1 * CompOilList[j].Pol;
+                    }
+                    if(i == 1){
+                        SumFlow = SumFlow + FlowList[j].comFlowT2;
+                        ProdPOL[i] = ProdPOL[i] + FlowList[j].comFlowT2 * CompOilList[j].Pol;                        
+                    }
+                    if(i == 2){
+                        SumFlow = SumFlow + FlowList[j].comFlowT3;
+                        ProdPOL[i] = ProdPOL[i] + FlowList[j].comFlowT3 * CompOilList[j].Pol;                        
+                    }
+                    if(i == 3){
+                        SumFlow = SumFlow + FlowList[j].comFlowT4;
+                        ProdPOL[i] = ProdPOL[i] + FlowList[j].comFlowT4 * CompOilList[j].Pol;                        
+                    }
+                    if(i == 4){
+                        SumFlow = SumFlow + FlowList[j].comFlowT5;
+                        ProdPOL[i] = ProdPOL[i] + FlowList[j].comFlowT5 * CompOilList[j].Pol;                        
+                    }
+                    if(i == 5){
+                        SumFlow = SumFlow + FlowList[j].comFlowT6;
+                        ProdPOL[i] = ProdPOL[i] + FlowList[j].comFlowT6 * CompOilList[j].Pol;                        
+                    }
+                    if(i == 6){
+                        SumFlow = SumFlow + FlowList[j].comFlowT7;
+                        ProdPOL[i] = ProdPOL[i] + FlowList[j].comFlowT7 * CompOilList[j].Pol;                        
+                    }
+                }
+                ProdPOL[i] = Math.Round(ProdPOL[i] / SumFlow, 2);
+            }
+            #endregion
+
+            #region 密度
+            for(int i = 0; i < 7; i++){
+                double SumFlow = 0.0000000001;//每一个周期的总流量
+                for(int j = 0; j < FlowList.Count; j++){
+                    if(i == 0){
+                        SumFlow = SumFlow + FlowList[j].comFlowT1;
+                        ProdDEN[i] = ProdDEN[i] + FlowList[j].comFlowT1 * CompOilList[j].Den;
+                    }
+                    if(i == 1){
+                        SumFlow = SumFlow + FlowList[j].comFlowT2;
+                        ProdDEN[i] = ProdDEN[i] + FlowList[j].comFlowT2 * CompOilList[j].Den;                        
+                    }
+                    if(i == 2){
+                        SumFlow = SumFlow + FlowList[j].comFlowT3;
+                        ProdDEN[i] = ProdDEN[i] + FlowList[j].comFlowT3 * CompOilList[j].Den;                        
+                    }
+                    if(i == 3){
+                        SumFlow = SumFlow + FlowList[j].comFlowT4;
+                        ProdDEN[i] = ProdDEN[i] + FlowList[j].comFlowT4 * CompOilList[j].Den;                        
+                    }
+                    if(i == 4){
+                        SumFlow = SumFlow + FlowList[j].comFlowT5;
+                        ProdDEN[i] = ProdDEN[i] + FlowList[j].comFlowT5 * CompOilList[j].Den;                        
+                    }
+                    if(i == 5){
+                        SumFlow = SumFlow + FlowList[j].comFlowT6;
+                        ProdDEN[i] = ProdDEN[i] + FlowList[j].comFlowT6 * CompOilList[j].Den;                        
+                    }
+                    if(i == 6){
+                        SumFlow = SumFlow + FlowList[j].comFlowT7;
+                        ProdDEN[i] = ProdDEN[i] + FlowList[j].comFlowT7 * CompOilList[j].Den;                        
+                    }
+                }
+                ProdDEN[i] = Math.Round(ProdDEN[i] / SumFlow, 2);
+            }
+            #endregion
+
+            List<Dispatch_decsScheme_prodInfo> ResultList = new List<Dispatch_decsScheme_prodInfo>();//新建一个List用来append的,返回的是list形式
+            for(int i = 0; i < 4; i++){
+                Dispatch_decsScheme_prodInfo Result = new Dispatch_decsScheme_prodInfo();
+                Result.PropertyName = PropertyList[i].PropertyName;
+                if(i == 0){
+                    Result.valueHigh = ProdOilList[0].CetHighLimit;
+                    Result.valueLow = ProdOilList[0].CetLowLimit;
+                    Result.valueT1 = (float)ProdCET[0];
+                    Result.valueT2 = (float)ProdCET[1];
+                    Result.valueT3 = (float)ProdCET[2];
+                    Result.valueT4 = (float)ProdCET[3];
+                    Result.valueT5 = (float)ProdCET[4];
+                    Result.valueT6 = (float)ProdCET[5];
+                    Result.valueT7 = (float)ProdCET[6];
+                }
+                if(i == 1){
+                    Result.valueHigh = ProdOilList[0].D50HighLimit;
+                    Result.valueLow = ProdOilList[0].D50LowLimit;
+                    Result.valueT1 = (float)ProdD50[0];
+                    Result.valueT2 = (float)ProdD50[1];
+                    Result.valueT3 = (float)ProdD50[2];
+                    Result.valueT4 = (float)ProdD50[3];
+                    Result.valueT5 = (float)ProdD50[4];
+                    Result.valueT6 = (float)ProdD50[5];
+                    Result.valueT7 = (float)ProdD50[6];
+                }
+                if(i == 2){
+                    Result.valueHigh = ProdOilList[0].PolHighLimit;
+                    Result.valueLow = ProdOilList[0].PolLowLimit;
+                    Result.valueT1 = (float)ProdPOL[0];
+                    Result.valueT2 = (float)ProdPOL[1];
+                    Result.valueT3 = (float)ProdPOL[2];
+                    Result.valueT4 = (float)ProdPOL[3];
+                    Result.valueT5 = (float)ProdPOL[4];
+                    Result.valueT6 = (float)ProdPOL[5];
+                    Result.valueT7 = (float)ProdPOL[6];
+                }
+                if(i == 3){
+                    Result.valueHigh = ProdOilList[0].DenHighLimit;
+                    Result.valueLow = ProdOilList[0].DenLowLimit;
+                    Result.valueT1 = (float)ProdDEN[0];
+                    Result.valueT2 = (float)ProdDEN[1];
+                    Result.valueT3 = (float)ProdDEN[2];
+                    Result.valueT4 = (float)ProdDEN[3];
+                    Result.valueT5 = (float)ProdDEN[4];
+                    Result.valueT6 = (float)ProdDEN[5];
+                    Result.valueT7 = (float)ProdDEN[6];
+                }
+                ResultList.Add(Result);
+            }
+            return ResultList;   
+        }
+        public IEnumerable<Dispatch_decsScheme_prodInfo> GetDispatch_decsScheme_prod2Info()//第二个成品油的属性信息
+        {
+            IProdOilConfig _ProdOilConfig = new ProdOilConfig(context);
+            ICompOilConfig _CompOilConfig = new CompOilConfig(context);
+            IProperty _Property = new PropertyApply(context);
+
+            var FlowList = GetDispatch_decsScheme_comFlowInfo_divProd2().ToList();//第一个成品油的周期组分油参调流量数据
+            var CompOilList = _CompOilConfig.GetAllCompOilConfigList().ToList();
+            var ProdOilList = _ProdOilConfig.GetAllProdOilConfigList().ToList();
+            var PropertyList = _Property.GetAllPropertyList().ToList();
+            var Weight = context.Dispatchweights.ToList();
+
+            int ComOilNum = CompOilList.Count;//组分油个数
+            int ProdOilNum = (int)Weight[5].Weight;//成品油个数
+            int Period = (int)Weight[0].Weight;//调度周期
+
+            double[] ProdCET = new double[7];
+            double[] ProdD50 = new double[7];
+            double[] ProdPOL = new double[7];
+            double[] ProdDEN = new double[7];
+
+            #region 十六烷值
+            for(int i = 0; i < 7; i++){
+                double SumFlow = 0.0000000001;//每一个周期的总流量
+                for(int j = 0; j < FlowList.Count; j++){
+                    if(i == 0){
+                        SumFlow = SumFlow + FlowList[j].comFlowT1;
+                        ProdCET[i] = ProdCET[i] + FlowList[j].comFlowT1 * CompOilList[j].Cet;
+                    }
+                    if(i == 1){
+                        SumFlow = SumFlow + FlowList[j].comFlowT2;
+                        ProdCET[i] = ProdCET[i] + FlowList[j].comFlowT2 * CompOilList[j].Cet;                        
+                    }
+                    if(i == 2){
+                        SumFlow = SumFlow + FlowList[j].comFlowT3;
+                        ProdCET[i] = ProdCET[i] + FlowList[j].comFlowT3 * CompOilList[j].Cet;                        
+                    }
+                    if(i == 3){
+                        SumFlow = SumFlow + FlowList[j].comFlowT4;
+                        ProdCET[i] = ProdCET[i] + FlowList[j].comFlowT4 * CompOilList[j].Cet;                        
+                    }
+                    if(i == 4){
+                        SumFlow = SumFlow + FlowList[j].comFlowT5;
+                        ProdCET[i] = ProdCET[i] + FlowList[j].comFlowT5 * CompOilList[j].Cet;                        
+                    }
+                    if(i == 5){
+                        SumFlow = SumFlow + FlowList[j].comFlowT6;
+                        ProdCET[i] = ProdCET[i] + FlowList[j].comFlowT6 * CompOilList[j].Cet;                        
+                    }
+                    if(i == 6){
+                        SumFlow = SumFlow + FlowList[j].comFlowT7;
+                        ProdCET[i] = ProdCET[i] + FlowList[j].comFlowT7 * CompOilList[j].Cet;                        
+                    }
+                }
+                ProdCET[i] = Math.Round(ProdCET[i] / SumFlow, 2);
+            }
+            #endregion 
+
+            #region 50%回收温度
+            for(int i = 0; i < 7; i++){
+                double SumFlow = 0.0000000001;//每一个周期的总流量
+                for(int j = 0; j < FlowList.Count; j++){
+                    if(i == 0){
+                        SumFlow = SumFlow + FlowList[j].comFlowT1;
+                        ProdD50[i] = ProdD50[i] + FlowList[j].comFlowT1 * CompOilList[j].D50;
+                    }
+                    if(i == 1){
+                        SumFlow = SumFlow + FlowList[j].comFlowT2;
+                        ProdD50[i] = ProdD50[i] + FlowList[j].comFlowT2 * CompOilList[j].D50;                        
+                    }
+                    if(i == 2){
+                        SumFlow = SumFlow + FlowList[j].comFlowT3;
+                        ProdD50[i] = ProdD50[i] + FlowList[j].comFlowT3 * CompOilList[j].D50;                        
+                    }
+                    if(i == 3){
+                        SumFlow = SumFlow + FlowList[j].comFlowT4;
+                        ProdD50[i] = ProdD50[i] + FlowList[j].comFlowT4 * CompOilList[j].D50;                        
+                    }
+                    if(i == 4){
+                        SumFlow = SumFlow + FlowList[j].comFlowT5;
+                        ProdD50[i] = ProdD50[i] + FlowList[j].comFlowT5 * CompOilList[j].D50;                        
+                    }
+                    if(i == 5){
+                        SumFlow = SumFlow + FlowList[j].comFlowT6;
+                        ProdD50[i] = ProdD50[i] + FlowList[j].comFlowT6 * CompOilList[j].D50;                        
+                    }
+                    if(i == 6){
+                        SumFlow = SumFlow + FlowList[j].comFlowT7;
+                        ProdD50[i] = ProdD50[i] + FlowList[j].comFlowT7 * CompOilList[j].D50;                        
+                    }
+                }
+                ProdD50[i] = Math.Round(ProdD50[i] / SumFlow, 2);
+            }
+            #endregion
+
+            #region 多环芳烃含量
+            for(int i = 0; i < 7; i++){
+                double SumFlow = 0.0000000001;//每一个周期的总流量
+                for(int j = 0; j < FlowList.Count; j++){
+                    if(i == 0){
+                        SumFlow = SumFlow + FlowList[j].comFlowT1;
+                        ProdPOL[i] = ProdPOL[i] + FlowList[j].comFlowT1 * CompOilList[j].Pol;
+                    }
+                    if(i == 1){
+                        SumFlow = SumFlow + FlowList[j].comFlowT2;
+                        ProdPOL[i] = ProdPOL[i] + FlowList[j].comFlowT2 * CompOilList[j].Pol;                        
+                    }
+                    if(i == 2){
+                        SumFlow = SumFlow + FlowList[j].comFlowT3;
+                        ProdPOL[i] = ProdPOL[i] + FlowList[j].comFlowT3 * CompOilList[j].Pol;                        
+                    }
+                    if(i == 3){
+                        SumFlow = SumFlow + FlowList[j].comFlowT4;
+                        ProdPOL[i] = ProdPOL[i] + FlowList[j].comFlowT4 * CompOilList[j].Pol;                        
+                    }
+                    if(i == 4){
+                        SumFlow = SumFlow + FlowList[j].comFlowT5;
+                        ProdPOL[i] = ProdPOL[i] + FlowList[j].comFlowT5 * CompOilList[j].Pol;                        
+                    }
+                    if(i == 5){
+                        SumFlow = SumFlow + FlowList[j].comFlowT6;
+                        ProdPOL[i] = ProdPOL[i] + FlowList[j].comFlowT6 * CompOilList[j].Pol;                        
+                    }
+                    if(i == 6){
+                        SumFlow = SumFlow + FlowList[j].comFlowT7;
+                        ProdPOL[i] = ProdPOL[i] + FlowList[j].comFlowT7 * CompOilList[j].Pol;                        
+                    }
+                }
+                ProdPOL[i] = Math.Round(ProdPOL[i] / SumFlow, 2);
+            }
+            #endregion
+
+            #region 密度
+            for(int i = 0; i < 7; i++){
+                double SumFlow = 0.0000000001;//每一个周期的总流量
+                for(int j = 0; j < FlowList.Count; j++){
+                    if(i == 0){
+                        SumFlow = SumFlow + FlowList[j].comFlowT1;
+                        ProdDEN[i] = ProdDEN[i] + FlowList[j].comFlowT1 * CompOilList[j].Den;
+                    }
+                    if(i == 1){
+                        SumFlow = SumFlow + FlowList[j].comFlowT2;
+                        ProdDEN[i] = ProdDEN[i] + FlowList[j].comFlowT2 * CompOilList[j].Den;                        
+                    }
+                    if(i == 2){
+                        SumFlow = SumFlow + FlowList[j].comFlowT3;
+                        ProdDEN[i] = ProdDEN[i] + FlowList[j].comFlowT3 * CompOilList[j].Den;                        
+                    }
+                    if(i == 3){
+                        SumFlow = SumFlow + FlowList[j].comFlowT4;
+                        ProdDEN[i] = ProdDEN[i] + FlowList[j].comFlowT4 * CompOilList[j].Den;                        
+                    }
+                    if(i == 4){
+                        SumFlow = SumFlow + FlowList[j].comFlowT5;
+                        ProdDEN[i] = ProdDEN[i] + FlowList[j].comFlowT5 * CompOilList[j].Den;                        
+                    }
+                    if(i == 5){
+                        SumFlow = SumFlow + FlowList[j].comFlowT6;
+                        ProdDEN[i] = ProdDEN[i] + FlowList[j].comFlowT6 * CompOilList[j].Den;                        
+                    }
+                    if(i == 6){
+                        SumFlow = SumFlow + FlowList[j].comFlowT7;
+                        ProdDEN[i] = ProdDEN[i] + FlowList[j].comFlowT7 * CompOilList[j].Den;                        
+                    }
+                }
+                ProdDEN[i] = Math.Round(ProdDEN[i] / SumFlow, 2);
+            }
+            #endregion
+
+            List<Dispatch_decsScheme_prodInfo> ResultList = new List<Dispatch_decsScheme_prodInfo>();//新建一个List用来append的,返回的是list形式
+            for(int i = 0; i < 4; i++){
+                Dispatch_decsScheme_prodInfo Result = new Dispatch_decsScheme_prodInfo();
+                Result.PropertyName = PropertyList[i].PropertyName;
+                if(i == 0){
+                    Result.valueHigh = ProdOilList[1].CetHighLimit;
+                    Result.valueLow = ProdOilList[1].CetLowLimit;
+                    Result.valueT1 = (float)ProdCET[0];
+                    Result.valueT2 = (float)ProdCET[1];
+                    Result.valueT3 = (float)ProdCET[2];
+                    Result.valueT4 = (float)ProdCET[3];
+                    Result.valueT5 = (float)ProdCET[4];
+                    Result.valueT6 = (float)ProdCET[5];
+                    Result.valueT7 = (float)ProdCET[6];
+                }
+                if(i == 1){
+                    Result.valueHigh = ProdOilList[1].D50HighLimit;
+                    Result.valueLow = ProdOilList[1].D50LowLimit;
+                    Result.valueT1 = (float)ProdD50[0];
+                    Result.valueT2 = (float)ProdD50[1];
+                    Result.valueT3 = (float)ProdD50[2];
+                    Result.valueT4 = (float)ProdD50[3];
+                    Result.valueT5 = (float)ProdD50[4];
+                    Result.valueT6 = (float)ProdD50[5];
+                    Result.valueT7 = (float)ProdD50[6];
+                }
+                if(i == 2){
+                    Result.valueHigh = ProdOilList[1].PolHighLimit;
+                    Result.valueLow = ProdOilList[1].PolLowLimit;
+                    Result.valueT1 = (float)ProdPOL[0];
+                    Result.valueT2 = (float)ProdPOL[1];
+                    Result.valueT3 = (float)ProdPOL[2];
+                    Result.valueT4 = (float)ProdPOL[3];
+                    Result.valueT5 = (float)ProdPOL[4];
+                    Result.valueT6 = (float)ProdPOL[5];
+                    Result.valueT7 = (float)ProdPOL[6];
+                }
+                if(i == 3){
+                    Result.valueHigh = ProdOilList[1].DenHighLimit;
+                    Result.valueLow = ProdOilList[1].DenLowLimit;
+                    Result.valueT1 = (float)ProdDEN[0];
+                    Result.valueT2 = (float)ProdDEN[1];
+                    Result.valueT3 = (float)ProdDEN[2];
+                    Result.valueT4 = (float)ProdDEN[3];
+                    Result.valueT5 = (float)ProdDEN[4];
+                    Result.valueT6 = (float)ProdDEN[5];
+                    Result.valueT7 = (float)ProdDEN[6];
+                }
+                ResultList.Add(Result);
+            }
+            return ResultList;   
+        }
+        public IEnumerable<Dispatch_decsScheme_prodInfo> GetDispatch_decsScheme_prod3Info()//第三个成品油的属性信息
+        {
+            IProdOilConfig _ProdOilConfig = new ProdOilConfig(context);
+            ICompOilConfig _CompOilConfig = new CompOilConfig(context);
+            IProperty _Property = new PropertyApply(context);
+
+            var FlowList = GetDispatch_decsScheme_comFlowInfo_divProd3().ToList();//第一个成品油的周期组分油参调流量数据
+            var CompOilList = _CompOilConfig.GetAllCompOilConfigList().ToList();
+            var ProdOilList = _ProdOilConfig.GetAllProdOilConfigList().ToList();
+            var PropertyList = _Property.GetAllPropertyList().ToList();
+            var Weight = context.Dispatchweights.ToList();
+
+            int ComOilNum = CompOilList.Count;//组分油个数
+            int ProdOilNum = (int)Weight[5].Weight;//成品油个数
+            int Period = (int)Weight[0].Weight;//调度周期
+
+            double[] ProdCET = new double[7];
+            double[] ProdD50 = new double[7];
+            double[] ProdPOL = new double[7];
+            double[] ProdDEN = new double[7];
+
+            #region 十六烷值
+            for(int i = 0; i < 7; i++){
+                double SumFlow = 0.0000000001;//每一个周期的总流量
+                for(int j = 0; j < FlowList.Count; j++){
+                    if(i == 0){
+                        SumFlow = SumFlow + FlowList[j].comFlowT1;
+                        ProdCET[i] = ProdCET[i] + FlowList[j].comFlowT1 * CompOilList[j].Cet;
+                    }
+                    if(i == 1){
+                        SumFlow = SumFlow + FlowList[j].comFlowT2;
+                        ProdCET[i] = ProdCET[i] + FlowList[j].comFlowT2 * CompOilList[j].Cet;                        
+                    }
+                    if(i == 2){
+                        SumFlow = SumFlow + FlowList[j].comFlowT3;
+                        ProdCET[i] = ProdCET[i] + FlowList[j].comFlowT3 * CompOilList[j].Cet;                        
+                    }
+                    if(i == 3){
+                        SumFlow = SumFlow + FlowList[j].comFlowT4;
+                        ProdCET[i] = ProdCET[i] + FlowList[j].comFlowT4 * CompOilList[j].Cet;                        
+                    }
+                    if(i == 4){
+                        SumFlow = SumFlow + FlowList[j].comFlowT5;
+                        ProdCET[i] = ProdCET[i] + FlowList[j].comFlowT5 * CompOilList[j].Cet;                        
+                    }
+                    if(i == 5){
+                        SumFlow = SumFlow + FlowList[j].comFlowT6;
+                        ProdCET[i] = ProdCET[i] + FlowList[j].comFlowT6 * CompOilList[j].Cet;                        
+                    }
+                    if(i == 6){
+                        SumFlow = SumFlow + FlowList[j].comFlowT7;
+                        ProdCET[i] = ProdCET[i] + FlowList[j].comFlowT7 * CompOilList[j].Cet;                        
+                    }
+                }
+                ProdCET[i] = Math.Round(ProdCET[i] / SumFlow, 2);
+            }
+            #endregion 
+
+            #region 50%回收温度
+            for(int i = 0; i < 7; i++){
+                double SumFlow = 0.0000000001;//每一个周期的总流量
+                for(int j = 0; j < FlowList.Count; j++){
+                    if(i == 0){
+                        SumFlow = SumFlow + FlowList[j].comFlowT1;
+                        ProdD50[i] = ProdD50[i] + FlowList[j].comFlowT1 * CompOilList[j].D50;
+                    }
+                    if(i == 1){
+                        SumFlow = SumFlow + FlowList[j].comFlowT2;
+                        ProdD50[i] = ProdD50[i] + FlowList[j].comFlowT2 * CompOilList[j].D50;                        
+                    }
+                    if(i == 2){
+                        SumFlow = SumFlow + FlowList[j].comFlowT3;
+                        ProdD50[i] = ProdD50[i] + FlowList[j].comFlowT3 * CompOilList[j].D50;                        
+                    }
+                    if(i == 3){
+                        SumFlow = SumFlow + FlowList[j].comFlowT4;
+                        ProdD50[i] = ProdD50[i] + FlowList[j].comFlowT4 * CompOilList[j].D50;                        
+                    }
+                    if(i == 4){
+                        SumFlow = SumFlow + FlowList[j].comFlowT5;
+                        ProdD50[i] = ProdD50[i] + FlowList[j].comFlowT5 * CompOilList[j].D50;                        
+                    }
+                    if(i == 5){
+                        SumFlow = SumFlow + FlowList[j].comFlowT6;
+                        ProdD50[i] = ProdD50[i] + FlowList[j].comFlowT6 * CompOilList[j].D50;                        
+                    }
+                    if(i == 6){
+                        SumFlow = SumFlow + FlowList[j].comFlowT7;
+                        ProdD50[i] = ProdD50[i] + FlowList[j].comFlowT7 * CompOilList[j].D50;                        
+                    }
+                }
+                ProdD50[i] = Math.Round(ProdD50[i] / SumFlow, 2);
+            }
+            #endregion
+
+            #region 多环芳烃含量
+            for(int i = 0; i < 7; i++){
+                double SumFlow = 0.0000000001;//每一个周期的总流量
+                for(int j = 0; j < FlowList.Count; j++){
+                    if(i == 0){
+                        SumFlow = SumFlow + FlowList[j].comFlowT1;
+                        ProdPOL[i] = ProdPOL[i] + FlowList[j].comFlowT1 * CompOilList[j].Pol;
+                    }
+                    if(i == 1){
+                        SumFlow = SumFlow + FlowList[j].comFlowT2;
+                        ProdPOL[i] = ProdPOL[i] + FlowList[j].comFlowT2 * CompOilList[j].Pol;                        
+                    }
+                    if(i == 2){
+                        SumFlow = SumFlow + FlowList[j].comFlowT3;
+                        ProdPOL[i] = ProdPOL[i] + FlowList[j].comFlowT3 * CompOilList[j].Pol;                        
+                    }
+                    if(i == 3){
+                        SumFlow = SumFlow + FlowList[j].comFlowT4;
+                        ProdPOL[i] = ProdPOL[i] + FlowList[j].comFlowT4 * CompOilList[j].Pol;                        
+                    }
+                    if(i == 4){
+                        SumFlow = SumFlow + FlowList[j].comFlowT5;
+                        ProdPOL[i] = ProdPOL[i] + FlowList[j].comFlowT5 * CompOilList[j].Pol;                        
+                    }
+                    if(i == 5){
+                        SumFlow = SumFlow + FlowList[j].comFlowT6;
+                        ProdPOL[i] = ProdPOL[i] + FlowList[j].comFlowT6 * CompOilList[j].Pol;                        
+                    }
+                    if(i == 6){
+                        SumFlow = SumFlow + FlowList[j].comFlowT7;
+                        ProdPOL[i] = ProdPOL[i] + FlowList[j].comFlowT7 * CompOilList[j].Pol;                        
+                    }
+                }
+                ProdPOL[i] = Math.Round(ProdPOL[i] / SumFlow, 2);
+            }
+            #endregion
+
+            #region 密度
+            for(int i = 0; i < 7; i++){
+                double SumFlow = 0.0000000001;//每一个周期的总流量
+                for(int j = 0; j < FlowList.Count; j++){
+                    if(i == 0){
+                        SumFlow = SumFlow + FlowList[j].comFlowT1;
+                        ProdDEN[i] = ProdDEN[i] + FlowList[j].comFlowT1 * CompOilList[j].Den;
+                    }
+                    if(i == 1){
+                        SumFlow = SumFlow + FlowList[j].comFlowT2;
+                        ProdDEN[i] = ProdDEN[i] + FlowList[j].comFlowT2 * CompOilList[j].Den;                        
+                    }
+                    if(i == 2){
+                        SumFlow = SumFlow + FlowList[j].comFlowT3;
+                        ProdDEN[i] = ProdDEN[i] + FlowList[j].comFlowT3 * CompOilList[j].Den;                        
+                    }
+                    if(i == 3){
+                        SumFlow = SumFlow + FlowList[j].comFlowT4;
+                        ProdDEN[i] = ProdDEN[i] + FlowList[j].comFlowT4 * CompOilList[j].Den;                        
+                    }
+                    if(i == 4){
+                        SumFlow = SumFlow + FlowList[j].comFlowT5;
+                        ProdDEN[i] = ProdDEN[i] + FlowList[j].comFlowT5 * CompOilList[j].Den;                        
+                    }
+                    if(i == 5){
+                        SumFlow = SumFlow + FlowList[j].comFlowT6;
+                        ProdDEN[i] = ProdDEN[i] + FlowList[j].comFlowT6 * CompOilList[j].Den;                        
+                    }
+                    if(i == 6){
+                        SumFlow = SumFlow + FlowList[j].comFlowT7;
+                        ProdDEN[i] = ProdDEN[i] + FlowList[j].comFlowT7 * CompOilList[j].Den;                        
+                    }
+                }
+                ProdDEN[i] = Math.Round(ProdDEN[i] / SumFlow, 2);
+            }
+            #endregion
+
+            List<Dispatch_decsScheme_prodInfo> ResultList = new List<Dispatch_decsScheme_prodInfo>();//新建一个List用来append的,返回的是list形式
+            for(int i = 0; i < 4; i++){
+                Dispatch_decsScheme_prodInfo Result = new Dispatch_decsScheme_prodInfo();
+                Result.PropertyName = PropertyList[i].PropertyName;
+                if(i == 0){
+                    Result.valueHigh = ProdOilList[2].CetHighLimit;
+                    Result.valueLow = ProdOilList[2].CetLowLimit;
+                    Result.valueT1 = (float)ProdCET[0];
+                    Result.valueT2 = (float)ProdCET[1];
+                    Result.valueT3 = (float)ProdCET[2];
+                    Result.valueT4 = (float)ProdCET[3];
+                    Result.valueT5 = (float)ProdCET[4];
+                    Result.valueT6 = (float)ProdCET[5];
+                    Result.valueT7 = (float)ProdCET[6];
+                }
+                if(i == 1){
+                    Result.valueHigh = ProdOilList[2].D50HighLimit;
+                    Result.valueLow = ProdOilList[2].D50LowLimit;
+                    Result.valueT1 = (float)ProdD50[0];
+                    Result.valueT2 = (float)ProdD50[1];
+                    Result.valueT3 = (float)ProdD50[2];
+                    Result.valueT4 = (float)ProdD50[3];
+                    Result.valueT5 = (float)ProdD50[4];
+                    Result.valueT6 = (float)ProdD50[5];
+                    Result.valueT7 = (float)ProdD50[6];
+                }
+                if(i == 2){
+                    Result.valueHigh = ProdOilList[2].PolHighLimit;
+                    Result.valueLow = ProdOilList[2].PolLowLimit;
+                    Result.valueT1 = (float)ProdPOL[0];
+                    Result.valueT2 = (float)ProdPOL[1];
+                    Result.valueT3 = (float)ProdPOL[2];
+                    Result.valueT4 = (float)ProdPOL[3];
+                    Result.valueT5 = (float)ProdPOL[4];
+                    Result.valueT6 = (float)ProdPOL[5];
+                    Result.valueT7 = (float)ProdPOL[6];
+                }
+                if(i == 3){
+                    Result.valueHigh = ProdOilList[3].DenHighLimit;
+                    Result.valueLow = ProdOilList[3].DenLowLimit;
+                    Result.valueT1 = (float)ProdDEN[0];
+                    Result.valueT2 = (float)ProdDEN[1];
+                    Result.valueT3 = (float)ProdDEN[2];
+                    Result.valueT4 = (float)ProdDEN[3];
+                    Result.valueT5 = (float)ProdDEN[4];
+                    Result.valueT6 = (float)ProdDEN[5];
+                    Result.valueT7 = (float)ProdDEN[6];
+                }
+                ResultList.Add(Result);
+            }
+            return ResultList;             
+        }
+        public IEnumerable<Dispatch_decsScheme_prodInfo> GetDispatch_decsScheme_prod4Info()//第四个成品油的属性信息
+        {
+            IProdOilConfig _ProdOilConfig = new ProdOilConfig(context);
+            ICompOilConfig _CompOilConfig = new CompOilConfig(context);
+            IProperty _Property = new PropertyApply(context);
+
+            var FlowList = GetDispatch_decsScheme_comFlowInfo_divProd4().ToList();//第一个成品油的周期组分油参调流量数据
+            var CompOilList = _CompOilConfig.GetAllCompOilConfigList().ToList();
+            var ProdOilList = _ProdOilConfig.GetAllProdOilConfigList().ToList();
+            var PropertyList = _Property.GetAllPropertyList().ToList();
+            var Weight = context.Dispatchweights.ToList();
+
+            int ComOilNum = CompOilList.Count;//组分油个数
+            int ProdOilNum = (int)Weight[5].Weight;//成品油个数
+            int Period = (int)Weight[0].Weight;//调度周期
+
+            double[] ProdCET = new double[7];
+            double[] ProdD50 = new double[7];
+            double[] ProdPOL = new double[7];
+            double[] ProdDEN = new double[7];
+
+            #region 十六烷值
+            for(int i = 0; i < 7; i++){
+                double SumFlow = 0.0000000001;//每一个周期的总流量
+                for(int j = 0; j < FlowList.Count; j++){
+                    if(i == 0){
+                        SumFlow = SumFlow + FlowList[j].comFlowT1;
+                        ProdCET[i] = ProdCET[i] + FlowList[j].comFlowT1 * CompOilList[j].Cet;
+                    }
+                    if(i == 1){
+                        SumFlow = SumFlow + FlowList[j].comFlowT2;
+                        ProdCET[i] = ProdCET[i] + FlowList[j].comFlowT2 * CompOilList[j].Cet;                        
+                    }
+                    if(i == 2){
+                        SumFlow = SumFlow + FlowList[j].comFlowT3;
+                        ProdCET[i] = ProdCET[i] + FlowList[j].comFlowT3 * CompOilList[j].Cet;                        
+                    }
+                    if(i == 3){
+                        SumFlow = SumFlow + FlowList[j].comFlowT4;
+                        ProdCET[i] = ProdCET[i] + FlowList[j].comFlowT4 * CompOilList[j].Cet;                        
+                    }
+                    if(i == 4){
+                        SumFlow = SumFlow + FlowList[j].comFlowT5;
+                        ProdCET[i] = ProdCET[i] + FlowList[j].comFlowT5 * CompOilList[j].Cet;                        
+                    }
+                    if(i == 5){
+                        SumFlow = SumFlow + FlowList[j].comFlowT6;
+                        ProdCET[i] = ProdCET[i] + FlowList[j].comFlowT6 * CompOilList[j].Cet;                        
+                    }
+                    if(i == 6){
+                        SumFlow = SumFlow + FlowList[j].comFlowT7;
+                        ProdCET[i] = ProdCET[i] + FlowList[j].comFlowT7 * CompOilList[j].Cet;                        
+                    }
+                }
+                ProdCET[i] = Math.Round(ProdCET[i] / SumFlow, 2);
+            }
+            #endregion 
+
+            #region 50%回收温度
+            for(int i = 0; i < 7; i++){
+                double SumFlow = 0.0000000001;//每一个周期的总流量
+                for(int j = 0; j < FlowList.Count; j++){
+                    if(i == 0){
+                        SumFlow = SumFlow + FlowList[j].comFlowT1;
+                        ProdD50[i] = ProdD50[i] + FlowList[j].comFlowT1 * CompOilList[j].D50;
+                    }
+                    if(i == 1){
+                        SumFlow = SumFlow + FlowList[j].comFlowT2;
+                        ProdD50[i] = ProdD50[i] + FlowList[j].comFlowT2 * CompOilList[j].D50;                        
+                    }
+                    if(i == 2){
+                        SumFlow = SumFlow + FlowList[j].comFlowT3;
+                        ProdD50[i] = ProdD50[i] + FlowList[j].comFlowT3 * CompOilList[j].D50;                        
+                    }
+                    if(i == 3){
+                        SumFlow = SumFlow + FlowList[j].comFlowT4;
+                        ProdD50[i] = ProdD50[i] + FlowList[j].comFlowT4 * CompOilList[j].D50;                        
+                    }
+                    if(i == 4){
+                        SumFlow = SumFlow + FlowList[j].comFlowT5;
+                        ProdD50[i] = ProdD50[i] + FlowList[j].comFlowT5 * CompOilList[j].D50;                        
+                    }
+                    if(i == 5){
+                        SumFlow = SumFlow + FlowList[j].comFlowT6;
+                        ProdD50[i] = ProdD50[i] + FlowList[j].comFlowT6 * CompOilList[j].D50;                        
+                    }
+                    if(i == 6){
+                        SumFlow = SumFlow + FlowList[j].comFlowT7;
+                        ProdD50[i] = ProdD50[i] + FlowList[j].comFlowT7 * CompOilList[j].D50;                        
+                    }
+                }
+                ProdD50[i] = Math.Round(ProdD50[i] / SumFlow, 2);
+            }
+            #endregion
+
+            #region 多环芳烃含量
+            for(int i = 0; i < 7; i++){
+                double SumFlow = 0.0000000001;//每一个周期的总流量
+                for(int j = 0; j < FlowList.Count; j++){
+                    if(i == 0){
+                        SumFlow = SumFlow + FlowList[j].comFlowT1;
+                        ProdPOL[i] = ProdPOL[i] + FlowList[j].comFlowT1 * CompOilList[j].Pol;
+                    }
+                    if(i == 1){
+                        SumFlow = SumFlow + FlowList[j].comFlowT2;
+                        ProdPOL[i] = ProdPOL[i] + FlowList[j].comFlowT2 * CompOilList[j].Pol;                        
+                    }
+                    if(i == 2){
+                        SumFlow = SumFlow + FlowList[j].comFlowT3;
+                        ProdPOL[i] = ProdPOL[i] + FlowList[j].comFlowT3 * CompOilList[j].Pol;                        
+                    }
+                    if(i == 3){
+                        SumFlow = SumFlow + FlowList[j].comFlowT4;
+                        ProdPOL[i] = ProdPOL[i] + FlowList[j].comFlowT4 * CompOilList[j].Pol;                        
+                    }
+                    if(i == 4){
+                        SumFlow = SumFlow + FlowList[j].comFlowT5;
+                        ProdPOL[i] = ProdPOL[i] + FlowList[j].comFlowT5 * CompOilList[j].Pol;                        
+                    }
+                    if(i == 5){
+                        SumFlow = SumFlow + FlowList[j].comFlowT6;
+                        ProdPOL[i] = ProdPOL[i] + FlowList[j].comFlowT6 * CompOilList[j].Pol;                        
+                    }
+                    if(i == 6){
+                        SumFlow = SumFlow + FlowList[j].comFlowT7;
+                        ProdPOL[i] = ProdPOL[i] + FlowList[j].comFlowT7 * CompOilList[j].Pol;                        
+                    }
+                }
+                ProdPOL[i] = Math.Round(ProdPOL[i] / SumFlow, 2);
+            }
+            #endregion
+
+            #region 密度
+            for(int i = 0; i < 7; i++){
+                double SumFlow = 0.0000000001;//每一个周期的总流量
+                for(int j = 0; j < FlowList.Count; j++){
+                    if(i == 0){
+                        SumFlow = SumFlow + FlowList[j].comFlowT1;
+                        ProdDEN[i] = ProdDEN[i] + FlowList[j].comFlowT1 * CompOilList[j].Den;
+                    }
+                    if(i == 1){
+                        SumFlow = SumFlow + FlowList[j].comFlowT2;
+                        ProdDEN[i] = ProdDEN[i] + FlowList[j].comFlowT2 * CompOilList[j].Den;                        
+                    }
+                    if(i == 2){
+                        SumFlow = SumFlow + FlowList[j].comFlowT3;
+                        ProdDEN[i] = ProdDEN[i] + FlowList[j].comFlowT3 * CompOilList[j].Den;                        
+                    }
+                    if(i == 3){
+                        SumFlow = SumFlow + FlowList[j].comFlowT4;
+                        ProdDEN[i] = ProdDEN[i] + FlowList[j].comFlowT4 * CompOilList[j].Den;                        
+                    }
+                    if(i == 4){
+                        SumFlow = SumFlow + FlowList[j].comFlowT5;
+                        ProdDEN[i] = ProdDEN[i] + FlowList[j].comFlowT5 * CompOilList[j].Den;                        
+                    }
+                    if(i == 5){
+                        SumFlow = SumFlow + FlowList[j].comFlowT6;
+                        ProdDEN[i] = ProdDEN[i] + FlowList[j].comFlowT6 * CompOilList[j].Den;                        
+                    }
+                    if(i == 6){
+                        SumFlow = SumFlow + FlowList[j].comFlowT7;
+                        ProdDEN[i] = ProdDEN[i] + FlowList[j].comFlowT7 * CompOilList[j].Den;                        
+                    }
+                }
+                ProdDEN[i] = Math.Round(ProdDEN[i] / SumFlow, 2);
+            }
+            #endregion
+
+            List<Dispatch_decsScheme_prodInfo> ResultList = new List<Dispatch_decsScheme_prodInfo>();//新建一个List用来append的,返回的是list形式
+            for(int i = 0; i < 4; i++){
+                Dispatch_decsScheme_prodInfo Result = new Dispatch_decsScheme_prodInfo();
+                Result.PropertyName = PropertyList[i].PropertyName;
+                if(i == 0){
+                    Result.valueHigh = ProdOilList[3].CetHighLimit;
+                    Result.valueLow = ProdOilList[3].CetLowLimit;
+                    Result.valueT1 = (float)ProdCET[0];
+                    Result.valueT2 = (float)ProdCET[1];
+                    Result.valueT3 = (float)ProdCET[2];
+                    Result.valueT4 = (float)ProdCET[3];
+                    Result.valueT5 = (float)ProdCET[4];
+                    Result.valueT6 = (float)ProdCET[5];
+                    Result.valueT7 = (float)ProdCET[6];
+                }
+                if(i == 1){
+                    Result.valueHigh = ProdOilList[3].D50HighLimit;
+                    Result.valueLow = ProdOilList[3].D50LowLimit;
+                    Result.valueT1 = (float)ProdD50[0];
+                    Result.valueT2 = (float)ProdD50[1];
+                    Result.valueT3 = (float)ProdD50[2];
+                    Result.valueT4 = (float)ProdD50[3];
+                    Result.valueT5 = (float)ProdD50[4];
+                    Result.valueT6 = (float)ProdD50[5];
+                    Result.valueT7 = (float)ProdD50[6];
+                }
+                if(i == 2){
+                    Result.valueHigh = ProdOilList[3].PolHighLimit;
+                    Result.valueLow = ProdOilList[3].PolLowLimit;
+                    Result.valueT1 = (float)ProdPOL[0];
+                    Result.valueT2 = (float)ProdPOL[1];
+                    Result.valueT3 = (float)ProdPOL[2];
+                    Result.valueT4 = (float)ProdPOL[3];
+                    Result.valueT5 = (float)ProdPOL[4];
+                    Result.valueT6 = (float)ProdPOL[5];
+                    Result.valueT7 = (float)ProdPOL[6];
+                }
+                if(i == 3){
+                    Result.valueHigh = ProdOilList[3].DenHighLimit;
+                    Result.valueLow = ProdOilList[3].DenLowLimit;
+                    Result.valueT1 = (float)ProdDEN[0];
+                    Result.valueT2 = (float)ProdDEN[1];
+                    Result.valueT3 = (float)ProdDEN[2];
+                    Result.valueT4 = (float)ProdDEN[3];
+                    Result.valueT5 = (float)ProdDEN[4];
+                    Result.valueT6 = (float)ProdDEN[5];
+                    Result.valueT7 = (float)ProdDEN[6];
+                }
+                ResultList.Add(Result);
+            }
+            return ResultList;               
+        }
+    
     }
 }

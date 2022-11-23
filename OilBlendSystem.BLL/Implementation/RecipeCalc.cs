@@ -618,6 +618,9 @@ namespace OilBlendSystem.BLL.Implementation
 
             // Col 为最优解
             Col = new double[lpsolve.get_Ncolumns(lp)]; 
+            // int status = lpsolve.get_status(lp);
+            // Console.WriteLine(lpsolve.get_statustext(lp, 0));最优解
+            // Console.WriteLine(lpsolve.get_statustext(lp, 1));次优解
             lpsolve.get_variables(lp, Col);             
             for(int i = 0; i < iNum; i++){
                 Calc[i] = Col[i];
@@ -1970,19 +1973,19 @@ namespace OilBlendSystem.BLL.Implementation
                 Result.ComOilName = CompOilList[i].ComOilName;
                 for(int j = 0; j < ProdOilNum; j++){
                     if(ProdOilList[j].Id == 1){
-                        Result.AutoRecipe = (float)Math.Round(percent1[i], 3);//保留完三位小数，换算成百分比之后就是一位小数
+                        Result.AutoRecipe = (float)Math.Round(percent1[i], 3) * 100;//保留完三位小数，换算成百分比之后就是一位小数
                     }
 
                     if(ProdOilList[j].Id == 2){
-                        Result.ExpRecipe = (float)Math.Round(percent2[i], 3);     
+                        Result.ExpRecipe = (float)Math.Round(percent2[i], 3) * 100;     
                     }
 
                     if(ProdOilList[j].Id == 3){
-                        Result.Prod1Recipe= (float)Math.Round(percent3[i], 3);
+                        Result.Prod1Recipe= (float)Math.Round(percent3[i], 3) * 100;
                     }
 
                     if(ProdOilList[j].Id == 4){
-                        Result.Prod2Recipe = (float)Math.Round(percent4[i], 3);
+                        Result.Prod2Recipe = (float)Math.Round(percent4[i], 3) * 100;
                     }
                 }
                 ResultList.Add(Result);
@@ -2177,19 +2180,19 @@ namespace OilBlendSystem.BLL.Implementation
                 Result.ComOilName = CompOilList[i].ComOilName;
                 for(int j = 0; j < ProdOilNum; j++){
                     if(ProdOilList[j].Id == 1){
-                        Result.AutoRecipe = (float)Math.Round(percent1[i], 3);//保留完三位小数，换算成百分比之后就是一位小数
+                        Result.AutoRecipe = (float)Math.Round(percent1[i], 3) * 100;//保留完三位小数，换算成百分比之后就是一位小数
                     }
 
                     if(ProdOilList[j].Id == 2){
-                        Result.ExpRecipe = (float)Math.Round(percent2[i], 3);     
+                        Result.ExpRecipe = (float)Math.Round(percent2[i], 3) * 100;     
                     }
 
                     if(ProdOilList[j].Id == 3){
-                        Result.Prod1Recipe= (float)Math.Round(percent3[i], 3);
+                        Result.Prod1Recipe= (float)Math.Round(percent3[i], 3) * 100;
                     }
 
                     if(ProdOilList[j].Id == 4){
-                        Result.Prod2Recipe = (float)Math.Round(percent4[i], 3);
+                        Result.Prod2Recipe = (float)Math.Round(percent4[i], 3) * 100;
                     }
                 }
                 ResultList.Add(Result);
@@ -2384,19 +2387,19 @@ namespace OilBlendSystem.BLL.Implementation
                 Result.ComOilName = CompOilList[i].ComOilName;
                 for(int j = 0; j < ProdOilNum; j++){
                     if(ProdOilList[j].Id == 1){
-                        Result.AutoRecipe = (float)Math.Round(percent1[i], 3);//保留完三位小数，换算成百分比之后就是一位小数
+                        Result.AutoRecipe = (float)Math.Round(percent1[i], 3) * 100;//保留完三位小数，换算成百分比之后就是一位小数
                     }
 
                     if(ProdOilList[j].Id == 2){
-                        Result.ExpRecipe = (float)Math.Round(percent2[i], 3);     
+                        Result.ExpRecipe = (float)Math.Round(percent2[i], 3) * 100;     
                     }
 
                     if(ProdOilList[j].Id == 3){
-                        Result.Prod1Recipe= (float)Math.Round(percent3[i], 3);
+                        Result.Prod1Recipe= (float)Math.Round(percent3[i], 3) * 100;
                     }
 
                     if(ProdOilList[j].Id == 4){
-                        Result.Prod2Recipe = (float)Math.Round(percent4[i], 3);
+                        Result.Prod2Recipe = (float)Math.Round(percent4[i], 3) * 100;
                     }
                 }
                 ResultList.Add(Result);

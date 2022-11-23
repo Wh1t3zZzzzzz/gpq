@@ -11,23 +11,23 @@ using OilBlendSystem.BLL.Interface;
 //using System.Data.Entity;
 [ApiController]
 [Route("[controller]")]
-public class DispatchController : ControllerBase
+public class DispatchSetController : ControllerBase
 {
+    //智能决策模块求解控制器
 
     private readonly oilblendContext context;
 
-    public DispatchController(oilblendContext _context)
+    public DispatchSetController(oilblendContext _context)
     {
        context = _context;
     }
 
-    [HttpGet]
-    //public IEnumerable<TestTable> Get()//model里的名字
-    public ApiModel Get()//model里的名字 多个数据用IEnumberable，单个数据不用
+    [HttpGet("Res/Obj")]
+    public ApiModel GetObj()//model里的名字 多个数据用IEnumberable，单个数据不用
     {       
         IDispatch _Dispatch = new Dispatch(context);
         // var list = context.Properties.ToList();
-        var list = _Dispatch.GetDispatchComFlowRes1().ToList();
+        var list = _Dispatch.GetDispatch_decsCalc().ToList();
         return new ApiModel()
         {
         code = 200,
@@ -36,8 +36,6 @@ public class DispatchController : ControllerBase
         msg = "查询成功"
         };
 
-
     }
-
 
 }
