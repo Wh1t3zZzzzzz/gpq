@@ -52,6 +52,10 @@ CREATE TABLE `compoilconfig` (
   `prod1High1` float DEFAULT NULL,
   `prod2Low1` float DEFAULT NULL,
   `prod2High1` float DEFAULT NULL,
+  `prod1Low2` float DEFAULT NULL,
+  `prod1High2` float DEFAULT NULL,
+  `prod2Low2` float DEFAULT NULL,
+  `prod2High2` float DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -62,155 +66,8 @@ CREATE TABLE `compoilconfig` (
 
 LOCK TABLES `compoilconfig` WRITE;
 /*!40000 ALTER TABLE `compoilconfig` DISABLE KEYS */;
-INSERT INTO `compoilconfig` VALUES (1,'组分油1',49.4,280,4,842,5000,100,5000,0,5000,0,5000,0,5000,200,8000,200,2000,2000,2000,2000,2000,2000,2000,0,5000,0,5000),(2,'组分油2',49.3,310,4,842,5000,0,5000,0,5000,0,5000,0,5000,200,8000,200,2500,2500,2500,2500,2500,2500,2500,0,5000,0,5000),(3,'组分油3',49.4,270,3,842,5500,300,5000,0,5000,0,5000,0,5000,200,8000,200,2500,2500,2500,2500,2500,2500,2500,0,5000,0,5000),(4,'组分油4',53,280,7,837,6550,200,5000,0,5000,0,5000,0,5000,200,8000,200,2500,2500,2500,2500,2500,2500,2500,0,5000,0,5000),(5,'组分油5',46.6,300,5,847,1000,0,6000,0,5000,0,5000,0,5000,200,8000,200,2500,2500,2500,2500,2500,2500,2500,0,5000,0,5000),(6,'组分油6',45,300,4,842,1000,100,1000,0,5000,0,5000,0,5000,200,8000,200,2500,2500,2500,2500,2500,2500,2500,0,5000,0,5000),(7,'组分油7',47,300,3,842,1000,100,5000,0,5000,0,5000,0,5000,200,8000,200,2500,2500,2500,2500,2500,2500,2500,0,5000,0,5000);
+INSERT INTO `compoilconfig` VALUES (1,'组分油1',49.4,280,4,842,5000,100,5000,0,5000,0,5000,0,5000,200,8000,200,2000,2000,2000,2000,2000,2000,2000,0,5000,0,5000,0,5000,0,5000),(2,'组分油2',49.3,310,4,842,5000,0,5000,0,5000,0,5000,0,5000,200,8000,200,2500,2500,2500,2500,2500,2500,2500,0,5000,0,5000,0,5000,0,5000),(3,'组分油3',49.4,270,3,842,5500,300,5000,0,5000,0,5000,0,5000,200,8000,200,2500,2500,2500,2500,2500,2500,2500,0,5000,0,5000,0,5000,0,5000),(4,'组分油4',53,280,7,837,6550,200,5000,0,5000,0,5000,0,5000,200,8000,200,2500,2500,2500,2500,2500,2500,2500,0,5000,0,5000,0,5000,0,5000),(5,'组分油5',46.6,300,5,847,1000,0,6000,0,5000,0,5000,0,5000,200,8000,200,2500,2500,2500,2500,2500,2500,2500,0,5000,0,5000,0,5000,0,5000),(6,'组分油6',45,300,4,842,1000,100,1000,0,5000,0,5000,0,5000,200,8000,200,2500,2500,2500,2500,2500,2500,2500,0,5000,0,5000,0,5000,0,5000),(7,'组分油7',47,300,3,842,1000,100,5000,0,5000,0,5000,0,5000,200,8000,200,2500,2500,2500,2500,2500,2500,2500,0,5000,0,5000,0,5000,0,5000);
 /*!40000 ALTER TABLE `compoilconfig` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `dispatchcomflow`
---
-
-DROP TABLE IF EXISTS `dispatchcomflow`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `dispatchcomflow` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `comFlowT1` float DEFAULT NULL,
-  `comFlowT2` float DEFAULT NULL,
-  `comFlowT3` float DEFAULT NULL,
-  `comFlowT4` float DEFAULT NULL,
-  `comFlowT5` float DEFAULT NULL,
-  `comFlowT6` float DEFAULT NULL,
-  `comFlowT7` float DEFAULT NULL,
-  `prodIns` int DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `dispatchcomflow`
---
-
-LOCK TABLES `dispatchcomflow` WRITE;
-/*!40000 ALTER TABLE `dispatchcomflow` DISABLE KEYS */;
-INSERT INTO `dispatchcomflow` VALUES (1,0,0,0,0,0,0,0,0),(2,0,0,0,0,0,0,0,0),(3,0,0,0,0,0,0,0,0),(4,0,0,0,0,0,0,0,0),(5,100,100,0,0,0,0,0,0),(6,2500,2500,2500,2500,2500,0,0,0),(7,2500,2500,2500,2500,2500,0,0,0),(8,2500,2500,2500,2500,2500,0,0,0),(9,2000,2000,2000,2000,2000,0,0,1),(10,2500,2500,2500,2500,2500,0,0,1),(11,2500,2500,2500,2500,2500,0,0,1),(12,2500,2500,2500,2500,2500,0,0,1),(13,2400,2400,2500,2500,2500,0,0,1),(14,0,0,0,0,0,0,0,1),(15,0,0,0,0,0,0,0,1),(16,0,0,0,0,0,0,0,1);
-/*!40000 ALTER TABLE `dispatchcomflow` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `dispatchcomvol`
---
-
-DROP TABLE IF EXISTS `dispatchcomvol`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `dispatchcomvol` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `comVolT1` float DEFAULT NULL,
-  `comVolT2` float DEFAULT NULL,
-  `comVolT3` float DEFAULT NULL,
-  `comVolT4` float DEFAULT NULL,
-  `comVolT5` float DEFAULT NULL,
-  `comVolT6` float DEFAULT NULL,
-  `comVolT7` float DEFAULT NULL,
-  `comIns` int DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `dispatchcomvol`
---
-
-LOCK TABLES `dispatchcomvol` WRITE;
-/*!40000 ALTER TABLE `dispatchcomvol` DISABLE KEYS */;
-INSERT INTO `dispatchcomvol` VALUES (1,200,200,200,200,200,0,0,1),(2,200,200,200,200,200,0,0,1),(3,200,200,200,200,200,0,0,1),(4,200,200,200,200,200,0,0,1),(5,200,200,200,200,200,0,0,1),(6,200,200,200,200,200,0,0,1),(7,200,200,200,200,200,0,0,1),(8,200,200,200,200,200,0,0,1);
-/*!40000 ALTER TABLE `dispatchcomvol` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `dispatchoptimal`
---
-
-DROP TABLE IF EXISTS `dispatchoptimal`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `dispatchoptimal` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `optimal_stage` varchar(128) DEFAULT NULL,
-  `optimal_obj` float DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `dispatchoptimal`
---
-
-LOCK TABLES `dispatchoptimal` WRITE;
-/*!40000 ALTER TABLE `dispatchoptimal` DISABLE KEYS */;
-INSERT INTO `dispatchoptimal` VALUES (1,'success',11242500);
-/*!40000 ALTER TABLE `dispatchoptimal` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `dispatchprodpick`
---
-
-DROP TABLE IF EXISTS `dispatchprodpick`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `dispatchprodpick` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `prodPickT1` float DEFAULT NULL,
-  `prodPickT2` float DEFAULT NULL,
-  `prodPickT3` float DEFAULT NULL,
-  `prodPickT4` float DEFAULT NULL,
-  `prodPickT5` float DEFAULT NULL,
-  `prodPickT6` float DEFAULT NULL,
-  `prodPickT7` float DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `dispatchprodpick`
---
-
-LOCK TABLES `dispatchprodpick` WRITE;
-/*!40000 ALTER TABLE `dispatchprodpick` DISABLE KEYS */;
-INSERT INTO `dispatchprodpick` VALUES (1,5000,5400,9600,5400,7500,0,0),(2,10000,10000,10000,10000,10000,0,0),(3,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(4,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
-/*!40000 ALTER TABLE `dispatchprodpick` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `dispatchprodvol`
---
-
-DROP TABLE IF EXISTS `dispatchprodvol`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `dispatchprodvol` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `prodVolT1` float DEFAULT NULL,
-  `prodVolT2` float DEFAULT NULL,
-  `prodVolT3` float DEFAULT NULL,
-  `prodVolT4` float DEFAULT NULL,
-  `prodVolT5` float DEFAULT NULL,
-  `prodVolT6` float DEFAULT NULL,
-  `prodVolT7` float DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `dispatchprodvol`
---
-
-LOCK TABLES `dispatchprodvol` WRITE;
-/*!40000 ALTER TABLE `dispatchprodvol` DISABLE KEYS */;
-INSERT INTO `dispatchprodvol` VALUES (1,2800,5000,2900,5000,5000,0,0),(2,2100,4000,6000,8000,10000,0,0),(3,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(4,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
-/*!40000 ALTER TABLE `dispatchprodvol` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -542,4 +399,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-23 16:26:37
+-- Dump completed on 2022-11-24 12:57:03
