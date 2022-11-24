@@ -31,7 +31,6 @@ namespace OilBlendSystem.BLL.Implementation
             context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
             return context.Recipecalc3s.ToList();
         }
-
         public double[] GetRecipe1()//场景1的lpsolve求解配方
         {
             IProdOilConfig _ProdOilConfig = new ProdOilConfig(context);

@@ -89,6 +89,14 @@ namespace OilBlendSystem.Models.DataBaseModel
 
                 entity.Property(e => e.Prod2Low1).HasColumnName("prod2Low1");
 
+                entity.Property(e => e.Prod1High1).HasColumnName("prod1High2");
+
+                entity.Property(e => e.Prod2High1).HasColumnName("prod2High2");
+
+                entity.Property(e => e.Prod1Low1).HasColumnName("prod1Low2");
+
+                entity.Property(e => e.Prod2Low1).HasColumnName("prod2Low2");
+
                 entity.Property(e => e.HighVolume).HasColumnName("highVolume");
 
                 entity.Property(e => e.IniVolume).HasColumnName("iniVolume");

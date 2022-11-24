@@ -29,6 +29,10 @@ namespace OilBlendSystem.Models.DataBaseModel
         public float AutoHigh2 { get; set; }//车柴高限
         public float ExpLow2 { get; set; }//出柴低限
         public float ExpHigh2 { get; set; }//出柴高限
+        public float Prod1Low2 { get; set; }//低限
+        public float Prod1High2 { get; set; }//高限
+        public float Prod2Low2 { get; set; }//低限
+        public float Prod2High2 { get; set; }//高限
         //下面是组分油罐容
         public float IniVolume { get; set; }//初始罐容
         public float HighVolume { get; set; }//罐容高限
