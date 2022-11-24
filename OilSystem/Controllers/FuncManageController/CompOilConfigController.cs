@@ -41,97 +41,7 @@ public class CompOilConfigController : ControllerBase
        //return menulist;
 
     }
-    //("{comOilName}/{cet}/{d50}/{pol}/{den}/{price}")
-    //string comOilName, string cet, string d50, string pol,string den, string price
 
-    // [HttpPut]
-    // //[FromBody]Compoilconfig obj
-    // //public ApiModel Put(float cet, int index)//model里的名字 多个数据用IEnumberable，单个数据不用
-    // public ApiModel Put(Comproperty obj)
-    // {
-    //     //oilblendContext context = new();
-    //     context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
-    //     ICompOilConfig _CompOilConfig = new CompOilConfig(context);
-    //     //List<Compoilconfig> list3 = new List<Compoilconfig>();
-    //     var list = _CompOilConfig.GetAllCompOilConfigList().ToList();//需要把IEnumberable中遍历成List
-    //     list[obj.Index].ComOilName = obj.ComOilName;
-    //     list[obj.Index].Cet = obj.Cet;
-    //     list[obj.Index].D50 = obj.D50;
-    //     list[obj.Index].Pol = obj.Pol;
-    //     list[obj.Index].Den = obj.Den;
-    //     list[obj.Index].Price = obj.Price;
-    //     context.Compoilconfigs.Update(list[obj.Index]);
-    //     var list1 = _CompOilConfig.GetAllCompOilConfigList().ToList();
-    //     //context.SaveChanges();
-    //     //context.Compoilconfigs.Update(list[0]);
-    //     context.SaveChanges();
-    //     return new ApiModel()
-    //     {
-    //     code = 200,
-    //     //data = JsonConvert.SerializeObject(list),
-    //     data = list1,
-    //     msg = "查询成功"
-    //     };
-    // }
-
-    // [HttpPut("post")]
-    // //[FromBody]Compoilconfig obj
-    // //public ApiModel Put(float cet, int index)//model里的名字 多个数据用IEnumberable，单个数据不用
-    // public ApiModel Put2(Comproperty obj)
-    // {
-    //     //oilblendContext context = new();
-    //     context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
-    //     ICompOilConfig _CompOilConfig = new CompOilConfig(context);
-    //     //List<Compoilconfig> list3 = new List<Compoilconfig>();
-    //     var list = _CompOilConfig.GetAllCompOilConfigList().ToList();//需要把IEnumberable中遍历成List
-    //     obj.Index = list.Count;
-    //     Compoilconfig comp = new Compoilconfig();
-    //     context.Compoilconfigs.Add(comp);
-    //     context.SaveChanges();
-    //     var list1 = context.Compoilconfigs.ToList();
-    //     list1[obj.Index].ComOilName = obj.ComOilName;
-    //     list1[obj.Index].Cet = obj.Cet;
-    //     list1[obj.Index].D50 = obj.D50;
-    //     list1[obj.Index].Pol = obj.Pol;
-    //     list1[obj.Index].Den = obj.Den;
-    //     list1[obj.Index].Price = obj.Price;
-    //     context.Compoilconfigs.Update(list1[obj.Index]);
-    //     context.SaveChanges();
-    //     var list2 = _CompOilConfig.GetAllCompOilConfigList().ToList();
-    //     //context.SaveChanges();
-    //     //context.Compoilconfigs.Update(list[0]);
-    //     return new ApiModel()
-    //     {
-    //     code = 200,
-    //     //data = JsonConvert.SerializeObject(list),
-    //     data = list2,
-    //     msg = "查询成功"
-    //     };
-    // }
-
-    // [HttpPost]
-    // //[FromBody]Compoilconfig obj
-    // //public ApiModel Put(float cet, int index)//model里的名字 多个数据用IEnumberable，单个数据不用
-    // //public ApiModel Post(Compoilconfig obj)
-    // public ApiModel Post(Comproperty obj)//前端新增时调用post
-    // {
-    //     //oilblendContext context = new();
-    //     context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
-    //     ICompOilConfig _CompOilConfig = new CompOilConfig(context);
-    //     //List<Compoilconfig> list3 = new List<Compoilconfig>();
-    //     var list = _CompOilConfig.GetAllCompOilConfigList().ToList();//需要把IEnumberable中遍历成List
-    //     Compoilconfig comp = new Compoilconfig();
-    //     context.Compoilconfigs.Add(comp);
-    //     context.SaveChanges();
-    //     var list1 = context.Compoilconfigs.ToList();
-    //     return new ApiModel()
-    //     {
-    //     code = 200,
-    //     //data = JsonConvert.SerializeObject(list),
-    //     data = list1,
-    //     msg = "查询成功"
-    //     };
-    // }
 
     [HttpPut]
     public ApiModel Put(Comproperty obj)//前端新增时调用post
@@ -210,11 +120,6 @@ public class CompOilConfigController : ControllerBase
         msg = "查询成功"
         };
     }
-    
-    // public string ParseJsonDynamic(dynamic data)
-    // {
-
-    // }
 
 
 }

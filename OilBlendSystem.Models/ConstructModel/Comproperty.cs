@@ -4,7 +4,7 @@ namespace OilBlendSystem.Models.ConstructModel
     {
         public int ID { get; set; }//
         //下面是组分油属性
-        public string? action { get; set; }//
+        public string? action { get; set; }//前端的动作，是增加后的编辑还是普通的编辑
         public string? ComOilName { get; set; }//组分油名称 ComOil = Component Oil
         public float Cet { get; set; }//十六烷值指数
         public float D50 { get; set; }//50%回收温度

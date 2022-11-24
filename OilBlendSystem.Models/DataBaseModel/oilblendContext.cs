@@ -25,11 +25,6 @@ namespace OilBlendSystem.Models.DataBaseModel
         public virtual DbSet<Recipecalc3> Recipecalc3s { get; set; } = null!;
         public virtual DbSet<Schemeverify1> Schemeverify1s { get; set; } = null!;
         public virtual DbSet<Schemeverify2> Schemeverify2s { get; set; } = null!;
-        public virtual DbSet<Dispatchcomflow> Dispatchcomflows { get; set; } = null!;
-        public virtual DbSet<Dispatchcomvol> Dispatchcomvols { get; set; } = null!;
-        public virtual DbSet<Dispatchprodpick> Dispatchprodpicks { get; set; } = null!;
-        public virtual DbSet<Dispatchprodvol> Dispatchprodvols { get; set; } = null!;
-        public virtual DbSet<Dispatchoptimal> Dispatchoptimals { get; set; } = null!;
         public virtual DbSet<Dispatchweight> Dispatchweights { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -432,125 +427,6 @@ namespace OilBlendSystem.Models.DataBaseModel
                 entity.Property(e => e.ProdOilName)
                     .HasMaxLength(128)
                     .HasColumnName("prodOilName");
-            });
-
-            modelBuilder.Entity<Dispatchcomvol>(entity =>
-            {
-                entity.ToTable("dispatchcomvol");
-
-                entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("id");
-
-                entity.Property(e => e.ComIns).HasColumnName("comIns");
-
-                entity.Property(e => e.ComVolT1).HasColumnName("comVolT1");
-
-                entity.Property(e => e.ComVolT2).HasColumnName("comVolT2");
-
-                entity.Property(e => e.ComVolT3).HasColumnName("comVolT3");
-
-                entity.Property(e => e.ComVolT4).HasColumnName("comVolT4");
-
-                entity.Property(e => e.ComVolT5).HasColumnName("comVolT5");
-
-                entity.Property(e => e.ComVolT6).HasColumnName("comVolT6");
-
-                entity.Property(e => e.ComVolT7).HasColumnName("comVolT7");
-
-
-            });
-
-            modelBuilder.Entity<Dispatchcomflow>(entity =>
-            {
-                entity.ToTable("dispatchcomflow");
-
-                entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("id");
-
-                entity.Property(e => e.ProdIns).HasColumnName("prodIns");
-
-                entity.Property(e => e.ComFlowT1).HasColumnName("comFlowT1");
-
-                entity.Property(e => e.ComFlowT2).HasColumnName("comFlowT2");
-
-                entity.Property(e => e.ComFlowT3).HasColumnName("comFlowT3");
-
-                entity.Property(e => e.ComFlowT4).HasColumnName("comFlowT4");
-
-                entity.Property(e => e.ComFlowT5).HasColumnName("comFlowT5");
-
-                entity.Property(e => e.ComFlowT6).HasColumnName("comFlowT6");
-
-                entity.Property(e => e.ComFlowT7).HasColumnName("comFlowT7");
-
-
-            });
-
-            modelBuilder.Entity<Dispatchprodvol>(entity =>
-            {
-                entity.ToTable("dispatchprodvol");
-
-                entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("id");
-
-                entity.Property(e => e.ProdVolT1).HasColumnName("prodVolT1");
-
-                entity.Property(e => e.ProdVolT2).HasColumnName("prodVolT2");
-
-                entity.Property(e => e.ProdVolT3).HasColumnName("prodVolT3");
-
-                entity.Property(e => e.ProdVolT4).HasColumnName("prodVolT4");
-
-                entity.Property(e => e.ProdVolT5).HasColumnName("prodVolT5");
-
-                entity.Property(e => e.ProdVolT6).HasColumnName("prodVolT6");
-
-                entity.Property(e => e.ProdVolT7).HasColumnName("prodVolT7");
-
-
-            });
-
-            modelBuilder.Entity<Dispatchprodpick>(entity =>
-            {
-                entity.ToTable("dispatchprodpick");
-
-                entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("id");
-
-                entity.Property(e => e.ProdPickT1).HasColumnName("prodPickT1");
-
-                entity.Property(e => e.ProdPickT2).HasColumnName("prodPickT2");
-
-                entity.Property(e => e.ProdPickT3).HasColumnName("prodPickT3");
-
-                entity.Property(e => e.ProdPickT4).HasColumnName("prodPickT4");
-
-                entity.Property(e => e.ProdPickT5).HasColumnName("prodPickT5");
-
-                entity.Property(e => e.ProdPickT6).HasColumnName("prodPickT6");
-
-                entity.Property(e => e.ProdPickT7).HasColumnName("prodPickT7");
-
-            });
-
-            modelBuilder.Entity<Dispatchoptimal>(entity =>
-            {
-                entity.ToTable("dispatchoptimal");
-
-                entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("id");
-
-                entity.Property(e => e.Optimal_obj).HasColumnName("optimal_obj");
-
-                entity.Property(e => e.Optimal_stage)
-                    .HasMaxLength(128)
-                    .HasColumnName("optimal_stage");
-
             });
 
             modelBuilder.Entity<Dispatchweight>(entity =>
