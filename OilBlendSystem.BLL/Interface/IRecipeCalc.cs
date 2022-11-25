@@ -7,6 +7,8 @@ namespace OilBlendSystem.BLL.Interface
     {
         IEnumerable<Recipecalc1> GetRecipeCalc1();
         IEnumerable<Recipecalc2> GetRecipeCalc2();
+        IEnumerable<Recipecalc2_2> GetRecipeCalc2_2();
+        IEnumerable<Recipecalc2_3> GetRecipeCalc2_3();
         IEnumerable<Recipecalc3> GetRecipeCalc3();
         double[] GetRecipe1();
         double[] GetRecipe2();

@@ -126,7 +126,7 @@ public class RecipeCalc_2Controller : ControllerBase
     public ApiModel Set4()//model里的名字 多个数据用IEnumberable，单个数据不用
     {
 
-        var OptimizeObjList = context.Recipecalc2s.Where(m => m.Apply == 1).ToList();
+        var OptimizeObjList = context.Recipecalc2_2s.Where(m => m.Apply == 1).ToList();
         List<Recipecalc_2_4> ResultList = new List<Recipecalc_2_4>();//列表，里面可以添加很多个对象
         for(int i = 0; i < OptimizeObjList.Count; i++){
             Recipecalc_2_4 result = new Recipecalc_2_4();//实体，可以理解为一个对象  

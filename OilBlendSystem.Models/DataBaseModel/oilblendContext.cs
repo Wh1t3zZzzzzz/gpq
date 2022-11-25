@@ -22,6 +22,8 @@ namespace OilBlendSystem.Models.DataBaseModel
         public virtual DbSet<Property> Properties { get; set; } = null!;
         public virtual DbSet<Recipecalc1> Recipecalc1s { get; set; } = null!;
         public virtual DbSet<Recipecalc2> Recipecalc2s { get; set; } = null!;
+        public virtual DbSet<Recipecalc2_2> Recipecalc2_2s { get; set; } = null!;
+        public virtual DbSet<Recipecalc2_3> Recipecalc2_3s { get; set; } = null!;
         public virtual DbSet<Recipecalc3> Recipecalc3s { get; set; } = null!;
         public virtual DbSet<Schemeverify1> Schemeverify1s { get; set; } = null!;
         public virtual DbSet<Schemeverify2> Schemeverify2s { get; set; } = null!;
@@ -284,6 +286,44 @@ namespace OilBlendSystem.Models.DataBaseModel
             modelBuilder.Entity<Recipecalc2>(entity =>
             {
                 entity.ToTable("recipecalc2");
+
+                entity.Property(e => e.Id)
+                    .ValueGeneratedNever()
+                    .HasColumnName("id");
+
+                entity.Property(e => e.Weight).HasColumnName("weight");
+
+                entity.Property(e => e.WeightName)
+                    .HasMaxLength(128)
+                    .HasColumnName("weightName");
+
+                entity.Property(e => e.ProdOilStatus).HasColumnName("ProdOilStatus");
+
+                entity.Property(e => e.Apply).HasColumnName("Apply");
+            });
+
+            modelBuilder.Entity<Recipecalc2_2>(entity =>
+            {
+                entity.ToTable("recipecalc2_2");
+
+                entity.Property(e => e.Id)
+                    .ValueGeneratedNever()
+                    .HasColumnName("id");
+
+                entity.Property(e => e.Weight).HasColumnName("weight");
+
+                entity.Property(e => e.WeightName)
+                    .HasMaxLength(128)
+                    .HasColumnName("weightName");
+
+                entity.Property(e => e.ProdOilStatus).HasColumnName("ProdOilStatus");
+
+                entity.Property(e => e.Apply).HasColumnName("Apply");
+            });
+
+            modelBuilder.Entity<Recipecalc2_3>(entity =>
+            {
+                entity.ToTable("recipecalc2_3");
 
                 entity.Property(e => e.Id)
                     .ValueGeneratedNever()

@@ -26,6 +26,16 @@ namespace OilBlendSystem.BLL.Implementation
             context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
             return context.Recipecalc2s.ToList();
         }
+        public IEnumerable<Recipecalc2_2> GetRecipeCalc2_2()
+        {
+            context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+            return context.Recipecalc2_2s.ToList();
+        }
+        public IEnumerable<Recipecalc2_3> GetRecipeCalc2_3()
+        {
+            context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+            return context.Recipecalc2_3s.ToList();
+        }
         public IEnumerable<Recipecalc3> GetRecipeCalc3()
         {
             context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
@@ -91,7 +101,7 @@ namespace OilBlendSystem.BLL.Implementation
             // f[15] = -Weight[3].Weight * CompOilList[7].Den / 1000 * 10000 + Weight[1].Weight * (CompOilList[7].Cet - ProdOilList[1].CetLowLimit) * 1000 - Weight[2].Weight * (CompOilList[7].Pol - ProdOilList[1].PolHighLimit) * 1000 ;
             
             for(int i = 0; i < ComOilNum; i++){
-                f[i + ProdOilNum * ComOilNum] = CompOilList[i].Price;//每吨的价格 CompOilList[i].Den / 1000 * 
+                f[i + ProdOilNum * ComOilNum] = CompOilList[i].Price;//每吨的价格
             }
 
             #endregion
@@ -608,19 +618,17 @@ namespace OilBlendSystem.BLL.Implementation
             }
             Row[0] = 0;
             lpsolve.set_obj_fn(lp, Row);
-
             //求解
             lpsolve.set_minim(lp);
             lpsolve.solve(lp);
-
+            // int status = lpsolve.get_status(lp);//0或2 从solve之后，status的标志位才会变化
             #endregion
 
             // Col 为最优解
             Col = new double[lpsolve.get_Ncolumns(lp)]; 
-            // int status = lpsolve.get_status(lp);
             // Console.WriteLine(lpsolve.get_statustext(lp, 0));最优解
-            // Console.WriteLine(lpsolve.get_statustext(lp, 1));次优解
-            lpsolve.get_variables(lp, Col);             
+            // Console.WriteLine(lpsolve.get_statustext(lp, 1));1 次优解 2 无解 infeasible
+            lpsolve.get_variables(lp, Col);            
             for(int i = 0; i < iNum; i++){
                 Calc[i] = Col[i];
             }       
@@ -640,7 +648,7 @@ namespace OilBlendSystem.BLL.Implementation
             var ProdOilList = _ProdOilConfig.GetAllProdOilConfigList().Where(m=>m.Apply == 1).ToList();
             var PropertyList = _Property.GetAllPropertyList().ToList();
             var CompOilConstraint = _RecipeCalc.GetRecipeCalc1().ToList();//组分油产量 罐容高低限 配方高低限 约束
-            var Weight = _RecipeCalc.GetRecipeCalc2().Where(m=>m.Apply == 1).ToList();//多目权值,三个场景的
+            var Weight = _RecipeCalc.GetRecipeCalc2_2().Where(m=>m.Apply == 1).ToList();//多目权值,三个场景的
             var ProdOilProduct = _RecipeCalc.GetRecipeCalc3().Where(m=>m.Apply == 1).ToList();//成品油产量限制
 
             int ComOilNum = CompOilList.Count;//组分油个数
@@ -1253,7 +1261,7 @@ namespace OilBlendSystem.BLL.Implementation
             var ProdOilList = _ProdOilConfig.GetAllProdOilConfigList().Where(m=>m.Apply == 1).ToList();
             var PropertyList = _Property.GetAllPropertyList().ToList();
             var CompOilConstraint = _RecipeCalc.GetRecipeCalc1().ToList();//组分油产量 罐容高低限 配方高低限 约束
-            var Weight = _RecipeCalc.GetRecipeCalc2().Where(m=>m.Apply == 1).ToList();//多目权值,三个场景的
+            var Weight = _RecipeCalc.GetRecipeCalc2_3().Where(m=>m.Apply == 1).ToList();//多目权值,三个场景的
             var ProdOilProduct = _RecipeCalc.GetRecipeCalc3().Where(m=>m.Apply == 1).ToList();//成品油产量限制
 
             int ComOilNum = CompOilList.Count;//组分油个数
