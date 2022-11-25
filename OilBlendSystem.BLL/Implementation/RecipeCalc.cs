@@ -22,17 +22,17 @@ namespace OilBlendSystem.BLL.Implementation
             return context.Recipecalc1s.ToList();
         }
         public IEnumerable<Recipecalc2> GetRecipeCalc2()
-        {
+        {//配方优化第一个场景的权值设置表格
             context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
             return context.Recipecalc2s.ToList();
         }
         public IEnumerable<Recipecalc2_2> GetRecipeCalc2_2()
-        {
+        {//配方优化第二个场景的权值设置表格
             context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
             return context.Recipecalc2_2s.ToList();
         }
         public IEnumerable<Recipecalc2_3> GetRecipeCalc2_3()
-        {
+        {//配方优化第三个场景的权值设置表格
             context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
             return context.Recipecalc2_3s.ToList();
         }
@@ -65,7 +65,7 @@ namespace OilBlendSystem.BLL.Implementation
             //int iNum = 24;//2X8是组分油1（车柴 出柴）组分油2（车柴 出柴） +8 （组分油产量）
             int iNum_Uncontain = ProdOilNum * ComOilNum;
             int iNum = ProdOilNum * ComOilNum + ComOilNum;
-            double[] Calc = new double[iNum];
+            double[] Calc = new double[iNum + 1];//加的这个1是求解标志位
 
             #region 目标函数定义
 
@@ -621,7 +621,7 @@ namespace OilBlendSystem.BLL.Implementation
             //求解
             lpsolve.set_minim(lp);
             lpsolve.solve(lp);
-            // int status = lpsolve.get_status(lp);//0或2 从solve之后，status的标志位才会变化
+            int status = lpsolve.get_status(lp);//0或2 从solve之后，status的标志位才会变化
             #endregion
 
             // Col 为最优解
@@ -631,8 +631,8 @@ namespace OilBlendSystem.BLL.Implementation
             lpsolve.get_variables(lp, Col);            
             for(int i = 0; i < iNum; i++){
                 Calc[i] = Col[i];
-            }       
-
+            }    
+            Calc[iNum] = status;//求解标志位   
             return Calc;
         }      
         public double[] GetRecipe2()//场景2的lpsolve求解配方
@@ -658,7 +658,7 @@ namespace OilBlendSystem.BLL.Implementation
             //变量个数应为 成品油启用个数 x 组分油个数
             //int iNum = 24;//2X8是组分油1（车柴 出柴）组分油2（车柴 出柴）
             int iNum = ProdOilNum * ComOilNum;
-            double[] Calc = new double[iNum];
+            double[] Calc = new double[iNum + 1];//多加的一位是求解标志位
 
             #region 目标函数定义
 
@@ -1236,6 +1236,7 @@ namespace OilBlendSystem.BLL.Implementation
             //求解
             lpsolve.set_minim(lp);
             lpsolve.solve(lp);
+            int status = lpsolve.get_status(lp);//0或2 从solve之后，status的标志位才会变化
 
             #endregion
 
@@ -1245,6 +1246,7 @@ namespace OilBlendSystem.BLL.Implementation
             for(int i = 0; i < iNum; i++){
                 Calc[i] = Col[i];
             }       
+            Calc[iNum] = status;
 
             return Calc;
         }   
@@ -1271,7 +1273,7 @@ namespace OilBlendSystem.BLL.Implementation
             //变量个数应为 成品油启用个数 x 组分油个数
             //int iNum = 24;//2X8是组分油1（车柴 出柴）组分油2（车柴 出柴）
             int iNum = ProdOilNum * ComOilNum;
-            double[] Calc = new double[iNum];
+            double[] Calc = new double[iNum + 1];//多的一位是求解标志位
 
             #region 目标函数定义
 
@@ -1849,6 +1851,7 @@ namespace OilBlendSystem.BLL.Implementation
             //求解
             lpsolve.set_minim(lp);
             lpsolve.solve(lp);
+            int status = lpsolve.get_status(lp);//0或2 从solve之后，status的标志位才会变化
 
             #endregion
 
@@ -1858,7 +1861,7 @@ namespace OilBlendSystem.BLL.Implementation
             for(int i = 0; i < iNum; i++){
                 Calc[i] = Col[i];
             }       
-
+            Calc[iNum] = status;
             return Calc;
         }            
         public IEnumerable<Recipecalc_1Res_1> GetRecipecalc_1Res_ComOilSugProduct()//场景1 计算结果：组分油产量分配（组分油建议产量）
@@ -1980,19 +1983,19 @@ namespace OilBlendSystem.BLL.Implementation
                 Result.ComOilName = CompOilList[i].ComOilName;
                 for(int j = 0; j < ProdOilNum; j++){
                     if(ProdOilList[j].Id == 1){
-                        Result.AutoRecipe = (float)Math.Round(percent1[i], 3) * 100;//保留完三位小数，换算成百分比之后就是一位小数
+                        Result.AutoRecipe = (float)Math.Round(percent1[i] * 100, 2);//保留完三位小数，换算成百分比之后就是一位小数
                     }
 
                     if(ProdOilList[j].Id == 2){
-                        Result.ExpRecipe = (float)Math.Round(percent2[i], 3) * 100;     
+                        Result.ExpRecipe = (float)Math.Round(percent2[i] * 100, 2);     
                     }
 
                     if(ProdOilList[j].Id == 3){
-                        Result.Prod1Recipe= (float)Math.Round(percent3[i], 3) * 100;
+                        Result.Prod1Recipe= (float)Math.Round(percent3[i] * 100, 2);
                     }
 
                     if(ProdOilList[j].Id == 4){
-                        Result.Prod2Recipe = (float)Math.Round(percent4[i], 3) * 100;
+                        Result.Prod2Recipe = (float)Math.Round(percent4[i] * 100, 2);
                     }
                 }
                 ResultList.Add(Result);
@@ -2187,19 +2190,19 @@ namespace OilBlendSystem.BLL.Implementation
                 Result.ComOilName = CompOilList[i].ComOilName;
                 for(int j = 0; j < ProdOilNum; j++){
                     if(ProdOilList[j].Id == 1){
-                        Result.AutoRecipe = (float)Math.Round(percent1[i], 3) * 100;//保留完三位小数，换算成百分比之后就是一位小数
+                        Result.AutoRecipe = (float)Math.Round(percent1[i] * 100, 2);//保留完三位小数，换算成百分比之后就是一位小数
                     }
 
                     if(ProdOilList[j].Id == 2){
-                        Result.ExpRecipe = (float)Math.Round(percent2[i], 3) * 100;     
+                        Result.ExpRecipe = (float)Math.Round(percent2[i] * 100, 2);     
                     }
 
                     if(ProdOilList[j].Id == 3){
-                        Result.Prod1Recipe= (float)Math.Round(percent3[i], 3) * 100;
+                        Result.Prod1Recipe = (float)Math.Round(percent3[i] * 100, 2);
                     }
 
                     if(ProdOilList[j].Id == 4){
-                        Result.Prod2Recipe = (float)Math.Round(percent4[i], 3) * 100;
+                        Result.Prod2Recipe = (float)Math.Round(percent4[i] * 100, 2);
                     }
                 }
                 ResultList.Add(Result);
@@ -2394,19 +2397,19 @@ namespace OilBlendSystem.BLL.Implementation
                 Result.ComOilName = CompOilList[i].ComOilName;
                 for(int j = 0; j < ProdOilNum; j++){
                     if(ProdOilList[j].Id == 1){
-                        Result.AutoRecipe = (float)Math.Round(percent1[i], 3) * 100;//保留完三位小数，换算成百分比之后就是一位小数
+                        Result.AutoRecipe = (float)Math.Round(percent1[i] * 100, 2);//保留完三位小数，换算成百分比之后就是一位小数
                     }
 
                     if(ProdOilList[j].Id == 2){
-                        Result.ExpRecipe = (float)Math.Round(percent2[i], 3) * 100;     
+                        Result.ExpRecipe = (float)Math.Round(percent2[i] * 100, 2);     
                     }
 
                     if(ProdOilList[j].Id == 3){
-                        Result.Prod1Recipe= (float)Math.Round(percent3[i], 3) * 100;
+                        Result.Prod1Recipe= (float)Math.Round(percent3[i] * 100, 2);
                     }
 
                     if(ProdOilList[j].Id == 4){
-                        Result.Prod2Recipe = (float)Math.Round(percent4[i], 3) * 100;
+                        Result.Prod2Recipe = (float)Math.Round(percent4[i] * 100, 2);
                     }
                 }
                 ResultList.Add(Result);

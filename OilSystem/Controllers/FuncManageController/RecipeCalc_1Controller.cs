@@ -120,15 +120,23 @@ public class RecipeCalc_1Controller : ControllerBase
     public ApiModel Res1()//model里的名字 多个数据用IEnumberable，单个数据不用
     {
         IRecipeCalc _RecipeCalc = new RecipeCalc(context);
+        int status = (int)_RecipeCalc.GetRecipe1()[_RecipeCalc.GetRecipe1().Length - 1];
         var list = _RecipeCalc.GetRecipecalc_1Res_ComOilSugProduct().ToList();
-        return new ApiModel()
-        {
-        code = 200,
-        //data = JsonConvert.SerializeObject(list),
-        data = list,
-        msg = "查询成功"
-        };
-
+        if(status == 0 || status == 1){//得到最优解或者次优解
+            return new ApiModel(){
+                code = 200,
+                //data = JsonConvert.SerializeObject(list),
+                data = list,
+                msg = "求解成功"
+            };
+        }else{//计算失败
+            return new ApiModel(){
+            code = 500,
+            //data = JsonConvert.SerializeObject(list),
+            data = list,
+            msg = "求解失败"
+            };       
+        }
     }
 
     [HttpGet("Res/Product")]

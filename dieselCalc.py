@@ -72,9 +72,9 @@ for i in range(P):
         if i == 1:
             flow_max[i].append(results_comp_tuple[j][14])
         if i == 2:
-            flow_max[i].append(results_comp_tuple[j][26])
+            flow_max[i].append(results_comp_tuple[j][30])
         if i == 3:
-            flow_max[i].append(results_comp_tuple[j][28])
+            flow_max[i].append(results_comp_tuple[j][32])
 
 flow_min = []
 for i in range(P):
@@ -85,9 +85,9 @@ for i in range(P):
         if i == 1:
             flow_min[i].append(results_comp_tuple[j][13])
         if i == 2:
-            flow_min[i].append(results_comp_tuple[j][25])
+            flow_min[i].append(results_comp_tuple[j][29])
         if i == 3:
-            flow_min[i].append(results_comp_tuple[j][27])
+            flow_min[i].append(results_comp_tuple[j][31])
 # 最小流量值
 x_min = 100
 
@@ -397,8 +397,8 @@ if scip_status == 'optimal':  # 求解成功
     print(Prod_LP)
 
     Status_txt = []
-    Status_txt.append(scip_status)
-    np.savetxt("E:\Python_env\Status_txt.txt", Status_txt, fmt='%s', delimiter=',')
+    Status_txt.append('计算成功')
+    np.savetxt("E:\Python_env\Status_txt.txt", Status_txt, encoding='utf-8', fmt='%s', delimiter=',')
     print(Status_txt)
 
     Obj_txt = []
@@ -447,8 +447,8 @@ elif scip_status == 'infeasible':
     print(Prod_LP)
 
     Status_txt = []
-    Status_txt.append(scip_status)
-    np.savetxt("E:\Python_env\Status_txt.txt", Status_txt, fmt='%s', delimiter=',')
+    Status_txt.append('计算失败')
+    np.savetxt("E:\Python_env\Status_txt.txt", Status_txt, encoding='utf-8', fmt='%s', delimiter=',')
     print(Status_txt)
 
     Obj_txt = []
@@ -459,6 +459,53 @@ elif scip_status == 'infeasible':
     sys.exit()
 
 else:
+    flow = []
+    for t in range(T):
+        for p in range(P):
+            for n in range(N):
+                flow.append(0)
+    flow_txt = np.array([flow])
+    np.savetxt("E:\Python_env\Flow_txt.txt", flow_txt, fmt='%d', delimiter=',')
+    print(flow)
+
+    # 组分油库存
+    ComOil_Inv = []
+    # print("组分油库存变量cs_tc:")
+    for t in range(T):
+        for n in range(N):
+            ComOil_Inv.append(0)
+    ComOil_Inv_txt = np.array([ComOil_Inv])
+    np.savetxt("E:\Python_env\ComOil_Inv_txt.txt", ComOil_Inv_txt, fmt='%d', delimiter=',')
+    print(ComOil_Inv)
+
+    # 成品油库存
+    ProdOil_Inv = []
+    for t in range(T):
+        for p in range(P):
+            ProdOil_Inv.append(0)
+    ProdOil_Inv_txt = np.array([ProdOil_Inv])
+    np.savetxt("E:\Python_env\ProdOil_Inv_txt.txt", ProdOil_Inv_txt, fmt='%d', delimiter=',')
+    print(ProdOil_Inv)
+
+    # 提货量
+    Prod_LP = []
+    for t in range(T):
+        for p in range(P):
+            Prod_LP.append(0)
+    Prod_LP_txt = np.array([Prod_LP])
+    np.savetxt("E:\Python_env\Prod_LP_txt.txt", Prod_LP_txt, fmt='%d', delimiter=',')
+    print(Prod_LP)
+
+    Status_txt = []
+    Status_txt.append('计算失败：' + scip_status)
+    np.savetxt("E:\Python_env\Status_txt.txt", Status_txt, encoding='utf-8', fmt='%s', delimiter=',')
+    print(Status_txt)
+
+    Obj_txt = []
+    Obj_txt.append(0)
+    np.savetxt("E:\Python_env\Obj_txt.txt", Obj_txt, fmt='%d', delimiter=',')
+    print(Obj_txt)
+
     sys.exit()
 
 # except Exception as e:

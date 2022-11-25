@@ -91,7 +91,7 @@ CREATE TABLE `dispatchweight` (
 
 LOCK TABLES `dispatchweight` WRITE;
 /*!40000 ALTER TABLE `dispatchweight` DISABLE KEYS */;
-INSERT INTO `dispatchweight` VALUES (1,'调度周期',7),(2,'车用柴油产量最大权值',1),(3,'出口柴油十六烷值卡边权值',1),(4,'出口柴油产量最大权值',0),(5,'调度方案切换权值',1),(6,'成品油个数',3);
+INSERT INTO `dispatchweight` VALUES (1,'调度周期',6),(2,'车用柴油产量最大权值',1),(3,'出口柴油十六烷值卡边权值',1),(4,'出口柴油产量最大权值',0),(5,'调度方案切换权值',1),(6,'成品油个数',3);
 /*!40000 ALTER TABLE `dispatchweight` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -173,7 +173,7 @@ CREATE TABLE `prodoilconfig` (
 
 LOCK TABLES `prodoilconfig` WRITE;
 /*!40000 ALTER TABLE `prodoilconfig` DISABLE KEYS */;
-INSERT INTO `prodoilconfig` VALUES (1,'车用柴油',48,60,250,350,3,10,830,870,200,200,10000,2000,10000,2000,10000,2000,10000,2000,10000,2000,10000,2000,10000,2000,10000,1),(2,'出口柴油',47,60,250,350,3,10,830,870,200,200,10000,2000,10000,2000,10000,2000,10000,2000,10000,2000,10000,2000,10000,2000,10000,1),(3,'备用成品油1',43,60,250,350,3,10,830,870,200,200,10000,2000,10000,2000,10000,2000,10000,2000,10000,2000,10000,2000,10000,2000,10000,1),(4,'备用成品油2',43,60,250,350,3,10,830,870,200,200,10000,2000,10000,2000,10000,2000,10000,2000,10000,2000,10000,2000,10000,2000,10000,1);
+INSERT INTO `prodoilconfig` VALUES (1,'车用柴油',48,60,250,350,3,10,830,870,200,200,10000,2000,10000,2000,10000,2000,10000,2000,10000,2000,10000,2000,10000,2000,10000,1),(2,'出口柴油',47,60,250,350,3,10,830,870,200,200,10000,2000,10000,2000,10000,2000,10000,2000,10000,2000,10000,2000,10000,2000,10000,1),(3,'备用成品油1',47,60,250,350,3,10,830,870,200,200,10000,2000,10000,2000,10000,2000,10000,2000,10000,2000,10000,2000,10000,2000,10000,1),(4,'备用成品油2',43,60,250,350,3,10,830,870,200,200,10000,2000,10000,2000,10000,2000,10000,2000,10000,2000,10000,2000,10000,2000,10000,1);
 /*!40000 ALTER TABLE `prodoilconfig` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -262,8 +262,62 @@ CREATE TABLE `recipecalc2` (
 
 LOCK TABLES `recipecalc2` WRITE;
 /*!40000 ALTER TABLE `recipecalc2` DISABLE KEYS */;
-INSERT INTO `recipecalc2` VALUES (1,'车柴产量最大权值',1,1,1),(2,'出柴产量最大权值',0,2,1),(3,'备用成品油1产量最大权值',0,3,1),(4,'备用成品油2产量最大权值',1,4,1),(5,'车柴十六烷值权值',0,1,1),(6,'出柴十六烷值权值',1,2,1),(7,'备用成品油1十六烷值权值',0,3,1),(8,'备用成品油2十六烷值权值',0,4,1),(9,'车柴多芳烃权值',0,1,1),(10,'出柴多芳烃权值',1,2,1),(11,'备用成品油1多芳烃权值',1,3,1),(12,'备用成品油2多芳烃权值',0,4,1),(13,'组分油成本最低权值',0,5,0);
+INSERT INTO `recipecalc2` VALUES (1,'车柴产量最大权值',1,1,1),(2,'出柴产量最大权值',0,2,1),(3,'备用成品油1产量最大权值',0,3,1),(4,'备用成品油2产量最大权值',1,4,1),(5,'车柴十六烷值权值',0,1,1),(6,'出柴十六烷值权值',1,2,1),(7,'备用成品油1十六烷值权值',0,3,1),(8,'备用成品油2十六烷值权值',0,4,1),(9,'车柴多芳烃权值',0,1,1),(10,'出柴多芳烃权值',1,2,1),(11,'备用成品油1多芳烃权值',1,3,1),(12,'备用成品油2多芳烃权值',0,4,1);
 /*!40000 ALTER TABLE `recipecalc2` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `recipecalc2_2`
+--
+
+DROP TABLE IF EXISTS `recipecalc2_2`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `recipecalc2_2` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `weightName` varchar(128) DEFAULT NULL,
+  `weight` float DEFAULT NULL,
+  `ProdOilStatus` int DEFAULT NULL,
+  `Apply` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `recipecalc2_2`
+--
+
+LOCK TABLES `recipecalc2_2` WRITE;
+/*!40000 ALTER TABLE `recipecalc2_2` DISABLE KEYS */;
+INSERT INTO `recipecalc2_2` VALUES (1,'车柴产量最大权值',1,1,1),(2,'出柴产量最大权值',0,2,1),(3,'备用成品油1产量最大权值',0,3,1),(4,'备用成品油2产量最大权值',1,4,1),(5,'车柴十六烷值权值',0,1,1),(6,'出柴十六烷值权值',1,2,1),(7,'备用成品油1十六烷值权值',0,3,1),(8,'备用成品油2十六烷值权值',0,4,1),(9,'车柴多芳烃权值',0,1,1),(10,'出柴多芳烃权值',1,2,1),(11,'备用成品油1多芳烃权值',1,3,1),(12,'备用成品油2多芳烃权值',0,4,1);
+/*!40000 ALTER TABLE `recipecalc2_2` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `recipecalc2_3`
+--
+
+DROP TABLE IF EXISTS `recipecalc2_3`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `recipecalc2_3` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `weightName` varchar(128) DEFAULT NULL,
+  `weight` float DEFAULT NULL,
+  `ProdOilStatus` int DEFAULT NULL,
+  `Apply` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `recipecalc2_3`
+--
+
+LOCK TABLES `recipecalc2_3` WRITE;
+/*!40000 ALTER TABLE `recipecalc2_3` DISABLE KEYS */;
+INSERT INTO `recipecalc2_3` VALUES (1,'车柴产量最大权值',1,1,1),(2,'出柴产量最大权值',0,2,1),(3,'备用成品油1产量最大权值',0,3,1),(4,'备用成品油2产量最大权值',1,4,1),(5,'车柴十六烷值权值',0,1,1),(6,'出柴十六烷值权值',1,2,1),(7,'备用成品油1十六烷值权值',0,3,1),(8,'备用成品油2十六烷值权值',0,4,1),(9,'车柴多芳烃权值',0,1,1),(10,'出柴多芳烃权值',1,2,1),(11,'备用成品油1多芳烃权值',1,3,1),(12,'备用成品油2多芳烃权值',0,4,1);
+/*!40000 ALTER TABLE `recipecalc2_3` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -399,4 +453,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-24 12:57:03
+-- Dump completed on 2022-11-25 16:15:15
