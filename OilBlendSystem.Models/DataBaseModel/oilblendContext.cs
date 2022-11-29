@@ -86,13 +86,13 @@ namespace OilBlendSystem.Models.DataBaseModel
 
                 entity.Property(e => e.Prod2Low1).HasColumnName("prod2Low1");
 
-                entity.Property(e => e.Prod1High1).HasColumnName("prod1High2");
+                entity.Property(e => e.Prod1High2).HasColumnName("prod1High2");
 
-                entity.Property(e => e.Prod2High1).HasColumnName("prod2High2");
+                entity.Property(e => e.Prod2High2).HasColumnName("prod2High2");
 
-                entity.Property(e => e.Prod1Low1).HasColumnName("prod1Low2");
+                entity.Property(e => e.Prod1Low2).HasColumnName("prod1Low2");
 
-                entity.Property(e => e.Prod2Low1).HasColumnName("prod2Low2");
+                entity.Property(e => e.Prod2Low2).HasColumnName("prod2Low2");
 
                 entity.Property(e => e.HighVolume).HasColumnName("highVolume");
 
@@ -373,49 +373,49 @@ namespace OilBlendSystem.Models.DataBaseModel
 
                 entity.Property(e => e.ExpQualityProduct).HasColumnName("expQualityProduct");
 
-                entity.Property(e => e.ExpQualityProduct).HasColumnName("prod1QualityProduct");
+                entity.Property(e => e.Prod1QualityProduct).HasColumnName("prod1QualityProduct");
 
-                entity.Property(e => e.ExpQualityProduct).HasColumnName("prod2QualityProduct");
+                entity.Property(e => e.Prod2QualityProduct).HasColumnName("prod2QualityProduct");
 
                 entity.Property(e => e.AutoFlowPercentMass).HasColumnName("autoFlowPercentMass");
 
                 entity.Property(e => e.ExpFlowPercentMass).HasColumnName("expFlowPercentMass");
 
-                entity.Property(e => e.ExpFlowPercentMass).HasColumnName("prod1FlowPercentMass");
+                entity.Property(e => e.Prod1FlowPercentMass).HasColumnName("prod1FlowPercentMass");
 
-                entity.Property(e => e.ExpFlowPercentMass).HasColumnName("prod2FlowPercentMass");
+                entity.Property(e => e.Prod2FlowPercentMass).HasColumnName("prod2FlowPercentMass");
 
                 entity.Property(e => e.AutoFlowMass).HasColumnName("autoFlowMass");
 
                 entity.Property(e => e.ExpFlowMass).HasColumnName("expFlowMass");
 
-                entity.Property(e => e.ExpFlowMass).HasColumnName("prod1FlowMass");
+                entity.Property(e => e.Prod1FlowMass).HasColumnName("prod1FlowMass");
 
-                entity.Property(e => e.ExpFlowMass).HasColumnName("prod2FlowMass");
+                entity.Property(e => e.Prod2FlowMass).HasColumnName("prod2FlowMass");
 
                 entity.Property(e => e.AutoVolumeProduct).HasColumnName("autoVolumeProduct");
 
                 entity.Property(e => e.ExpVolumeProduct).HasColumnName("expVolumeProduct");
 
-                entity.Property(e => e.ExpVolumeProduct).HasColumnName("prod1VolumeProduct");
+                entity.Property(e => e.Prod1VolumeProduct).HasColumnName("prod1VolumeProduct");
 
-                entity.Property(e => e.ExpVolumeProduct).HasColumnName("prod2VolumeProduct");
+                entity.Property(e => e.Prod2VolumeProduct).HasColumnName("prod2VolumeProduct");
 
                 entity.Property(e => e.AutoFlowPercentVol).HasColumnName("autoFlowPercentVol");
 
                 entity.Property(e => e.ExpFlowPercentVol).HasColumnName("expFlowPercentVol");
 
-                entity.Property(e => e.ExpFlowPercentVol).HasColumnName("prod1FlowPercentVol");
+                entity.Property(e => e.Prod1FlowPercentVol).HasColumnName("prod1FlowPercentVol");
 
-                entity.Property(e => e.ExpFlowPercentVol).HasColumnName("prod2FlowPercentVol");
+                entity.Property(e => e.Prod2FlowPercentVol).HasColumnName("prod2FlowPercentVol");
 
                 entity.Property(e => e.AutoFlowVol).HasColumnName("autoFlowVol");
 
                 entity.Property(e => e.ExpFlowVol).HasColumnName("expFlowVol");
 
-                entity.Property(e => e.ExpFlowVol).HasColumnName("prod1FlowVol");
+                entity.Property(e => e.Prod1FlowVol).HasColumnName("prod1FlowVol");
 
-                entity.Property(e => e.ExpFlowVol).HasColumnName("prod2FlowVol");
+                entity.Property(e => e.Prod2FlowVol).HasColumnName("prod2FlowVol");
 
                 entity.Property(e => e.ComOilName)
                     .HasMaxLength(128)

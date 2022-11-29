@@ -2,7 +2,7 @@ namespace OilBlendSystem.Models.ConstructModel
 {
     public class IndexNumber
     {
-        public int Index { get; set; }
+        public int index { get; set; }
 
     }
 }

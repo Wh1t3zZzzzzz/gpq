@@ -21,87 +21,81 @@ public class CompOilConfigController : ControllerBase
     }
 
     [HttpGet]
-    //public IEnumerable<TestTable> Get()//model里的名字
     public ApiModel Get()//model里的名字 多个数据用IEnumberable，单个数据不用
     {
 
         ICompOilConfig _CompOilConfig = new CompOilConfig(context);
         var list = _CompOilConfig.GetAllCompOilConfigList().ToList();
-        //list[0].ComOilName = System.Environment.CurrentDirectory;
-
+        List<Comproperty> ResultList = new List<Comproperty>();//列表，里面可以添加很多个对象
+        for(int i = 0; i < list.Count; i++){
+            Comproperty result = new Comproperty();//实体，可以理解为一个对象  
+            result.ComOilName = list[i].ComOilName;
+            result.Cet = list[i].Cet;
+            result.D50 = list[i].D50;
+            result.Pol = list[i].Pol;
+            result.Den = list[i].Den;
+            result.Price = list[i].Price;
+            ResultList.Add(result);
+        }   
         return new ApiModel()
         {
         code = 200,
-        //data = JsonConvert.SerializeObject(list),
-        data = list,
+        data = ResultList,
         msg = "查询成功"
         };
-    
-
-       //return menulist;
 
     }
 
-
     [HttpPut]
-    public ApiModel Put(Comproperty obj)//前端新增时调用post
+    public ApiModel Put(Comproperty_index obj)//前端新增时调用post
     {
         context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
-        ICompOilConfig _CompOilConfig = new CompOilConfig(context);
-        if(obj.action == "edit"){        
-            var list = context.Compoilconfigs.Where(m=>m.Id == obj.ID).ToList();
-            list[0].ComOilName = obj.ComOilName;
-            list[0].Cet = obj.Cet;
-            list[0].D50 = obj.D50;
-            list[0].Pol = obj.Pol;
-            list[0].Den = obj.Den;
-            list[0].Price = obj.Price;
-            context.Compoilconfigs.Update(list[0]);
-            var list1 = _CompOilConfig.GetAllCompOilConfigList().ToList();
-            //context.SaveChanges();
-            //context.Compoilconfigs.Update(list[0]);
+        ICompOilConfig _CompOilConfig = new CompOilConfig(context);  
+        if(obj.action == "add"){    
+            Compoilconfig comp = new Compoilconfig();
+            context.Compoilconfigs.Add(comp);
             context.SaveChanges();
+            var list = context.Compoilconfigs.ToList();//增加行过后的表格数据
+            list[obj.index].ComOilName = obj.ComOilName;
+            // list[obj.index].Cet = obj.Cet;
+            // list[obj.index].D50 = obj.D50;
+            // list[obj.index].Pol = obj.Pol;
+            // list[obj.index].Den = obj.Den;
+            // list[obj.index].Price = obj.Price;
+            context.Compoilconfigs.Update(list[obj.index]);
+            context.SaveChanges();
+            var list1 = context.Compoilconfigs.ToList();//增加行并且修改后的表格数据         
+            return new ApiModel()
+            {
+            code = 200,
+            //data = JsonConvert.SerializeObject(list),
+            data = list1,
+            msg = "增加成功"
+            };
+        }else{
+            var list = context.Compoilconfigs.ToList();//打印最新的表格数据
+            list[obj.index].ComOilName = obj.ComOilName;
+            // list[obj.index].Cet = obj.Cet;
+            // list[obj.index].D50 = obj.D50;
+            // list[obj.index].Pol = obj.Pol;
+            // list[obj.index].Den = obj.Den;
+            // list[obj.index].Price = obj.Price;
+            context.Compoilconfigs.Update(list[obj.index]);
+            context.SaveChanges();
+            var list1 = _CompOilConfig.GetAllCompOilConfigList().ToList();
             return new ApiModel()
             {
             code = 200,
             //data = JsonConvert.SerializeObject(list),
             data = list1,
             msg = "查询成功"
-            };
-        }else{
-            //List<Compoilconfig> list3 = new List<Compoilconfig>();
-            var list = _CompOilConfig.GetAllCompOilConfigList().ToList();//需要把IEnumberable中遍历成List
-            int index = list.Count;
-            Compoilconfig comp = new Compoilconfig();
-            context.Compoilconfigs.Add(comp);
-            context.SaveChanges();
-            var list1 = context.Compoilconfigs.ToList();
-            list1[index].ComOilName = obj.ComOilName;
-            list1[index].Cet = obj.Cet;
-            list1[index].D50 = obj.D50;
-            list1[index].Pol = obj.Pol;
-            list1[index].Den = obj.Den;
-            list1[index].Price = obj.Price;
-            context.Compoilconfigs.Update(list1[index]);
-            context.SaveChanges();
-            var list2 = _CompOilConfig.GetAllCompOilConfigList().ToList();
-            //context.SaveChanges();
-            //context.Compoilconfigs.Update(list[0]);
-            return new ApiModel()
-            {
-            code = 200,
-            //data = JsonConvert.SerializeObject(list),
-            data = list2,
-            msg = "查询成功"
-            };
-        }
+            };            
+        }     
 
     }
 
+
     [HttpDelete]
-    //[FromBody]Compoilconfig obj
-    //public ApiModel Put(float cet, int index)//model里的名字 多个数据用IEnumberable，单个数据不用
-    //public ApiModel Post(Compoilconfig obj)
     public ApiModel Delete(IndexNumber obj)//IndexNumber obj
     {
         //oilblendContext context = new();
@@ -109,7 +103,7 @@ public class CompOilConfigController : ControllerBase
         ICompOilConfig _CompOilConfig = new CompOilConfig(context);
         //List<Compoilconfig> list3 = new List<Compoilconfig>();
         var list = _CompOilConfig.GetAllCompOilConfigList().ToList();//需要把IEnumberable中遍历成List
-        context.Compoilconfigs.Remove(list[obj.Index]);
+        context.Compoilconfigs.Remove(list[obj.index]);
         context.SaveChanges();
         var list1 = _CompOilConfig.GetAllCompOilConfigList().ToList();
         return new ApiModel()
