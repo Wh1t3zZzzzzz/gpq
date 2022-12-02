@@ -384,7 +384,7 @@ public class DispatchSetController : ControllerBase
             if(time.Contains(".")){
                 return new ApiModel()
                 {
-                code = 500,
+                code = 502,
                 //data = JsonConvert.SerializeObject(list),
                 data = null,
                 msg = "成品油个数不允许是小数, 取值范围(1~4)"
@@ -393,7 +393,7 @@ public class DispatchSetController : ControllerBase
             else if(obj.weight > 4 || obj.weight < 1){
                 return new ApiModel()
                 {
-                code = 501,
+                code = 503,
                 //data = JsonConvert.SerializeObject(list),
                 data = null,
                 msg = "超出限制，成品油个数的取值范围是(1~4)"
