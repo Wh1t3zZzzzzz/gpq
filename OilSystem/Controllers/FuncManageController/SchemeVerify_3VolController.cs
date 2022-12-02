@@ -30,10 +30,10 @@ public class SchemeVerify_3VolController : ControllerBase
         for(int i = 0; i < ProdOilFlowList.Count; i++){
             SchemeVerify_3_1 result = new SchemeVerify_3_1();//实体，可以理解为一个对象  
             result.ComOilName = ProdOilFlowList[i].ComOilName;
-            result.AutoFlow = ProdOilFlowList[i].AutoFlowMass;
-            result.ExpFlow = ProdOilFlowList[i].ExpFlowMass;
-            result.Prod1Flow = ProdOilFlowList[i].Prod1FlowMass;
-            result.Prod2Flow = ProdOilFlowList[i].Prod2FlowMass;
+            result.AutoFlow = ProdOilFlowList[i].AutoFlowVol;
+            result.ExpFlow = ProdOilFlowList[i].ExpFlowVol;
+            result.Prod1Flow = ProdOilFlowList[i].Prod1FlowVol;
+            result.Prod2Flow = ProdOilFlowList[i].Prod2FlowVol;
             ResultList.Add(result);
         }
     

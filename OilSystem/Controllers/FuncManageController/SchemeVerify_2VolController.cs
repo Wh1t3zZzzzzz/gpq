@@ -31,10 +31,10 @@ public class SchemeVerify_2VolController : ControllerBase
         for(int i = 0; i < ProdOilPercentList.Count; i++){
             SchemeVerify_2_1 result = new SchemeVerify_2_1();//实体，可以理解为一个对象  
             result.ComOilName = ProdOilPercentList[i].ComOilName;
-            result.AutoPercent = ProdOilPercentList[i].AutoFlowPercentMass;
-            result.ExpPercent = ProdOilPercentList[i].ExpFlowPercentMass;
-            result.Prod1Percent = ProdOilPercentList[i].Prod1FlowPercentMass;
-            result.Prod2Percent = ProdOilPercentList[i].Prod2FlowPercentMass;
+            result.AutoPercent = ProdOilPercentList[i].AutoFlowPercentVol;
+            result.ExpPercent = ProdOilPercentList[i].ExpFlowPercentVol;
+            result.Prod1Percent = ProdOilPercentList[i].Prod1FlowPercentVol;
+            result.Prod2Percent = ProdOilPercentList[i].Prod2FlowPercentVol;
             ResultList.Add(result);
         }
     
