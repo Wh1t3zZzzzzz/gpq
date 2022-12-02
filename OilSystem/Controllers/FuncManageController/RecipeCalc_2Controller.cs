@@ -51,11 +51,45 @@ public class RecipeCalc_2Controller : ControllerBase
 
     }
 
+    [HttpPut("Put/RecipeLimit")]
+    //配方优化场景2配方上下限设置表格——修改保存功能
+    public ApiModel Put1(Recipecalc_2_1_index obj)//model里的名字 多个数据用IEnumberable，单个数据不用
+    {
+        var RecipeLimitList = context.Recipecalc1s.ToList();
+        var list1 = context.Schemeverify1s.ToList();
+        var list2 = context.Compoilconfigs.ToList();
+
+        RecipeLimitList[obj.index].ComOilName = obj.ComOilName;
+        list1[obj.index].ComOilName = obj.ComOilName;
+        list2[obj.index].ComOilName = obj.ComOilName;
+        RecipeLimitList[obj.index].AutoFlowHigh = obj.AutoRecipeHigh;
+        RecipeLimitList[obj.index].AutoFlowLow = obj.AutoRecipeLow;
+        RecipeLimitList[obj.index].ExpFlowHigh = obj.ExpRecipeHigh;
+        RecipeLimitList[obj.index].ExpFlowLow = obj.ExpRecipeLow;
+        RecipeLimitList[obj.index].Prod1FlowHigh = obj.Prod1RecipeHigh;
+        RecipeLimitList[obj.index].Prod1FlowLow = obj.Prod1RecipeLow;
+        RecipeLimitList[obj.index].Prod2FlowHigh = obj.Prod2RecipeHigh;
+        RecipeLimitList[obj.index].Prod2FlowLow = obj.Prod2RecipeLow;
+
+        context.Recipecalc1s.Update(RecipeLimitList[obj.index]);
+        context.Schemeverify1s.Update(list1[obj.index]);
+        context.Compoilconfigs.Update(list2[obj.index]);
+        context.SaveChanges();
+    
+        return new ApiModel()
+        {
+        code = 200,
+        //data = JsonConvert.SerializeObject(list),
+        data = RecipeLimitList,
+        msg = "查询成功"
+        };
+
+    }
+
     [HttpGet("Set/TotalFlow")]
     //配方优化场景2参调总流量设置表格
     public ApiModel Set2()//model里的名字 多个数据用IEnumberable，单个数据不用
     {
-
         var TotalFlowList = context.Recipecalc3s.Where(m => m.Apply == 1).ToList();
         List<Recipecalc_2_2> ResultList = new List<Recipecalc_2_2>();//列表，里面可以添加很多个对象
         for(int i = 0; i < TotalFlowList.Count; i++){
@@ -72,7 +106,33 @@ public class RecipeCalc_2Controller : ControllerBase
         data = ResultList,
         msg = "查询成功"
         };
+    }
 
+    [HttpPut("Put/TotalFlow")]
+    //配方优化场景2参调总流量设置表格——修改保存功能
+    public ApiModel Put2(Recipecalc_2_2_index obj)//model里的名字 多个数据用IEnumberable，单个数据不用
+    {
+        var TotalFlowList = context.Recipecalc3s.Where(m => m.Apply == 1).ToList();
+        var list1 = context.Schemeverify2s.ToList();
+        var list2 = context.Prodoilconfigs.ToList();
+
+        TotalFlowList[obj.index].ProdOilName = obj.ProdOilName;
+        list1[obj.index].ProdOilName = obj.ProdOilName;
+        list2[obj.index].ProdOilName = obj.ProdOilName;
+        TotalFlowList[obj.index].TotalFlow = obj.ProdTotalFlow;
+
+        context.Recipecalc3s.Update(TotalFlowList[obj.index]);
+        context.Schemeverify2s.Update(list1[obj.index]);
+        context.Prodoilconfigs.Update(list2[obj.index]);
+        context.SaveChanges();
+    
+        return new ApiModel()
+        {
+        code = 200,
+        //data = JsonConvert.SerializeObject(list),
+        data = TotalFlowList,
+        msg = "查询成功"
+        };
     }
 
     [HttpGet("Set/ComOilFlow")]
@@ -142,7 +202,23 @@ public class RecipeCalc_2Controller : ControllerBase
         data = ResultList,
         msg = "查询成功"
         };
+    }
 
+    [HttpPut("Put/OptimizeObj")]
+    //配方优化场景2优化目标设置——修改保存功能
+    public ApiModel Put3(Recipecalc_2_4_index obj)//model里的名字 多个数据用IEnumberable，单个数据不用
+    {
+        var OptimizeObjList = context.Recipecalc2_2s.Where(m => m.Apply == 1).ToList();
+        OptimizeObjList[obj.index].Weight = obj.Weight;
+        context.Recipecalc2_2s.Update(OptimizeObjList[obj.index]);//是按经过where查询后的list顺序更改的
+        context.SaveChanges();   
+        return new ApiModel()
+        {
+        code = 200,
+        //data = JsonConvert.SerializeObject(list),
+        data = OptimizeObjList,
+        msg = "查询成功"
+        };
     }
 
     [HttpGet("Res/Product")]

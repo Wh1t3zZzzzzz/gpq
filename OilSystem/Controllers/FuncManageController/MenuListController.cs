@@ -18,14 +18,6 @@ public class MenuListController : ControllerBase
     {
        context = _context;
     }
-    //private readonly IProdOilConfig _prod;
-
-    // private readonly ILogger<SchemeVerify_2Controller> _logger;
-
-    // public SchemeVerify_2Controller(ILogger<SchemeVerify_2Controller> logger)
-    // {
-    //     _logger = logger;
-    // }
 
     [HttpGet]
     //ID ParentID Name   List<TreeChildren>

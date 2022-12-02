@@ -41,6 +41,34 @@ public class RecipeCalc_1Controller : ControllerBase
         data = ResultList,
         msg = "查询成功"
         };
+    }
+
+    [HttpPut("Put/ComOilProductLimit")]
+    //配方优化场景1组分油产量范围设置表格——修改保存功能
+    public ApiModel Put1(Recipecalc_1_1_index obj)//model里的名字 多个数据用IEnumberable，单个数据不用
+    {
+        var ComOilProductLimitList = context.Recipecalc1s.ToList();
+        var list1 = context.Schemeverify1s.ToList();
+        var list2 = context.Compoilconfigs.ToList();
+
+        ComOilProductLimitList[obj.index].ComOilName = obj.ComOilName;
+        list1[obj.index].ComOilName = obj.ComOilName;
+        list2[obj.index].ComOilName = obj.ComOilName;
+        ComOilProductLimitList[obj.index].ComOilProductHigh = obj.ComOilProductHigh;
+        ComOilProductLimitList[obj.index].ComOilProductLow = obj.ComOilProductLow;
+
+        context.Recipecalc1s.Update(ComOilProductLimitList[obj.index]);
+        context.Schemeverify1s.Update(list1[obj.index]);
+        context.Compoilconfigs.Update(list2[obj.index]);
+        context.SaveChanges();
+    
+        return new ApiModel()
+        {
+        code = 200,
+        //data = JsonConvert.SerializeObject(list),
+        data = ComOilProductLimitList,
+        msg = "查询成功"
+        };
 
     }
 
@@ -67,6 +95,23 @@ public class RecipeCalc_1Controller : ControllerBase
 
     }
 
+    [HttpPut("Put/OptimizeObj")]
+    //配方优化场景1优化目标设置表格——修改保存功能
+    public ApiModel Put2(Recipecalc_1_2_index obj)//model里的名字 多个数据用IEnumberable，单个数据不用
+    {
+        var OptimizeObjList = context.Recipecalc2s.Where(m => m.Apply == 1).ToList();
+        OptimizeObjList[obj.index].Weight = obj.Weight;
+        context.Recipecalc2s.Update(OptimizeObjList[obj.index]);//是按经过where查询后的list顺序更改的
+        context.SaveChanges();   
+        return new ApiModel()
+        {
+        code = 200,
+        //data = JsonConvert.SerializeObject(list),
+        data = OptimizeObjList,
+        msg = "查询成功"
+        };
+    }
+
     [HttpGet("Set/ProdOilProductLimit")]
     //配方优化场景1成品油产量限制设置表格（上限）
     public ApiModel Set3()//model里的名字 多个数据用IEnumberable，单个数据不用
@@ -85,6 +130,34 @@ public class RecipeCalc_1Controller : ControllerBase
         code = 200,
         //data = JsonConvert.SerializeObject(list),
         data = ResultList,
+        msg = "查询成功"
+        };
+
+    }
+
+    [HttpPut("Put/ProdOilProductLimit")]
+    //配方优化场景1成品油产量限制设置表格（上限）——修改保存功能
+    public ApiModel Put3(Recipecalc_1_3_index obj)//model里的名字 多个数据用IEnumberable，单个数据不用
+    {
+        var ProdOilProductLimitList = context.Recipecalc3s.Where(m => m.Apply == 1).ToList();
+        var list1 = context.Schemeverify2s.ToList();
+        var list2 = context.Prodoilconfigs.ToList();
+
+        ProdOilProductLimitList[obj.index].ProdOilName = obj.ProdOilName;
+        list1[obj.index].ProdOilName = obj.ProdOilName;
+        list2[obj.index].ProdOilName = obj.ProdOilName;
+        ProdOilProductLimitList[obj.index].ProdOilProduct = obj.ProdOilProduct;
+
+        context.Recipecalc3s.Update(ProdOilProductLimitList[obj.index]);
+        context.Schemeverify2s.Update(list1[obj.index]);
+        context.Prodoilconfigs.Update(list2[obj.index]);
+        context.SaveChanges();
+    
+        return new ApiModel()
+        {
+        code = 200,
+        //data = JsonConvert.SerializeObject(list),
+        data = ProdOilProductLimitList,
         msg = "查询成功"
         };
 
@@ -110,6 +183,35 @@ public class RecipeCalc_1Controller : ControllerBase
         code = 200,
         //data = JsonConvert.SerializeObject(list),
         data = ResultList,
+        msg = "查询成功"
+        };
+    }
+
+    [HttpPut("Put/ComOilTankVol")]
+    //配方优化场景1组分油罐容设置——修改保存功能
+    public ApiModel Put4(Recipecalc_1_4_index obj)//model里的名字 多个数据用IEnumberable，单个数据不用
+    {
+        var ComOilTankVolList = context.Recipecalc1s.ToList();
+        var list1 = context.Schemeverify1s.ToList();
+        var list2 = context.Compoilconfigs.ToList();
+
+        ComOilTankVolList[obj.index].ComOilName = obj.ComOilName;
+        list1[obj.index].ComOilName = obj.ComOilName;
+        list2[obj.index].ComOilName = obj.ComOilName;
+        ComOilTankVolList[obj.index].IniVolume = obj.IniVolume;
+        ComOilTankVolList[obj.index].VolumeHigh = obj.HighVolume;
+        ComOilTankVolList[obj.index].VolumeLow = obj.LowVolume;
+
+        context.Recipecalc1s.Update(ComOilTankVolList[obj.index]);
+        context.Schemeverify1s.Update(list1[obj.index]);
+        context.Compoilconfigs.Update(list2[obj.index]);
+        context.SaveChanges();
+    
+        return new ApiModel()
+        {
+        code = 200,
+        //data = JsonConvert.SerializeObject(list),
+        data = ComOilTankVolList,
         msg = "查询成功"
         };
 

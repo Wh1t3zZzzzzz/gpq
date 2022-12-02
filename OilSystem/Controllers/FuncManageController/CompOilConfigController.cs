@@ -35,7 +35,7 @@ public class CompOilConfigController : ControllerBase
             result.Pol = list[i].Pol;
             result.Den = list[i].Den;
             result.Price = list[i].Price;
-            ResultList.Add(result);
+            ResultList.Add(result); 
         }   
         return new ApiModel()
         {
@@ -52,17 +52,31 @@ public class CompOilConfigController : ControllerBase
         context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
         ICompOilConfig _CompOilConfig = new CompOilConfig(context);  
         if(obj.action == "add"){    
+            //增加操作
             Compoilconfig comp = new Compoilconfig();
+            Recipecalc1 recipecalc1 = new Recipecalc1();
+            Schemeverify1 schemeverify1 = new Schemeverify1();
             context.Compoilconfigs.Add(comp);
+            context.Recipecalc1s.Add(recipecalc1);
+            context.Schemeverify1s.Add(schemeverify1);
             context.SaveChanges();
+
+            //更改保存操作
             var list = context.Compoilconfigs.ToList();//增加行过后的表格数据
+            var list2 = context.Recipecalc1s.ToList();//recipecalc1表格
+            var list3 = context.Schemeverify1s.ToList();//schemeverify1表格
+
             list[obj.index].ComOilName = obj.ComOilName;
-            // list[obj.index].Cet = obj.Cet;
-            // list[obj.index].D50 = obj.D50;
-            // list[obj.index].Pol = obj.Pol;
-            // list[obj.index].Den = obj.Den;
-            // list[obj.index].Price = obj.Price;
+            list2[obj.index].ComOilName = obj.ComOilName;
+            list3[obj.index].ComOilName = obj.ComOilName;
+            list[obj.index].Cet = obj.Cet;
+            list[obj.index].D50 = obj.D50;
+            list[obj.index].Pol = obj.Pol;
+            list[obj.index].Den = obj.Den;
+            list[obj.index].Price = obj.Price;
             context.Compoilconfigs.Update(list[obj.index]);
+            context.Recipecalc1s.Update(list2[obj.index]);
+            context.Schemeverify1s.Update(list3[obj.index]);
             context.SaveChanges();
             var list1 = context.Compoilconfigs.ToList();//增加行并且修改后的表格数据         
             return new ApiModel()
@@ -73,14 +87,23 @@ public class CompOilConfigController : ControllerBase
             msg = "增加成功"
             };
         }else{
+            //更改保存操作
             var list = context.Compoilconfigs.ToList();//打印最新的表格数据
+            var list2 = context.Recipecalc1s.ToList();//增加行过后的表格数据
+            var list3 = context.Schemeverify1s.ToList();//增加行过后的表格数据
+
             list[obj.index].ComOilName = obj.ComOilName;
-            // list[obj.index].Cet = obj.Cet;
-            // list[obj.index].D50 = obj.D50;
-            // list[obj.index].Pol = obj.Pol;
-            // list[obj.index].Den = obj.Den;
-            // list[obj.index].Price = obj.Price;
+            list2[obj.index].ComOilName = obj.ComOilName;
+            list3[obj.index].ComOilName = obj.ComOilName;
+            list[obj.index].Cet = obj.Cet;
+            list[obj.index].D50 = obj.D50;
+            list[obj.index].Pol = obj.Pol;
+            list[obj.index].Den = obj.Den;
+            list[obj.index].Price = obj.Price;
+            
             context.Compoilconfigs.Update(list[obj.index]);
+            context.Recipecalc1s.Update(list2[obj.index]);
+            context.Schemeverify1s.Update(list3[obj.index]);
             context.SaveChanges();
             var list1 = _CompOilConfig.GetAllCompOilConfigList().ToList();
             return new ApiModel()
@@ -98,12 +121,18 @@ public class CompOilConfigController : ControllerBase
     [HttpDelete]
     public ApiModel Delete(IndexNumber obj)//IndexNumber obj
     {
+        //增加时，要同时把三个表格里的组分油都增加，删除时同理
         //oilblendContext context = new();
         context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
         ICompOilConfig _CompOilConfig = new CompOilConfig(context);
         //List<Compoilconfig> list3 = new List<Compoilconfig>();
         var list = _CompOilConfig.GetAllCompOilConfigList().ToList();//需要把IEnumberable中遍历成List
+        var list2 = context.Recipecalc1s.ToList();
+        var list3 = context.Schemeverify1s.ToList();
+
         context.Compoilconfigs.Remove(list[obj.index]);
+        context.Recipecalc1s.Remove(list2[obj.index]);
+        context.Schemeverify1s.Remove(list3[obj.index]);
         context.SaveChanges();
         var list1 = _CompOilConfig.GetAllCompOilConfigList().ToList();
         return new ApiModel()

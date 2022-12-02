@@ -2,7 +2,7 @@ namespace OilBlendSystem.Models.ConstructModel
 {
     public class Prodproperty
     {
-        public int Index { get; set; }
+        //成品油设置表格
         public string? ProdOilName { get; set; }//成品油名称
         public float CetLowLimit { get; set; }//十六烷值低限
         public float CetHighLimit { get; set; }//十六烷值高限

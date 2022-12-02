@@ -47,6 +47,38 @@ public class SchemeVerify_2VolController : ControllerBase
 
     }
 
+    [HttpPut("Put/ProdOilPercent")]
+    //体积
+    //方案验证场景2成品油参调百分比表格——修改保存功能
+    public ApiModel Put1(SchemeVerify_2_1_index obj)//model里的名字 多个数据用IEnumberable，单个数据不用
+    {
+        var ProdOilPercentList = context.Schemeverify1s.ToList();
+        var list1 = context.Recipecalc1s.ToList();
+        var list2 = context.Compoilconfigs.ToList();
+
+        ProdOilPercentList[obj.index].ComOilName = obj.ComOilName;
+        list1[obj.index].ComOilName = obj.ComOilName;
+        list2[obj.index].ComOilName = obj.ComOilName;
+        ProdOilPercentList[obj.index].AutoFlowPercentVol = obj.AutoPercent;
+        ProdOilPercentList[obj.index].ExpFlowPercentVol = obj.ExpPercent;
+        ProdOilPercentList[obj.index].Prod1FlowPercentVol = obj.Prod1Percent;
+        ProdOilPercentList[obj.index].Prod2FlowPercentVol = obj.Prod2Percent;
+
+        context.Schemeverify1s.Update(ProdOilPercentList[obj.index]);
+        context.Recipecalc1s.Update(list1[obj.index]);
+        context.Compoilconfigs.Update(list2[obj.index]);
+        context.SaveChanges();
+    
+        return new ApiModel()
+        {
+        code = 200,
+        //data = JsonConvert.SerializeObject(list),
+        data = ProdOilPercentList,
+        msg = "查询成功"
+        };
+
+    }
+
     [HttpGet("Set/TotalBlend")]
     //方案验证场景2成品油调合总量（不含罐底油）
     public ApiModel Set2()//model里的名字 多个数据用IEnumberable，单个数据不用
@@ -69,6 +101,34 @@ public class SchemeVerify_2VolController : ControllerBase
 
     }
 
+    [HttpPut("Put/TotalBlend")]
+    //体积
+    //方案验证场景2成品油调合总量（不含罐底油）——修改保存功能
+    public ApiModel Put2(SchemeVerify_2_2_index obj)//model里的名字 多个数据用IEnumberable，单个数据不用
+    {
+        var TotalBlendList = context.Schemeverify2s.ToList();
+        var list1 = context.Recipecalc3s.ToList();
+        var list2 = context.Prodoilconfigs.ToList();
+
+        TotalBlendList[obj.index].ProdOilName = obj.ProdOilName;
+        list1[obj.index].ProdOilName = obj.ProdOilName;
+        list2[obj.index].ProdOilName = obj.ProdOilName;
+        TotalBlendList[obj.index].TotalBlendVol2 = obj.ProdTotalBlend;
+
+        context.Schemeverify2s.Update(TotalBlendList[obj.index]);
+        context.Recipecalc3s.Update(list1[obj.index]);
+        context.Prodoilconfigs.Update(list2[obj.index]);
+        context.SaveChanges();
+    
+        return new ApiModel()
+        {
+        code = 200,
+        //data = JsonConvert.SerializeObject(list),
+        data = TotalBlendList,
+        msg = "查询成功"
+        };
+
+    }
 
     [HttpGet("Res/Product")]
     //方案验证场景2计算结果：成品油产量

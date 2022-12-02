@@ -24,73 +24,57 @@ public class ProdOilConfigController : ControllerBase
     //public IEnumerable<TestTable> Get()//model里的名字
     public ApiModel Get()//model里的名字 多个数据用IEnumberable，单个数据不用
     {
-        // return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-        // {
-        //     Date = DateTime.Now.AddDays(index),
-        //     TemperatureC = Random.Shared.Next(-20, 55),
-        //     Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-        // })
-        // .ToArray();
-        //using oilblendContext context = new();
         var list = context.Prodoilconfigs.ToList();
+        List<Prodproperty> ResultList = new List<Prodproperty>();//列表，里面可以添加很多个对象
+        
+        for(int i = 0; i < list.Count; i++){
+            Prodproperty result = new Prodproperty();//实体，可以理解为一个对象  
+            result.ProdOilName = list[i].ProdOilName;
+            result.CetHighLimit = list[i].CetHighLimit;
+            result.CetLowLimit = list[i].CetLowLimit;
+            result.D50HighLimit = list[i].D50HighLimit;
+            result.D50LowLimit = list[i].D50LowLimit;
+            result.PolHighLimit = list[i].PolHighLimit;
+            result.PolLowLimit = list[i].PolLowLimit;
+            result.DenHighLimit = list[i].DenHighLimit;
+            result.DenLowLimit = list[i].DenLowLimit;
+            ResultList.Add(result); 
+        }   
         return new ApiModel()
         {
         code = 200,
-        //data = JsonConvert.SerializeObject(list),
-        data = list,
+        data = ResultList,
         msg = "查询成功"
         };
-        //using oilblendContext context = new();//context上下文紧接着的是model中的名字（数据库名字+s）
-        //retun context.Menulists.Where(m=>m.Id == 1).ToList();//自动表名后加s
-        //context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;//用到了microsoft.entity包
-        //var menulist = context.Menulists.ToList();//firstordefult 如果没有值，则返回默认值
-        //return context.Compoilconfigs.ToList();
-        //asnotracking关闭跟踪
-        //return context.TestTables.Single(m=>m.Id == 1);//只有一个值用single
-        //index.Index = number;
-        //context.Menulists.Update(menulist);//把赋予的对象放到update里,这句其实可以不写
-        // context.TestTables.Add(new TestTable{
-        //     PartName = "Leo",
-        //     Point = 10,
-        // });
-        //throw new Exception();
-        //context.SaveChanges();//跟踪原理,不需要写update，如果取消更新则需要加上update
-        //查询的时候用asnotracking，可以降低内存消耗，减少不必要的跟踪，二分写八分读
-
-       //return menulist;
 
     }
 
 
     [HttpPut]
-    public ApiModel Put(Prodproperty obj)
+    public ApiModel Put(Prodproperty_index obj)
     {
-        //oilblendContext context = new();
         context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
         IProdOilConfig _ProdOilConfig = new ProdOilConfig(context);
-        //List<Compoilconfig> list3 = new List<Compoilconfig>();
         var list = _ProdOilConfig.GetAllProdOilConfigList().ToList();//需要把IEnumberable中遍历成List
-        //var list = _CompOilConfig.GetAllCompOilConfigList();
-        //var list = context.Compoilconfigs.ToList();
-        //for(int i = 0; i < list.Count; i++)
-        //foreach (var item in list)
-        //{
-            list[obj.Index].ProdOilName = obj.ProdOilName;
-            list[obj.Index].CetHighLimit = obj.CetHighLimit;
-            list[obj.Index].CetLowLimit = obj.CetLowLimit;
-            list[obj.Index].D50HighLimit = obj.D50HighLimit;
-            list[obj.Index].D50LowLimit = obj.D50LowLimit;
-            list[obj.Index].PolHighLimit = obj.PolHighLimit;
-            list[obj.Index].PolLowLimit = obj.PolLowLimit;
-            list[obj.Index].DenHighLimit = obj.DenHighLimit;
-            list[obj.Index].DenLowLimit = obj.DenLowLimit;
-            context.Prodoilconfigs.Update(list[obj.Index]);
-            context.SaveChanges();
-        //}
-        //list[0].Cet = obj.Cet;
-        //obj.Cet = 16;
-        //list[0].Cet = cet;
-        //list[index].Cet = cet;
+        var list2 = context.Recipecalc3s.ToList();
+        var list3 = context.Schemeverify2s.ToList();
+
+        list[obj.index].ProdOilName = obj.ProdOilName;
+        list2[obj.index].ProdOilName = obj.ProdOilName;
+        list3[obj.index].ProdOilName = obj.ProdOilName;
+        list[obj.index].CetHighLimit = obj.CetHighLimit;
+        list[obj.index].CetLowLimit = obj.CetLowLimit;
+        list[obj.index].D50HighLimit = obj.D50HighLimit;
+        list[obj.index].D50LowLimit = obj.D50LowLimit;
+        list[obj.index].PolHighLimit = obj.PolHighLimit;
+        list[obj.index].PolLowLimit = obj.PolLowLimit;
+        list[obj.index].DenHighLimit = obj.DenHighLimit;
+        list[obj.index].DenLowLimit = obj.DenLowLimit;
+
+        context.Prodoilconfigs.Update(list[obj.index]);
+        context.Recipecalc3s.Update(list2[obj.index]);
+        context.Schemeverify2s.Update(list3[obj.index]);
+        context.SaveChanges();
 
         return new ApiModel()
         {

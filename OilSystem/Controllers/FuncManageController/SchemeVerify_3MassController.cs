@@ -25,7 +25,6 @@ public class SchemeVerify_3MassController : ControllerBase
     //方案验证场景3成品油参调流量表格
     public ApiModel Set1()//model里的名字 多个数据用IEnumberable，单个数据不用
     {
-
         var ProdOilFlowList = context.Schemeverify1s.ToList();
         List<SchemeVerify_3_1> ResultList = new List<SchemeVerify_3_1>();//列表，里面可以添加很多个对象
         for(int i = 0; i < ProdOilFlowList.Count; i++){
@@ -42,6 +41,38 @@ public class SchemeVerify_3MassController : ControllerBase
         {
         code = 200,
         data = ResultList,
+        msg = "查询成功"
+        };
+
+    }
+
+    [HttpPut("Put/ProdOilFlow")]
+    //质量
+    //方案验证场景3成品油参调流量表格——修改保存功能
+    public ApiModel Put1(SchemeVerify_3_1_index obj)//model里的名字 多个数据用IEnumberable，单个数据不用
+    {
+        var ProdOilFlowList = context.Schemeverify1s.ToList();
+        var list1 = context.Recipecalc1s.ToList();
+        var list2 = context.Compoilconfigs.ToList();
+
+        ProdOilFlowList[obj.index].ComOilName = obj.ComOilName;
+        list1[obj.index].ComOilName = obj.ComOilName;
+        list2[obj.index].ComOilName = obj.ComOilName;
+        ProdOilFlowList[obj.index].AutoFlowMass = obj.AutoFlow;
+        ProdOilFlowList[obj.index].ExpFlowMass = obj.ExpFlow;
+        ProdOilFlowList[obj.index].Prod1FlowMass = obj.Prod1Flow;
+        ProdOilFlowList[obj.index].Prod2FlowMass = obj.Prod2Flow;
+
+        context.Schemeverify1s.Update(ProdOilFlowList[obj.index]);
+        context.Recipecalc1s.Update(list1[obj.index]);
+        context.Compoilconfigs.Update(list2[obj.index]);
+        context.SaveChanges();
+    
+        return new ApiModel()
+        {
+        code = 200,
+        //data = JsonConvert.SerializeObject(list),
+        data = ProdOilFlowList,
         msg = "查询成功"
         };
 
@@ -64,6 +95,35 @@ public class SchemeVerify_3MassController : ControllerBase
         {
         code = 200,
         data = ResultList,
+        msg = "查询成功"
+        };
+
+    }
+
+    [HttpPut("Put/TotalBlend")]
+    //质量
+    //方案验证场景3成品油调合总量（不含罐底油）——修改保存功能
+    public ApiModel Put2(SchemeVerify_3_2_index obj)//model里的名字 多个数据用IEnumberable，单个数据不用
+    {
+        var TotalBlendList = context.Schemeverify2s.ToList();
+        var list1 = context.Recipecalc3s.ToList();
+        var list2 = context.Prodoilconfigs.ToList();
+
+        TotalBlendList[obj.index].ProdOilName = obj.ProdOilName;
+        list1[obj.index].ProdOilName = obj.ProdOilName;
+        list2[obj.index].ProdOilName = obj.ProdOilName;
+        TotalBlendList[obj.index].TotalBlendMass3 = obj.ProdTotalBlend;
+
+        context.Schemeverify2s.Update(TotalBlendList[obj.index]);
+        context.Recipecalc3s.Update(list1[obj.index]);
+        context.Prodoilconfigs.Update(list2[obj.index]);
+        context.SaveChanges();
+    
+        return new ApiModel()
+        {
+        code = 200,
+        //data = JsonConvert.SerializeObject(list),
+        data = TotalBlendList,
         msg = "查询成功"
         };
 

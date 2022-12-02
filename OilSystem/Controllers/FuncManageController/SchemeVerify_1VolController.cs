@@ -48,6 +48,39 @@ public class SchemeVerify_1VolController : ControllerBase
 
     }
 
+
+    [HttpPut("Put/ProdOilProduct")]
+    //体积
+    //方案验证场景1成品油产量分配表格——修改保存功能
+    public ApiModel Put1(SchemeVerify_1_1_index obj)//model里的名字 多个数据用IEnumberable，单个数据不用
+    {
+        var ProdOilProductList = context.Schemeverify1s.ToList();
+        var list1 = context.Recipecalc1s.ToList();
+        var list2 = context.Compoilconfigs.ToList();
+
+        ProdOilProductList[obj.index].ComOilName = obj.ComOilName;
+        list1[obj.index].ComOilName = obj.ComOilName;
+        list2[obj.index].ComOilName = obj.ComOilName;
+        ProdOilProductList[obj.index].AutoVolumeProduct = obj.AutoProduct;
+        ProdOilProductList[obj.index].ExpVolumeProduct = obj.ExpProduct;
+        ProdOilProductList[obj.index].Prod1VolumeProduct = obj.Prod1Product;
+        ProdOilProductList[obj.index].Prod2VolumeProduct = obj.Prod2Product;
+
+        context.Schemeverify1s.Update(ProdOilProductList[obj.index]);
+        context.Recipecalc1s.Update(list1[obj.index]);
+        context.Compoilconfigs.Update(list2[obj.index]);
+        context.SaveChanges();
+    
+        return new ApiModel()
+        {
+        code = 200,
+        //data = JsonConvert.SerializeObject(list),
+        data = ProdOilProductList,
+        msg = "查询成功"
+        };
+
+    }               
+
     [HttpGet("Set/BottomInfo")]
     //方案验证场景1罐底油信息配置表格
     public ApiModel Set2()//model里的名字 多个数据用IEnumberable，单个数据不用
@@ -76,6 +109,39 @@ public class SchemeVerify_1VolController : ControllerBase
 
     }
 
+    [HttpPut("Put/BottomInfo")]
+    //体积
+    //方案验证场景1罐底油信息配置表格——修改保存功能
+    public ApiModel Put2(SchemeVerify_1_2_index obj)//model里的名字 多个数据用IEnumberable，单个数据不用
+    {
+        var BottomInfoList = context.Schemeverify2s.ToList();
+        var list1 = context.Recipecalc3s.ToList();
+        var list2 = context.Prodoilconfigs.ToList();
+
+        BottomInfoList[obj.index].ProdOilName = obj.ProdOilName;
+        list1[obj.index].ProdOilName = obj.ProdOilName;
+        list2[obj.index].ProdOilName = obj.ProdOilName;
+        BottomInfoList[obj.index].BottomVolume = obj.BottomCapacity;
+        BottomInfoList[obj.index].CetVol = obj.BottomCET;
+        BottomInfoList[obj.index].D50Vol = obj.BottomD50;
+        BottomInfoList[obj.index].PolVol = obj.BottomPOL;
+        BottomInfoList[obj.index].DenVol = obj.BottomDEN;
+
+        context.Schemeverify2s.Update(BottomInfoList[obj.index]);
+        context.Recipecalc3s.Update(list1[obj.index]);
+        context.Prodoilconfigs.Update(list2[obj.index]);
+        context.SaveChanges();
+    
+        return new ApiModel()
+        {
+        code = 200,
+        //data = JsonConvert.SerializeObject(list),
+        data = BottomInfoList,
+        msg = "查询成功"
+        };
+
+    }
+
     [HttpGet("Set/TotalBlend")]
     //方案验证场景1调合总量设置表格（含罐底油）
     public ApiModel Set3()//model里的名字 多个数据用IEnumberable，单个数据不用
@@ -95,6 +161,35 @@ public class SchemeVerify_1VolController : ControllerBase
         code = 200,
         //data = JsonConvert.SerializeObject(list),
         data = ResultList,
+        msg = "查询成功"
+        };
+
+    }
+
+    [HttpPut("Put/TotalBlend")]
+    //体积
+    //方案验证场景1调合总量设置表格（含罐底油）——修改保存功能
+    public ApiModel Put3(SchemeVerify_1_3_index obj)//model里的名字 多个数据用IEnumberable，单个数据不用
+    {
+        var TotalBlendList = context.Schemeverify2s.ToList();
+        var list1 = context.Recipecalc3s.ToList();
+        var list2 = context.Prodoilconfigs.ToList();
+
+        TotalBlendList[obj.index].ProdOilName = obj.ProdOilName;
+        list1[obj.index].ProdOilName = obj.ProdOilName;
+        list2[obj.index].ProdOilName = obj.ProdOilName;
+        TotalBlendList[obj.index].TotalBlendVol = obj.ProdTotalBlend;
+
+        context.Schemeverify2s.Update(TotalBlendList[obj.index]);
+        context.Recipecalc3s.Update(list1[obj.index]);
+        context.Prodoilconfigs.Update(list2[obj.index]);
+        context.SaveChanges();
+    
+        return new ApiModel()
+        {
+        code = 200,
+        //data = JsonConvert.SerializeObject(list),
+        data = TotalBlendList,
         msg = "查询成功"
         };
 
@@ -148,5 +243,11 @@ public class SchemeVerify_1VolController : ControllerBase
 
     }
 
-
 }
+
+
+
+
+
+
+
