@@ -59,30 +59,50 @@ public class ProdOilConfigController : ControllerBase
         var list2 = context.Recipecalc3s.ToList();
         var list3 = context.Schemeverify2s.ToList();
 
-        list[obj.index].ProdOilName = obj.ProdOilName;
-        list2[obj.index].ProdOilName = obj.ProdOilName;
-        list3[obj.index].ProdOilName = obj.ProdOilName;
-        list[obj.index].CetHighLimit = obj.CetHighLimit;
-        list[obj.index].CetLowLimit = obj.CetLowLimit;
-        list[obj.index].D50HighLimit = obj.D50HighLimit;
-        list[obj.index].D50LowLimit = obj.D50LowLimit;
-        list[obj.index].PolHighLimit = obj.PolHighLimit;
-        list[obj.index].PolLowLimit = obj.PolLowLimit;
-        list[obj.index].DenHighLimit = obj.DenHighLimit;
-        list[obj.index].DenLowLimit = obj.DenLowLimit;
+        if(40 <= obj.CetLowLimit && obj.CetLowLimit <= obj.CetHighLimit && obj.CetHighLimit <= 70 
+        && 200 <= obj.D50LowLimit && obj.D50LowLimit <= obj.D50HighLimit  && obj.D50HighLimit <= 300
+        && 0 < obj.PolLowLimit && obj.PolLowLimit <= obj.PolHighLimit  && obj.PolHighLimit <= 7
+        && 700 <= obj.DenLowLimit && obj.DenLowLimit <= obj.DenHighLimit  && obj.DenHighLimit <= 900){
+            list[obj.index].ProdOilName = obj.ProdOilName;
+            list2[obj.index].ProdOilName = obj.ProdOilName;
+            list3[obj.index].ProdOilName = obj.ProdOilName;
 
-        context.Prodoilconfigs.Update(list[obj.index]);
-        context.Recipecalc3s.Update(list2[obj.index]);
-        context.Schemeverify2s.Update(list3[obj.index]);
-        context.SaveChanges();
+            list[obj.index].CetHighLimit = obj.CetHighLimit;
+            list[obj.index].CetLowLimit = obj.CetLowLimit;
+            list[obj.index].D50HighLimit = obj.D50HighLimit;
+            list[obj.index].D50LowLimit = obj.D50LowLimit;
+            list[obj.index].PolHighLimit = obj.PolHighLimit;
+            list[obj.index].PolLowLimit = obj.PolLowLimit;
+            list[obj.index].DenHighLimit = obj.DenHighLimit;
+            list[obj.index].DenLowLimit = obj.DenLowLimit;
 
-        return new ApiModel()
-        {
-        code = 200,
-        //data = JsonConvert.SerializeObject(list),
-        data = list,
-        msg = "查询成功"
-        };
+            context.Prodoilconfigs.Update(list[obj.index]);
+            context.Recipecalc3s.Update(list2[obj.index]);
+            context.Schemeverify2s.Update(list3[obj.index]);
+            context.SaveChanges();
+
+            return new ApiModel()
+            {
+            code = 200,
+            //data = JsonConvert.SerializeObject(list),
+            data = list,
+            msg = "修改成功"
+            };            
+        }else{
+            return new ApiModel(){
+                code = 500,
+                //data = JsonConvert.SerializeObject(list),
+                data = null,
+                msg = @"成品油属性值高低限应满足以下条件: 
+                1) 属性值低限小于等于高限
+                2) 十六烷值指数: [40,70] 
+                3) 50%回收温度(℃): [200,300] 
+                4) 多环芳烃含量(wt%): (0,7] 
+                5) 密度(kg/m³): [700,900]"
+            };        
+        }
+
+
     }
 
 

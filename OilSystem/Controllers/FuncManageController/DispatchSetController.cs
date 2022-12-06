@@ -361,21 +361,18 @@ public class DispatchSetController : ControllerBase
         if(obj.index == 0){
             string time = Convert.ToString(obj.weight);
             if(time.Contains(".")){
-                return new ApiModel()
-                {
-                code = 500,
-                //data = JsonConvert.SerializeObject(list),
-                data = null,
-                msg = "周期不允许是小数, 取值范围(1~7)"
+                return new ApiModel(){
+                    code = 500,
+                    //data = JsonConvert.SerializeObject(list),
+                    data = null,
+                    msg = "周期不允许是小数, 取值范围(1~7)"
                 };
-            }
-            else if(obj.weight > 7 || obj.weight < 1){
-                return new ApiModel()
-                {
-                code = 501,
-                //data = JsonConvert.SerializeObject(list),
-                data = null,
-                msg = "超出限制，周期的取值范围是(1~7)"
+            }else if(obj.weight > 7 || obj.weight < 1){
+                return new ApiModel(){
+                    code = 501,
+                    //data = JsonConvert.SerializeObject(list),
+                    data = null,
+                    msg = "超出限制，周期的取值范围是(1~7)"
                 };
             }
         }

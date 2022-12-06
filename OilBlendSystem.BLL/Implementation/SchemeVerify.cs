@@ -64,22 +64,22 @@ namespace OilBlendSystem.BLL.Implementation
             //车柴
             SchemeVerify_1Res_1 result1 = new SchemeVerify_1Res_1();//实体，可以理解为一个对象
             result1.ProdOilName = ProdOilList[0].ProdOilName;
-            result1.Time = (float)Math.Round((SchemeBottomList[0].TotalBlendMass - SchemeBottomList[0].BottomMass) / AutoMassProduct * 24);
+            result1.Time = (float)Math.Round((SchemeBottomList[0].TotalBlendMass - SchemeBottomList[0].BottomMass) / AutoMassProduct * 24, 1);
             ResultList.Add(result1);
             //出柴
             SchemeVerify_1Res_1 result2 = new SchemeVerify_1Res_1();//实体，可以理解为一个对象
             result2.ProdOilName = ProdOilList[1].ProdOilName;
-            result2.Time = (float)Math.Round((SchemeBottomList[1].TotalBlendMass - SchemeBottomList[1].BottomMass) / ExpMassProduct * 24);
+            result2.Time = (float)Math.Round((SchemeBottomList[1].TotalBlendMass - SchemeBottomList[1].BottomMass) / ExpMassProduct * 24, 1);
             ResultList.Add(result2);
             //备用油1
             SchemeVerify_1Res_1 result3 = new SchemeVerify_1Res_1();//实体，可以理解为一个对象
             result3.ProdOilName = ProdOilList[2].ProdOilName;
-            result3.Time = (float)Math.Round((SchemeBottomList[2].TotalBlendMass - SchemeBottomList[2].BottomMass) / Prod1MassProduct * 24);
+            result3.Time = (float)Math.Round((SchemeBottomList[2].TotalBlendMass - SchemeBottomList[2].BottomMass) / Prod1MassProduct * 24, 1);
             ResultList.Add(result3);
             //备用油2
             SchemeVerify_1Res_1 result4 = new SchemeVerify_1Res_1();//实体，可以理解为一个对象
             result4.ProdOilName = ProdOilList[3].ProdOilName;
-            result4.Time = (float)Math.Round((SchemeBottomList[3].TotalBlendMass - SchemeBottomList[3].BottomMass) / Prod2MassProduct * 24);
+            result4.Time = (float)Math.Round((SchemeBottomList[3].TotalBlendMass - SchemeBottomList[3].BottomMass) / Prod2MassProduct * 24, 1);
             ResultList.Add(result4);
             return ResultList;
 
@@ -122,22 +122,22 @@ namespace OilBlendSystem.BLL.Implementation
             //车柴
             SchemeVerify_1Res_1 result1 = new SchemeVerify_1Res_1();//实体，可以理解为一个对象
             result1.ProdOilName = ProdOilList[0].ProdOilName;
-            result1.Time = (float)Math.Round((SchemeBottomList[0].TotalBlendVol - SchemeBottomList[0].BottomVolume) / AutoVolProduct * 24);
+            result1.Time = (float)Math.Round((SchemeBottomList[0].TotalBlendVol - SchemeBottomList[0].BottomVolume) / AutoVolProduct * 24, 1);
             ResultList.Add(result1);
             //出柴
             SchemeVerify_1Res_1 result2 = new SchemeVerify_1Res_1();//实体，可以理解为一个对象
             result2.ProdOilName = ProdOilList[1].ProdOilName;
-            result2.Time = (float)Math.Round((SchemeBottomList[1].TotalBlendVol - SchemeBottomList[1].BottomVolume) / ExpVolProduct * 24);
+            result2.Time = (float)Math.Round((SchemeBottomList[1].TotalBlendVol - SchemeBottomList[1].BottomVolume) / ExpVolProduct * 24, 1);
             ResultList.Add(result2);
             //备用油1
             SchemeVerify_1Res_1 result3 = new SchemeVerify_1Res_1();//实体，可以理解为一个对象
             result3.ProdOilName = ProdOilList[2].ProdOilName;
-            result3.Time = (float)Math.Round((SchemeBottomList[2].TotalBlendVol - SchemeBottomList[2].BottomVolume) / Prod1VolProduct * 24);
+            result3.Time = (float)Math.Round((SchemeBottomList[2].TotalBlendVol - SchemeBottomList[2].BottomVolume) / Prod1VolProduct * 24, 1);
             ResultList.Add(result3);
             //备用油2
             SchemeVerify_1Res_1 result4 = new SchemeVerify_1Res_1();//实体，可以理解为一个对象
             result4.ProdOilName = ProdOilList[3].ProdOilName;
-            result4.Time = (float)Math.Round((SchemeBottomList[3].TotalBlendVol - SchemeBottomList[3].BottomVolume) / Prod2VolProduct * 24);
+            result4.Time = (float)Math.Round((SchemeBottomList[3].TotalBlendVol - SchemeBottomList[3].BottomVolume) / Prod2VolProduct * 24, 1);
             ResultList.Add(result4);
             return ResultList;
 
@@ -1783,7 +1783,7 @@ namespace OilBlendSystem.BLL.Implementation
             /// 质量界面
             /// </summary>
             result1.ProdOilName = SchemeBottomList[0].ProdOilName;
-            result1.Time = (float)Math.Round(SchemeBottomList[0].TotalBlendMass / AutoMassFlow) * 24;
+            result1.Time = (float)Math.Round((SchemeBottomList[0].TotalBlendMass / AutoMassFlow) * 24, 1);
 
             ResultList.Add(result1);   
 
@@ -1793,7 +1793,7 @@ namespace OilBlendSystem.BLL.Implementation
             /// 质量界面
             /// </summary>
             result2.ProdOilName = SchemeBottomList[1].ProdOilName;
-            result2.Time = (float)Math.Round(SchemeBottomList[1].TotalBlendMass / ExpMassFlow) * 24;
+            result2.Time = (float)Math.Round((SchemeBottomList[1].TotalBlendMass / ExpMassFlow) * 24, 1);
 
             ResultList.Add(result2);
 
@@ -1803,7 +1803,7 @@ namespace OilBlendSystem.BLL.Implementation
             /// 质量界面
             /// </summary>
             result3.ProdOilName = SchemeBottomList[2].ProdOilName;
-            result3.Time = (float)Math.Round(SchemeBottomList[2].TotalBlendMass / Prod1MassFlow) * 24;
+            result3.Time = (float)Math.Round((SchemeBottomList[2].TotalBlendMass / Prod1MassFlow) * 24, 1);
 
             ResultList.Add(result3);
 
@@ -1813,7 +1813,7 @@ namespace OilBlendSystem.BLL.Implementation
             /// 质量界面
             /// </summary>
             result4.ProdOilName = SchemeBottomList[3].ProdOilName;
-            result4.Time = (float)Math.Round(SchemeBottomList[3].TotalBlendMass / Prod2MassFlow) * 24;
+            result4.Time = (float)Math.Round((SchemeBottomList[3].TotalBlendMass / Prod2MassFlow) * 24, 1);
 
             ResultList.Add(result4);
 
@@ -1862,7 +1862,7 @@ namespace OilBlendSystem.BLL.Implementation
             /// 体积界面
             /// </summary>
             result1.ProdOilName = SchemeBottomList[0].ProdOilName;
-            result1.Time = (float)Math.Round(SchemeBottomList[0].TotalBlendVol / AutoVolFlow) * 24;
+            result1.Time = (float)Math.Round((SchemeBottomList[0].TotalBlendVol / AutoVolFlow) * 24, 1);
 
             ResultList.Add(result1);  
 
@@ -1872,7 +1872,7 @@ namespace OilBlendSystem.BLL.Implementation
             /// 体积界面
             /// </summary>
             result2.ProdOilName = SchemeBottomList[1].ProdOilName;
-            result2.Time = (float)Math.Round(SchemeBottomList[1].TotalBlendVol / ExpVolFlow) * 24;
+            result2.Time = (float)Math.Round((SchemeBottomList[1].TotalBlendVol / ExpVolFlow) * 24, 1);
 
             ResultList.Add(result2);
 
@@ -1882,7 +1882,7 @@ namespace OilBlendSystem.BLL.Implementation
             /// 体积界面
             /// </summary>
             result3.ProdOilName = SchemeBottomList[2].ProdOilName;
-            result3.Time = (float)Math.Round(SchemeBottomList[2].TotalBlendVol / Prod1VolFlow) * 24;
+            result3.Time = (float)Math.Round((SchemeBottomList[2].TotalBlendVol / Prod1VolFlow) * 24, 1);
 
             ResultList.Add(result3);
 
@@ -1892,10 +1892,10 @@ namespace OilBlendSystem.BLL.Implementation
             /// 体积界面
             /// </summary>
             result4.ProdOilName = SchemeBottomList[3].ProdOilName;
-            result4.Time = (float)Math.Round(SchemeBottomList[3].TotalBlendVol / Prod2VolFlow) * 24;
+            result4.Time = (float)Math.Round((SchemeBottomList[3].TotalBlendVol / Prod2VolFlow) * 24, 1);
 
             ResultList.Add(result4);
-
+            
             return ResultList;
         }
         

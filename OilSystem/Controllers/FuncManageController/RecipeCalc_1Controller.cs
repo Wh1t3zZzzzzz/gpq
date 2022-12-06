@@ -51,25 +51,36 @@ public class RecipeCalc_1Controller : ControllerBase
         var list1 = context.Schemeverify1s.ToList();
         var list2 = context.Compoilconfigs.ToList();
 
-        ComOilProductLimitList[obj.index].ComOilName = obj.ComOilName;
-        list1[obj.index].ComOilName = obj.ComOilName;
-        list2[obj.index].ComOilName = obj.ComOilName;
-        ComOilProductLimitList[obj.index].ComOilProductHigh = obj.ComOilProductHigh;
-        ComOilProductLimitList[obj.index].ComOilProductLow = obj.ComOilProductLow;
+        if(0 <= obj.ComOilProductLow && obj.ComOilProductLow <= obj.ComOilProductHigh && obj.ComOilProductHigh <= 9999999999){
+            ComOilProductLimitList[obj.index].ComOilName = obj.ComOilName;
+            list1[obj.index].ComOilName = obj.ComOilName;
+            list2[obj.index].ComOilName = obj.ComOilName;
+            ComOilProductLimitList[obj.index].ComOilProductHigh = obj.ComOilProductHigh;
+            ComOilProductLimitList[obj.index].ComOilProductLow = obj.ComOilProductLow;
 
-        context.Recipecalc1s.Update(ComOilProductLimitList[obj.index]);
-        context.Schemeverify1s.Update(list1[obj.index]);
-        context.Compoilconfigs.Update(list2[obj.index]);
-        context.SaveChanges();
-    
-        return new ApiModel()
-        {
-        code = 200,
-        //data = JsonConvert.SerializeObject(list),
-        data = ComOilProductLimitList,
-        msg = "查询成功"
-        };
-
+            context.Recipecalc1s.Update(ComOilProductLimitList[obj.index]);
+            context.Schemeverify1s.Update(list1[obj.index]);
+            context.Compoilconfigs.Update(list2[obj.index]);
+            context.SaveChanges();
+        
+            return new ApiModel()
+            {
+            code = 200,
+            //data = JsonConvert.SerializeObject(list),
+            data = ComOilProductLimitList,
+            msg = "查询成功"
+            };            
+        }else{
+            return new ApiModel(){
+                code = 500,
+                //data = JsonConvert.SerializeObject(list),
+                data = null,
+                msg = @"组分油产量范围设置需遵循以下条件: 
+                1) 组分油产量低限大于等于0
+                2) 组分油产量低限小于等于高限
+                3) 组分油产量高限小于等于999999999"
+            };         
+        }
     }
 
     [HttpGet("Set/OptimizeObj")]
@@ -222,8 +233,8 @@ public class RecipeCalc_1Controller : ControllerBase
     public ApiModel Res1()//model里的名字 多个数据用IEnumberable，单个数据不用
     {
         IRecipeCalc _RecipeCalc = new RecipeCalc(context);
-        int status = (int)_RecipeCalc.GetRecipe1()[_RecipeCalc.GetRecipe1().Length - 1];
         var list = _RecipeCalc.GetRecipecalc_1Res_ComOilSugProduct().ToList();
+        int status = (int)_RecipeCalc.GetRecipe1()[_RecipeCalc.GetRecipe1().Length - 1];
         if(status == 0 || status == 1){//得到最优解或者次优解
             return new ApiModel(){
                 code = 200,

@@ -28,14 +28,51 @@ public class DispatchResController : ControllerBase
         IDispatch _Dispatch = new Dispatch(context);
         // var list = context.Properties.ToList();
         var list = _Dispatch.GetDispatch_decsCalc().ToList();
-        return new ApiModel()
-        {
-        code = 200,
-        //data = JsonConvert.SerializeObject(list),
-        data = list,
-        msg = "查询成功"
-        };
+        if(list[0].objValue != 0){
+            return new ApiModel(){
+                code = 200,
+                //data = JsonConvert.SerializeObject(list),
+                data = list,
+                msg = "计算成功"
+            };
+        }else{
+            return new ApiModel(){
+                code = 500,
+                data = list,
+                msg = "计算失败"
+            };
+        }
+    }
 
+    [HttpGet("Res/ComFlowInfo_divProd")]
+    //ComFlowInfo_divProd1 + ComFlowInfo_divProd2 + ComFlowInfo_divProd3 + ComFlowInfo_divProd4
+    public ApiModel GetProd()//model里的名字 多个数据用IEnumberable，单个数据不用
+    {       
+        IDispatch _Dispatch = new Dispatch(context);
+        // var list = context.Properties.ToList();
+        var list1 = _Dispatch.GetDispatch_decsScheme_comFlowInfo_divProd1().ToList();
+        var list2 = _Dispatch.GetDispatch_decsScheme_comFlowInfo_divProd2().ToList();
+        var list3 = _Dispatch.GetDispatch_decsScheme_comFlowInfo_divProd3().ToList();
+        var list4 = _Dispatch.GetDispatch_decsScheme_comFlowInfo_divProd4().ToList();
+        List<Dispatch_decsScheme_comFlowInfo_divProd> ResultList = new List<Dispatch_decsScheme_comFlowInfo_divProd>();//列表，里面可以添加很多个对象  
+        for(int i = 0; i < list1.Count; i++){//组分油个数
+            Dispatch_decsScheme_comFlowInfo_divProd result = new Dispatch_decsScheme_comFlowInfo_divProd();//实体，可以理解为一个对象  
+            result.ComOilName = list1[i].ComOilName;//随便取一个列表的组分油名称，因为肯定是一致的
+            result.comFlowT1 = list1[i].comFlowT1 + list2[i].comFlowT1 + list3[i].comFlowT1 + list4[i].comFlowT1;
+            result.comFlowT2 = list1[i].comFlowT2 + list2[i].comFlowT2 + list3[i].comFlowT2 + list4[i].comFlowT2;
+            result.comFlowT3 = list1[i].comFlowT3 + list2[i].comFlowT3 + list3[i].comFlowT3 + list4[i].comFlowT3;
+            result.comFlowT4 = list1[i].comFlowT4 + list2[i].comFlowT4 + list3[i].comFlowT4 + list4[i].comFlowT4;
+            result.comFlowT5 = list1[i].comFlowT5 + list2[i].comFlowT5 + list3[i].comFlowT5 + list4[i].comFlowT5;
+            result.comFlowT6 = list1[i].comFlowT6 + list2[i].comFlowT6 + list3[i].comFlowT6 + list4[i].comFlowT6;
+            result.comFlowT7 = list1[i].comFlowT7 + list2[i].comFlowT7 + list3[i].comFlowT7 + list4[i].comFlowT7;
+            ResultList.Add(result); 
+        }   
+        return new ApiModel(){
+            code = 200,
+            //data = JsonConvert.SerializeObject(list),
+            data = ResultList,
+            msg = "查询成功"
+        };
     }
 
     [HttpGet("Res/ComFlowInfo_divProd1")]
@@ -51,7 +88,6 @@ public class DispatchResController : ControllerBase
         data = list,
         msg = "查询成功"
         };
-
     }
 
     [HttpGet("Res/ComFlowInfo_divProd2")]

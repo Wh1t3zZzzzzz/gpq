@@ -179,14 +179,22 @@ public class RecipeCalc_3Controller : ControllerBase
     {
         IRecipeCalc _RecipeCalc = new RecipeCalc(context);
         var list = _RecipeCalc.GetRecipecalc_3Res_ProdOilProduct().ToList();
-        return new ApiModel()
-        {
-        code = 200,
-        //data = JsonConvert.SerializeObject(list),
-        data = list,
-        msg = "查询成功"
-        };
-
+        int status = (int)_RecipeCalc.GetRecipe3()[_RecipeCalc.GetRecipe3().Length - 1];
+        if(status == 0 || status == 1){//得到最优解或者次优解
+            return new ApiModel(){
+                code = 200,
+                //data = JsonConvert.SerializeObject(list),
+                data = list,
+                msg = "求解成功"
+            };
+        }else{//计算失败
+            return new ApiModel(){
+            code = 500,
+            //data = JsonConvert.SerializeObject(list),
+            data = list,
+            msg = "求解失败"
+            };       
+        }
     }
 
     [HttpGet("Res/Recipe")]
