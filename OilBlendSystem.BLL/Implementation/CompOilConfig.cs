@@ -19,9 +19,5 @@ namespace OilBlendSystem.BLL.Implementation
             return context.Compoilconfigs.ToList();
         }
 
-        // public void UpdateCompOilConfig(CompOilConfig CompOilConfigList)
-        // {
-        //     //CompOilConfigList.Update(CompOilConfigList);
-        // }
     }
 }
