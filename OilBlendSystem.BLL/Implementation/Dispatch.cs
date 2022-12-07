@@ -30,6 +30,7 @@ namespace OilBlendSystem.BLL.Implementation
             string sArgName = @"dieselCalc.py";//diesel
             string args = "-u";
             Process p = new Process();
+            //py文件存储位置
             string path = @"E:\Python_env\" + sArgName;//(因为我没放debug下，所以直接写的绝对路径,替换掉上面的路径了)
             p.StartInfo.FileName = @"E:\Python_env\venv\Scripts\python.exe";//(注意：用的话需要换成自己的)没有配环境变量的话，可以像我这样写python.exe的绝对路径(用的话需要换成自己的)。如果配了，直接写"python.exe"即可
             string sArguments = path;
@@ -57,13 +58,13 @@ namespace OilBlendSystem.BLL.Implementation
         }
         public void RunIOFromtxt()
         {
-            RunPythonScript();
-            string[] flow_strs = File.ReadAllLines(@"E:\Python_env\Flow_txt.txt");//组分油参调流量
-            string[] ComOil_Inv_strs = File.ReadAllLines(@"E:\Python_env\ComOil_Inv_txt.txt");//组分油库存
-            string[] ProdOil_Inv_strs = File.ReadAllLines(@"E:\Python_env\ProdOil_Inv_txt.txt");//成品油库存
-            string[] Prod_LP_strs = File.ReadAllLines(@"E:\Python_env\Prod_LP_txt.txt");//成品油提货量
-            string[] Status_strs = File.ReadAllLines(@"E:\Python_env\Status_txt.txt");//求解标志
-            string[] Obj_strs = File.ReadAllLines(@"E:\Python_env\Obj_txt.txt");//目标函数值
+            string self_FilePath = @"E:\Python_env\";
+            string[] flow_strs = File.ReadAllLines(self_FilePath + "Flow_txt.txt");//组分油参调流量
+            string[] ComOil_Inv_strs = File.ReadAllLines(self_FilePath + "ComOil_Inv_txt.txt");//组分油库存
+            string[] ProdOil_Inv_strs = File.ReadAllLines(self_FilePath + "ProdOil_Inv_txt.txt");//成品油库存
+            string[] Prod_LP_strs = File.ReadAllLines(self_FilePath + "Prod_LP_txt.txt");//成品油提货量
+            string[] Status_strs = File.ReadAllLines(self_FilePath + "Status_txt.txt");//求解标志
+            string[] Obj_strs = File.ReadAllLines(self_FilePath + "Obj_txt.txt");//目标函数值
 
             string flow_str = string.Join("", flow_strs);//字符串数组转成字符串
             string ComOil_Inv_str = string.Join("", ComOil_Inv_strs);
@@ -88,6 +89,7 @@ namespace OilBlendSystem.BLL.Implementation
         }
         public IEnumerable<Dispatch_decsCalc> GetDispatch_decsCalc()
         {
+            RunPythonScript();
             RunIOFromtxt();
             List<Dispatch_decsCalc> ResultList = new List<Dispatch_decsCalc>();//新建一个List用来append的,返回的是list形式
             Dispatch_decsCalc Result = new Dispatch_decsCalc();
@@ -753,6 +755,7 @@ namespace OilBlendSystem.BLL.Implementation
         }
         public IEnumerable<Dispatch_decsScheme_prodInfo> GetDispatch_decsScheme_prod1Info()//第一个成品油的属性信息
         {
+            RunIOFromtxt();
             IProdOilConfig _ProdOilConfig = new ProdOilConfig(context);
             ICompOilConfig _CompOilConfig = new CompOilConfig(context);
             IProperty _Property = new PropertyApply(context);
@@ -974,6 +977,7 @@ namespace OilBlendSystem.BLL.Implementation
         }
         public IEnumerable<Dispatch_decsScheme_prodInfo> GetDispatch_decsScheme_prod2Info()//第二个成品油的属性信息
         {
+            RunIOFromtxt();
             IProdOilConfig _ProdOilConfig = new ProdOilConfig(context);
             ICompOilConfig _CompOilConfig = new CompOilConfig(context);
             IProperty _Property = new PropertyApply(context);
@@ -1195,6 +1199,7 @@ namespace OilBlendSystem.BLL.Implementation
         }
         public IEnumerable<Dispatch_decsScheme_prodInfo> GetDispatch_decsScheme_prod3Info()//第三个成品油的属性信息
         {
+            RunIOFromtxt();
             IProdOilConfig _ProdOilConfig = new ProdOilConfig(context);
             ICompOilConfig _CompOilConfig = new CompOilConfig(context);
             IProperty _Property = new PropertyApply(context);
@@ -1416,6 +1421,7 @@ namespace OilBlendSystem.BLL.Implementation
         }
         public IEnumerable<Dispatch_decsScheme_prodInfo> GetDispatch_decsScheme_prod4Info()//第四个成品油的属性信息
         {
+            RunIOFromtxt();
             IProdOilConfig _ProdOilConfig = new ProdOilConfig(context);
             ICompOilConfig _CompOilConfig = new CompOilConfig(context);
             IProperty _Property = new PropertyApply(context);

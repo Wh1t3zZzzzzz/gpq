@@ -1,4 +1,5 @@
 import pyscipopt as opt
+
 model = opt.Model()
 import pymysql
 import sys
@@ -11,6 +12,8 @@ conn = pymysql.connect(host='localhost', user='root', port=3306, password='53566
                        database='oilblend', charset='utf8')
 # 使用cursor()方法获取操作游标
 cursor = conn.cursor()
+# txt文件存储位置
+self_FilePath = r"E:\Python_env"
 
 # 数据库获取
 
@@ -31,9 +34,9 @@ results_comp_tuple = cursor.fetchall()
 cursor.execute(sql_prod)
 results_prod_tuple = cursor.fetchall()
 
-N = len(results_comp_tuple)       # 组分油个数
+N = len(results_comp_tuple)  # 组分油个数
 P = int(results_weight_array[5])  # 成品油个数
-J = 4                             # 属性个数
+J = 4  # 属性个数
 T = int(results_weight_array[0])  # 优化周期
 
 # 车柴产量最大权值
@@ -108,7 +111,6 @@ for i in range(P):
     pro_low[i].append(results_prod_tuple[i][4])
     pro_low[i].append(results_prod_tuple[i][6])
     pro_low[i].append(results_prod_tuple[i][8])
-
 
 # 组分油库存
 cs_t_min = []
@@ -346,7 +348,7 @@ if scip_status == 'optimal':  # 求解成功
             for n in range(N):
                 flow.append(round(model.getVal(x[t][p][n])))
     flow_txt = np.array([flow])
-    np.savetxt("E:\Python_env\Flow_txt.txt", flow_txt, fmt='%d', delimiter=',')
+    np.savetxt(self_FilePath + r"\Flow_txt.txt", flow_txt, fmt='%d', delimiter=',')
     print(flow)
 
     # 组分油库存
@@ -363,7 +365,7 @@ if scip_status == 'optimal':  # 求解成功
         for n in range(N):
             ComOil_Inv.append(round(model.getVal(cs_tc[t][n])))
     ComOil_Inv_txt = np.array([ComOil_Inv])
-    np.savetxt("E:\Python_env\ComOil_Inv_txt.txt", ComOil_Inv_txt, fmt='%d', delimiter=',')
+    np.savetxt(self_FilePath + r"\ComOil_Inv_txt.txt", ComOil_Inv_txt, fmt='%d', delimiter=',')
     print(ComOil_Inv)
 
     # 成品油库存
@@ -378,7 +380,7 @@ if scip_status == 'optimal':  # 求解成功
         for p in range(P):
             ProdOil_Inv.append(round(model.getVal(ps_tp[t][p])))
     ProdOil_Inv_txt = np.array([ProdOil_Inv])
-    np.savetxt("E:\Python_env\ProdOil_Inv_txt.txt", ProdOil_Inv_txt, fmt='%d', delimiter=',')
+    np.savetxt(self_FilePath + r"\ProdOil_Inv_txt.txt", ProdOil_Inv_txt, fmt='%d', delimiter=',')
     print(ProdOil_Inv)
 
     # 提货量
@@ -393,17 +395,17 @@ if scip_status == 'optimal':  # 求解成功
         for p in range(P):
             Prod_LP.append(round(model.getVal(lp[t][p])))
     Prod_LP_txt = np.array([Prod_LP])
-    np.savetxt("E:\Python_env\Prod_LP_txt.txt", Prod_LP_txt, fmt='%d', delimiter=',')
+    np.savetxt(self_FilePath + r"\Prod_LP_txt.txt", Prod_LP_txt, fmt='%d', delimiter=',')
     print(Prod_LP)
 
     Status_txt = []
     Status_txt.append('计算成功')
-    np.savetxt("E:\Python_env\Status_txt.txt", Status_txt, encoding='utf-8', fmt='%s', delimiter=',')
+    np.savetxt(self_FilePath + r"\Status_txt.txt", Status_txt, encoding='utf-8', fmt='%s', delimiter=',')
     print(Status_txt)
 
     Obj_txt = []
     Obj_txt.append(model.getObjVal())
-    np.savetxt("E:\Python_env\Obj_txt.txt", Obj_txt, fmt='%d', delimiter=',')
+    np.savetxt(self_FilePath + r"\Obj_txt.txt", Obj_txt, fmt='%d', delimiter=',')
     print(Obj_txt)
 
     sys.exit()
@@ -415,7 +417,7 @@ elif scip_status == 'infeasible':
             for n in range(N):
                 flow.append(0)
     flow_txt = np.array([flow])
-    np.savetxt("E:\Python_env\Flow_txt.txt", flow_txt, fmt='%d', delimiter=',')
+    np.savetxt(self_FilePath + r"\Flow_txt.txt", flow_txt, fmt='%d', delimiter=',')
     print(flow)
 
     # 组分油库存
@@ -425,7 +427,7 @@ elif scip_status == 'infeasible':
         for n in range(N):
             ComOil_Inv.append(0)
     ComOil_Inv_txt = np.array([ComOil_Inv])
-    np.savetxt("E:\Python_env\ComOil_Inv_txt.txt", ComOil_Inv_txt, fmt='%d', delimiter=',')
+    np.savetxt(self_FilePath + r"\ComOil_Inv_txt.txt", ComOil_Inv_txt, fmt='%d', delimiter=',')
     print(ComOil_Inv)
 
     # 成品油库存
@@ -434,7 +436,7 @@ elif scip_status == 'infeasible':
         for p in range(P):
             ProdOil_Inv.append(0)
     ProdOil_Inv_txt = np.array([ProdOil_Inv])
-    np.savetxt("E:\Python_env\ProdOil_Inv_txt.txt", ProdOil_Inv_txt, fmt='%d', delimiter=',')
+    np.savetxt(self_FilePath + r"\ProdOil_Inv_txt.txt", ProdOil_Inv_txt, fmt='%d', delimiter=',')
     print(ProdOil_Inv)
 
     # 提货量
@@ -443,17 +445,17 @@ elif scip_status == 'infeasible':
         for p in range(P):
             Prod_LP.append(0)
     Prod_LP_txt = np.array([Prod_LP])
-    np.savetxt("E:\Python_env\Prod_LP_txt.txt", Prod_LP_txt, fmt='%d', delimiter=',')
+    np.savetxt(self_FilePath + r"\Prod_LP_txt.txt", Prod_LP_txt, fmt='%d', delimiter=',')
     print(Prod_LP)
 
     Status_txt = []
     Status_txt.append('计算失败')
-    np.savetxt("E:\Python_env\Status_txt.txt", Status_txt, encoding='utf-8', fmt='%s', delimiter=',')
+    np.savetxt(self_FilePath + r"\Status_txt.txt", Status_txt, encoding='utf-8', fmt='%s', delimiter=',')
     print(Status_txt)
 
     Obj_txt = []
     Obj_txt.append(0)
-    np.savetxt("E:\Python_env\Obj_txt.txt", Obj_txt, fmt='%d', delimiter=',')
+    np.savetxt(self_FilePath + r"\Obj_txt.txt", Obj_txt, fmt='%d', delimiter=',')
     print(Obj_txt)
 
     sys.exit()
@@ -465,7 +467,7 @@ else:
             for n in range(N):
                 flow.append(0)
     flow_txt = np.array([flow])
-    np.savetxt("E:\Python_env\Flow_txt.txt", flow_txt, fmt='%d', delimiter=',')
+    np.savetxt(self_FilePath + r"\Flow_txt.txt", flow_txt, fmt='%d', delimiter=',')
     print(flow)
 
     # 组分油库存
@@ -475,7 +477,7 @@ else:
         for n in range(N):
             ComOil_Inv.append(0)
     ComOil_Inv_txt = np.array([ComOil_Inv])
-    np.savetxt("E:\Python_env\ComOil_Inv_txt.txt", ComOil_Inv_txt, fmt='%d', delimiter=',')
+    np.savetxt(self_FilePath + r"\ComOil_Inv_txt.txt", ComOil_Inv_txt, fmt='%d', delimiter=',')
     print(ComOil_Inv)
 
     # 成品油库存
@@ -484,7 +486,7 @@ else:
         for p in range(P):
             ProdOil_Inv.append(0)
     ProdOil_Inv_txt = np.array([ProdOil_Inv])
-    np.savetxt("E:\Python_env\ProdOil_Inv_txt.txt", ProdOil_Inv_txt, fmt='%d', delimiter=',')
+    np.savetxt(self_FilePath + r"\ProdOil_Inv_txt.txt", ProdOil_Inv_txt, fmt='%d', delimiter=',')
     print(ProdOil_Inv)
 
     # 提货量
@@ -493,17 +495,17 @@ else:
         for p in range(P):
             Prod_LP.append(0)
     Prod_LP_txt = np.array([Prod_LP])
-    np.savetxt("E:\Python_env\Prod_LP_txt.txt", Prod_LP_txt, fmt='%d', delimiter=',')
+    np.savetxt(self_FilePath + r"\Prod_LP_txt.txt", Prod_LP_txt, fmt='%d', delimiter=',')
     print(Prod_LP)
 
     Status_txt = []
     Status_txt.append('计算失败：' + scip_status)
-    np.savetxt("E:\Python_env\Status_txt.txt", Status_txt, encoding='utf-8', fmt='%s', delimiter=',')
+    np.savetxt(self_FilePath + r"\Status_txt.txt", Status_txt, encoding='utf-8', fmt='%s', delimiter=',')
     print(Status_txt)
 
     Obj_txt = []
     Obj_txt.append(0)
-    np.savetxt("E:\Python_env\Obj_txt.txt", Obj_txt, fmt='%d', delimiter=',')
+    np.savetxt(self_FilePath + r"\Obj_txt.txt", Obj_txt, fmt='%d', delimiter=',')
     print(Obj_txt)
 
     sys.exit()
@@ -511,5 +513,3 @@ else:
 # except Exception as e:
 #     print(e)  # 数据库写入错误
 #     sys.exit()
-
-
