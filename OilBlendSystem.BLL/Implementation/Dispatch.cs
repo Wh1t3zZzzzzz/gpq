@@ -808,7 +808,7 @@ namespace OilBlendSystem.BLL.Implementation
                         ProdCET[i] = ProdCET[i] + FlowList[j].comFlowT7 * CompOilList[j].Cet;                        
                     }
                 }
-                ProdCET[i] = Math.Round(ProdCET[i] / SumFlow, 2);
+                ProdCET[i] = Math.Round(ProdCET[i] / SumFlow, 1);
             }
             #endregion 
 
@@ -845,7 +845,7 @@ namespace OilBlendSystem.BLL.Implementation
                         ProdD50[i] = ProdD50[i] + FlowList[j].comFlowT7 * CompOilList[j].D50;                        
                     }
                 }
-                ProdD50[i] = Math.Round(ProdD50[i] / SumFlow, 2);
+                ProdD50[i] = Math.Round(ProdD50[i] / SumFlow);
             }
             #endregion
 
@@ -919,7 +919,7 @@ namespace OilBlendSystem.BLL.Implementation
                         ProdDEN[i] = ProdDEN[i] + FlowList[j].comFlowT7 * CompOilList[j].Den;                        
                     }
                 }
-                ProdDEN[i] = Math.Round(ProdDEN[i] / SumFlow, 2);
+                ProdDEN[i] = Math.Round(ProdDEN[i] / SumFlow, 1);
             }
             #endregion
 
@@ -1030,7 +1030,7 @@ namespace OilBlendSystem.BLL.Implementation
                         ProdCET[i] = ProdCET[i] + FlowList[j].comFlowT7 * CompOilList[j].Cet;                        
                     }
                 }
-                ProdCET[i] = Math.Round(ProdCET[i] / SumFlow, 2);
+                ProdCET[i] = Math.Round(ProdCET[i] / SumFlow, 1);
             }
             #endregion 
 
@@ -1067,7 +1067,7 @@ namespace OilBlendSystem.BLL.Implementation
                         ProdD50[i] = ProdD50[i] + FlowList[j].comFlowT7 * CompOilList[j].D50;                        
                     }
                 }
-                ProdD50[i] = Math.Round(ProdD50[i] / SumFlow, 2);
+                ProdD50[i] = Math.Round(ProdD50[i] / SumFlow);
             }
             #endregion
 
@@ -1141,7 +1141,7 @@ namespace OilBlendSystem.BLL.Implementation
                         ProdDEN[i] = ProdDEN[i] + FlowList[j].comFlowT7 * CompOilList[j].Den;                        
                     }
                 }
-                ProdDEN[i] = Math.Round(ProdDEN[i] / SumFlow, 2);
+                ProdDEN[i] = Math.Round(ProdDEN[i] / SumFlow, 1);
             }
             #endregion
 
@@ -1252,7 +1252,7 @@ namespace OilBlendSystem.BLL.Implementation
                         ProdCET[i] = ProdCET[i] + FlowList[j].comFlowT7 * CompOilList[j].Cet;                        
                     }
                 }
-                ProdCET[i] = Math.Round(ProdCET[i] / SumFlow, 2);
+                ProdCET[i] = Math.Round(ProdCET[i] / SumFlow, 1);
             }
             #endregion 
 
@@ -1289,7 +1289,7 @@ namespace OilBlendSystem.BLL.Implementation
                         ProdD50[i] = ProdD50[i] + FlowList[j].comFlowT7 * CompOilList[j].D50;                        
                     }
                 }
-                ProdD50[i] = Math.Round(ProdD50[i] / SumFlow, 2);
+                ProdD50[i] = Math.Round(ProdD50[i] / SumFlow);
             }
             #endregion
 
@@ -1363,7 +1363,7 @@ namespace OilBlendSystem.BLL.Implementation
                         ProdDEN[i] = ProdDEN[i] + FlowList[j].comFlowT7 * CompOilList[j].Den;                        
                     }
                 }
-                ProdDEN[i] = Math.Round(ProdDEN[i] / SumFlow, 2);
+                ProdDEN[i] = Math.Round(ProdDEN[i] / SumFlow, 1);
             }
             #endregion
 
@@ -1474,7 +1474,7 @@ namespace OilBlendSystem.BLL.Implementation
                         ProdCET[i] = ProdCET[i] + FlowList[j].comFlowT7 * CompOilList[j].Cet;                        
                     }
                 }
-                ProdCET[i] = Math.Round(ProdCET[i] / SumFlow, 2);
+                ProdCET[i] = Math.Round(ProdCET[i] / SumFlow, 1);
             }
             #endregion 
 
@@ -1511,7 +1511,7 @@ namespace OilBlendSystem.BLL.Implementation
                         ProdD50[i] = ProdD50[i] + FlowList[j].comFlowT7 * CompOilList[j].D50;                        
                     }
                 }
-                ProdD50[i] = Math.Round(ProdD50[i] / SumFlow, 2);
+                ProdD50[i] = Math.Round(ProdD50[i] / SumFlow);
             }
             #endregion
 
@@ -1585,7 +1585,7 @@ namespace OilBlendSystem.BLL.Implementation
                         ProdDEN[i] = ProdDEN[i] + FlowList[j].comFlowT7 * CompOilList[j].Den;                        
                     }
                 }
-                ProdDEN[i] = Math.Round(ProdDEN[i] / SumFlow, 2);
+                ProdDEN[i] = Math.Round(ProdDEN[i] / SumFlow, 1);
             }
             #endregion
 

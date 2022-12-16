@@ -259,7 +259,7 @@ namespace OilBlendSystem.BLL.Implementation
                 AutoCETMass = AutoCETMass + CompOilList[i].Cet * SchemeCompOilList[i].AutoQualityProduct / CompOilList[i].Den * 1000;//十六烷值乘以体积
             }
 
-            double TotalAutoCETMass = Math.Round((AutoCETMass + SchemeBottomList[0].BottomMass * 1000 / SchemeBottomList[0].DenMass * SchemeBottomList[0].CetMass) / (AutoVolume + SchemeBottomList[0].BottomMass * 1000 / SchemeBottomList[0].DenMass), 2); 
+            double TotalAutoCETMass = Math.Round((AutoCETMass + SchemeBottomList[0].BottomMass * 1000 / SchemeBottomList[0].DenMass * SchemeBottomList[0].CetMass) / (AutoVolume + SchemeBottomList[0].BottomMass * 1000 / SchemeBottomList[0].DenMass), 1); 
 
             // 车柴50%回收温度 基于体积
             double AutoD50Mass = 0;
@@ -268,7 +268,7 @@ namespace OilBlendSystem.BLL.Implementation
                 AutoD50Mass = AutoD50Mass + CompOilList[i].D50 * SchemeCompOilList[i].AutoQualityProduct / CompOilList[i].Den * 1000;//馏程乘以体积
             }
 
-            double TotalAutoD50Mass = Math.Round((AutoD50Mass + SchemeBottomList[0].BottomMass * 1000 / SchemeBottomList[0].DenMass * SchemeBottomList[0].D50Mass) / (AutoVolume + SchemeBottomList[0].BottomMass * 1000 / SchemeBottomList[0].DenMass), 2);
+            double TotalAutoD50Mass = Math.Round((AutoD50Mass + SchemeBottomList[0].BottomMass * 1000 / SchemeBottomList[0].DenMass * SchemeBottomList[0].D50Mass) / (AutoVolume + SchemeBottomList[0].BottomMass * 1000 / SchemeBottomList[0].DenMass));
 
             // 多环芳烃含量 基于质量
             double AutoPOLMass = 0;
@@ -285,7 +285,7 @@ namespace OilBlendSystem.BLL.Implementation
             {
                 AutoDENMass = AutoDENMass + CompOilList[i].Den * SchemeCompOilList[i].AutoQualityProduct;//密度乘以质量
             }
-            double TotalAutoDENMass = Math.Round((AutoDENMass + AutoBottomMass * SchemeBottomList[0].DenMass) / (AutoMassProduct + AutoBottomMass), 2);
+            double TotalAutoDENMass = Math.Round((AutoDENMass + AutoBottomMass * SchemeBottomList[0].DenMass) / (AutoMassProduct + AutoBottomMass), 1);
             
             #endregion
 
@@ -311,7 +311,7 @@ namespace OilBlendSystem.BLL.Implementation
                 ExpCETMass = ExpCETMass + CompOilList[i].Cet * SchemeCompOilList[i].ExpQualityProduct / CompOilList[i].Den * 1000;//十六烷值乘以体积
             }
 
-            double TotalExpCETMass = Math.Round((ExpCETMass + SchemeBottomList[1].BottomMass * 1000 / SchemeBottomList[1].DenMass * SchemeBottomList[1].CetMass) / (ExpVolume + SchemeBottomList[1].BottomMass * 1000 / SchemeBottomList[1].DenMass), 2); 
+            double TotalExpCETMass = Math.Round((ExpCETMass + SchemeBottomList[1].BottomMass * 1000 / SchemeBottomList[1].DenMass * SchemeBottomList[1].CetMass) / (ExpVolume + SchemeBottomList[1].BottomMass * 1000 / SchemeBottomList[1].DenMass), 1); 
 
             // 出柴50%回收温度 基于体积
             double ExpD50Mass = 0;
@@ -320,7 +320,7 @@ namespace OilBlendSystem.BLL.Implementation
                 ExpD50Mass = ExpD50Mass + CompOilList[i].D50 * SchemeCompOilList[i].ExpQualityProduct / CompOilList[i].Den * 1000;//馏程乘以体积
             }
 
-            double TotalExpD50Mass = Math.Round((ExpD50Mass + SchemeBottomList[1].BottomMass * 1000 / SchemeBottomList[1].DenMass * SchemeBottomList[1].D50Mass) / (ExpVolume + SchemeBottomList[1].BottomMass * 1000 / SchemeBottomList[1].DenMass), 2);
+            double TotalExpD50Mass = Math.Round((ExpD50Mass + SchemeBottomList[1].BottomMass * 1000 / SchemeBottomList[1].DenMass * SchemeBottomList[1].D50Mass) / (ExpVolume + SchemeBottomList[1].BottomMass * 1000 / SchemeBottomList[1].DenMass));
 
             // 多环芳烃含量 基于质量
             double ExpPOLMass = 0;
@@ -337,7 +337,7 @@ namespace OilBlendSystem.BLL.Implementation
             {
                 ExpDENMass = ExpDENMass + CompOilList[i].Den * SchemeCompOilList[i].ExpQualityProduct;//密度乘以质量
             }
-            double TotalExpDENMass = Math.Round((ExpDENMass + ExpBottomMass * SchemeBottomList[1].DenMass) / (ExpMassProduct + ExpBottomMass), 2);
+            double TotalExpDENMass = Math.Round((ExpDENMass + ExpBottomMass * SchemeBottomList[1].DenMass) / (ExpMassProduct + ExpBottomMass), 1);
             #endregion
 
             #region 备用成品油1
@@ -362,7 +362,7 @@ namespace OilBlendSystem.BLL.Implementation
                 Prod1CETMass = Prod1CETMass + CompOilList[i].Cet * SchemeCompOilList[i].Prod1QualityProduct / CompOilList[i].Den * 1000;//十六烷值乘以体积
             }
 
-            double TotalProd1CETMass = Math.Round((Prod1CETMass + SchemeBottomList[2].BottomMass * 1000 / SchemeBottomList[2].DenMass * SchemeBottomList[2].CetMass) / (Prod1Volume + SchemeBottomList[2].BottomMass * 1000 / SchemeBottomList[2].DenMass), 2); 
+            double TotalProd1CETMass = Math.Round((Prod1CETMass + SchemeBottomList[2].BottomMass * 1000 / SchemeBottomList[2].DenMass * SchemeBottomList[2].CetMass) / (Prod1Volume + SchemeBottomList[2].BottomMass * 1000 / SchemeBottomList[2].DenMass), 1); 
 
             // 车柴50%回收温度 基于体积
             double Prod1D50Mass = 0;
@@ -371,7 +371,7 @@ namespace OilBlendSystem.BLL.Implementation
                 Prod1D50Mass = Prod1D50Mass + CompOilList[i].D50 * SchemeCompOilList[i].Prod1QualityProduct / CompOilList[i].Den * 1000;//馏程乘以体积
             }
 
-            double TotalProd1D50Mass = Math.Round((Prod1D50Mass + SchemeBottomList[2].BottomMass * 1000 / SchemeBottomList[2].DenMass * SchemeBottomList[2].D50Mass) / (Prod1Volume + SchemeBottomList[2].BottomMass * 1000 / SchemeBottomList[2].DenMass), 2);
+            double TotalProd1D50Mass = Math.Round((Prod1D50Mass + SchemeBottomList[2].BottomMass * 1000 / SchemeBottomList[2].DenMass * SchemeBottomList[2].D50Mass) / (Prod1Volume + SchemeBottomList[2].BottomMass * 1000 / SchemeBottomList[2].DenMass));
 
             // 多环芳烃含量 基于质量
             double Prod1POLMass = 0;
@@ -388,7 +388,7 @@ namespace OilBlendSystem.BLL.Implementation
             {
                 Prod1DENMass = Prod1DENMass + CompOilList[i].Den * SchemeCompOilList[i].Prod1QualityProduct;//密度乘以质量
             }
-            double TotalProd1DENMass = Math.Round((Prod1DENMass + Prod1BottomMass * SchemeBottomList[2].DenMass) / (Prod1MassProduct + Prod1BottomMass), 2);
+            double TotalProd1DENMass = Math.Round((Prod1DENMass + Prod1BottomMass * SchemeBottomList[2].DenMass) / (Prod1MassProduct + Prod1BottomMass), 1);
 
             #endregion    
 
@@ -414,7 +414,7 @@ namespace OilBlendSystem.BLL.Implementation
                 Prod2CETMass = Prod2CETMass + CompOilList[i].Cet * SchemeCompOilList[i].Prod2QualityProduct / CompOilList[i].Den * 1000;//十六烷值乘以体积
             }
 
-            double TotalProd2CETMass = Math.Round((Prod2CETMass + SchemeBottomList[3].BottomMass * 1000 / SchemeBottomList[3].DenMass * SchemeBottomList[3].CetMass) / (Prod2Volume + SchemeBottomList[3].BottomMass * 1000 / SchemeBottomList[3].DenMass), 2); 
+            double TotalProd2CETMass = Math.Round((Prod2CETMass + SchemeBottomList[3].BottomMass * 1000 / SchemeBottomList[3].DenMass * SchemeBottomList[3].CetMass) / (Prod2Volume + SchemeBottomList[3].BottomMass * 1000 / SchemeBottomList[3].DenMass), 1); 
 
             // 车柴50%回收温度 基于体积
             double Prod2D50Mass = 0;
@@ -423,7 +423,7 @@ namespace OilBlendSystem.BLL.Implementation
                 Prod2D50Mass = Prod2D50Mass + CompOilList[i].D50 * SchemeCompOilList[i].Prod2QualityProduct / CompOilList[i].Den * 1000;//馏程乘以体积
             }
 
-            double TotalProd2D50Mass = Math.Round((Prod2D50Mass + SchemeBottomList[3].BottomMass * 1000 / SchemeBottomList[3].DenMass * SchemeBottomList[3].D50Mass) / (Prod2Volume + SchemeBottomList[3].BottomMass * 1000 / SchemeBottomList[3].DenMass), 2);
+            double TotalProd2D50Mass = Math.Round((Prod2D50Mass + SchemeBottomList[3].BottomMass * 1000 / SchemeBottomList[3].DenMass * SchemeBottomList[3].D50Mass) / (Prod2Volume + SchemeBottomList[3].BottomMass * 1000 / SchemeBottomList[3].DenMass));
 
             // 多环芳烃含量 基于质量
             double Prod2POLMass = 0;
@@ -440,7 +440,7 @@ namespace OilBlendSystem.BLL.Implementation
             {
                 Prod2DENMass = Prod2DENMass + CompOilList[i].Den * SchemeCompOilList[i].Prod2QualityProduct;//密度乘以质量
             }
-            double TotalProd2DENMass = Math.Round((Prod2DENMass + Prod2BottomMass * SchemeBottomList[3].DenMass) / (Prod2MassProduct + Prod2BottomMass), 2);
+            double TotalProd2DENMass = Math.Round((Prod2DENMass + Prod2BottomMass * SchemeBottomList[3].DenMass) / (Prod2MassProduct + Prod2BottomMass), 1);
             
             #endregion
 
@@ -619,7 +619,7 @@ namespace OilBlendSystem.BLL.Implementation
                 AutoCETVol = AutoCETVol + CompOilList[i].Cet * SchemeCompOilList[i].AutoVolumeProduct;//十六烷值乘以体积
             }
 
-            double TotalAutoCETVol = Math.Round((AutoCETVol + SchemeBottomList[0].BottomVolume * SchemeBottomList[0].CetVol) / (AutoVolProduct + SchemeBottomList[0].BottomVolume), 2); 
+            double TotalAutoCETVol = Math.Round((AutoCETVol + SchemeBottomList[0].BottomVolume * SchemeBottomList[0].CetVol) / (AutoVolProduct + SchemeBottomList[0].BottomVolume), 1); 
 
             // 车柴50%回收温度 基于体积
             double AutoD50Vol = 0;
@@ -628,7 +628,7 @@ namespace OilBlendSystem.BLL.Implementation
                 AutoD50Vol = AutoD50Vol + CompOilList[i].D50 * SchemeCompOilList[i].AutoVolumeProduct;//馏程乘以体积
             }
 
-            double TotalAutoD50Vol = Math.Round((AutoD50Vol + SchemeBottomList[0].BottomVolume * SchemeBottomList[0].D50Vol) / (AutoVolProduct + SchemeBottomList[0].BottomVolume), 2);
+            double TotalAutoD50Vol = Math.Round((AutoD50Vol + SchemeBottomList[0].BottomVolume * SchemeBottomList[0].D50Vol) / (AutoVolProduct + SchemeBottomList[0].BottomVolume));
 
             // 多环芳烃含量 基于质量
             double AutoPOLVol = 0;
@@ -646,7 +646,7 @@ namespace OilBlendSystem.BLL.Implementation
             {
                 AutoDENVol = AutoDENVol + CompOilList[i].Den * SchemeCompOilList[i].AutoVolumeProduct * CompOilList[i].Den / 1000;//密度基于质量 单位吨
             }
-            double TotalAutoDENVol = Math.Round((AutoDENVol + AutoBottomMass_1 * SchemeBottomList[0].DenVol) / (AutoMass + AutoBottomMass_1), 2);
+            double TotalAutoDENVol = Math.Round((AutoDENVol + AutoBottomMass_1 * SchemeBottomList[0].DenVol) / (AutoMass + AutoBottomMass_1), 1);
             #endregion
             
             #region 出口柴油
@@ -671,7 +671,7 @@ namespace OilBlendSystem.BLL.Implementation
                 ExpCETVol = ExpCETVol + CompOilList[i].Cet * SchemeCompOilList[i].ExpVolumeProduct;//十六烷值乘以体积
             }
 
-            double TotalExpCETVol = Math.Round((ExpCETVol + SchemeBottomList[1].BottomVolume * SchemeBottomList[1].CetVol) / (ExpVolProduct + SchemeBottomList[1].BottomVolume), 2); 
+            double TotalExpCETVol = Math.Round((ExpCETVol + SchemeBottomList[1].BottomVolume * SchemeBottomList[1].CetVol) / (ExpVolProduct + SchemeBottomList[1].BottomVolume), 1); 
 
             // 出柴50%回收温度 基于体积
             double ExpD50Vol = 0;
@@ -680,7 +680,7 @@ namespace OilBlendSystem.BLL.Implementation
                 ExpD50Vol = ExpD50Vol + CompOilList[i].D50 * SchemeCompOilList[i].ExpVolumeProduct;//馏程乘以体积
             }
 
-            double TotalExpD50Vol = Math.Round((ExpD50Vol + SchemeBottomList[1].BottomVolume * SchemeBottomList[1].D50Vol) / (ExpVolProduct + SchemeBottomList[1].BottomVolume), 2);
+            double TotalExpD50Vol = Math.Round((ExpD50Vol + SchemeBottomList[1].BottomVolume * SchemeBottomList[1].D50Vol) / (ExpVolProduct + SchemeBottomList[1].BottomVolume));
 
             // 多环芳烃含量 基于质量
             double ExpPOLVol = 0;
@@ -698,7 +698,7 @@ namespace OilBlendSystem.BLL.Implementation
             {
                 ExpDENVol = ExpDENVol + CompOilList[i].Den * SchemeCompOilList[i].ExpVolumeProduct * CompOilList[i].Den / 1000;//密度基于质量 单位吨
             }
-            double TotalExpDENVol = Math.Round((ExpDENVol + ExpBottomMass_1 * SchemeBottomList[1].DenVol) / (ExpMass + ExpBottomMass_1), 2);
+            double TotalExpDENVol = Math.Round((ExpDENVol + ExpBottomMass_1 * SchemeBottomList[1].DenVol) / (ExpMass + ExpBottomMass_1), 1);
             #endregion
 
             #region 备用成品油1
@@ -723,7 +723,7 @@ namespace OilBlendSystem.BLL.Implementation
                 Prod1CETVol = Prod1CETVol + CompOilList[i].Cet * SchemeCompOilList[i].Prod1VolumeProduct;//十六烷值乘以体积
             }
 
-            double TotalProd1CETVol = Math.Round((Prod1CETVol + SchemeBottomList[2].BottomVolume * SchemeBottomList[2].CetVol) / (Prod1VolProduct + SchemeBottomList[2].BottomVolume), 2); 
+            double TotalProd1CETVol = Math.Round((Prod1CETVol + SchemeBottomList[2].BottomVolume * SchemeBottomList[2].CetVol) / (Prod1VolProduct + SchemeBottomList[2].BottomVolume), 1); 
 
             // 车柴50%回收温度 基于体积
             double Prod1D50Vol = 0;
@@ -732,7 +732,7 @@ namespace OilBlendSystem.BLL.Implementation
                 Prod1D50Vol = Prod1D50Vol + CompOilList[i].D50 * SchemeCompOilList[i].Prod1VolumeProduct;//馏程乘以体积
             }
 
-            double TotalProd1D50Vol = Math.Round((Prod1D50Vol + SchemeBottomList[2].BottomVolume * SchemeBottomList[2].D50Vol) / (Prod1VolProduct + SchemeBottomList[2].BottomVolume), 2);
+            double TotalProd1D50Vol = Math.Round((Prod1D50Vol + SchemeBottomList[2].BottomVolume * SchemeBottomList[2].D50Vol) / (Prod1VolProduct + SchemeBottomList[2].BottomVolume));
 
             // 多环芳烃含量 基于质量
             double Prod1POLVol = 0;
@@ -750,7 +750,7 @@ namespace OilBlendSystem.BLL.Implementation
             {
                 Prod1DENVol = Prod1DENVol + CompOilList[i].Den * SchemeCompOilList[i].Prod1VolumeProduct * CompOilList[i].Den / 1000;//密度基于质量 单位吨
             }
-            double TotalProd1DENVol = Math.Round((Prod1DENVol + Prod1BottomMass_1 * SchemeBottomList[2].DenVol) / (Prod1Mass + Prod1BottomMass_1), 2);
+            double TotalProd1DENVol = Math.Round((Prod1DENVol + Prod1BottomMass_1 * SchemeBottomList[2].DenVol) / (Prod1Mass + Prod1BottomMass_1), 1);
             #endregion
 
             #region 备用成品油2
@@ -775,7 +775,7 @@ namespace OilBlendSystem.BLL.Implementation
                 Prod2CETVol = Prod2CETVol + CompOilList[i].Cet * SchemeCompOilList[i].Prod2VolumeProduct;//十六烷值乘以体积
             }
 
-            double TotalProd2CETVol = Math.Round((Prod2CETVol + SchemeBottomList[3].BottomVolume * SchemeBottomList[3].CetVol) / (Prod2VolProduct + SchemeBottomList[3].BottomVolume), 2); 
+            double TotalProd2CETVol = Math.Round((Prod2CETVol + SchemeBottomList[3].BottomVolume * SchemeBottomList[3].CetVol) / (Prod2VolProduct + SchemeBottomList[3].BottomVolume), 1); 
 
             // 车柴50%回收温度 基于体积
             double Prod2D50Vol = 0;
@@ -784,7 +784,7 @@ namespace OilBlendSystem.BLL.Implementation
                 Prod2D50Vol = Prod2D50Vol + CompOilList[i].D50 * SchemeCompOilList[i].Prod2VolumeProduct;//馏程乘以体积
             }
 
-            double TotalProd2D50Vol = Math.Round((Prod2D50Vol + SchemeBottomList[3].BottomVolume * SchemeBottomList[3].D50Vol) / (Prod2VolProduct + SchemeBottomList[3].BottomVolume), 2);
+            double TotalProd2D50Vol = Math.Round((Prod2D50Vol + SchemeBottomList[3].BottomVolume * SchemeBottomList[3].D50Vol) / (Prod2VolProduct + SchemeBottomList[3].BottomVolume));
 
             // 多环芳烃含量 基于质量
             double Prod2POLVol = 0;
@@ -802,7 +802,7 @@ namespace OilBlendSystem.BLL.Implementation
             {
                 Prod2DENVol = Prod2DENVol + CompOilList[i].Den * SchemeCompOilList[i].Prod2VolumeProduct * CompOilList[i].Den / 1000;//密度基于质量 单位吨
             }
-            double TotalProd2DENVol = Math.Round((Prod2DENVol + Prod2BottomMass_1 * SchemeBottomList[3].DenVol) / (Prod2Mass + Prod2BottomMass_1), 2);
+            double TotalProd2DENVol = Math.Round((Prod2DENVol + Prod2BottomMass_1 * SchemeBottomList[3].DenVol) / (Prod2Mass + Prod2BottomMass_1), 1);
             #endregion
 
             #endregion
@@ -1043,7 +1043,7 @@ namespace OilBlendSystem.BLL.Implementation
                 AutoCETMass = AutoCETMass + CompOilList[i].Cet * AutoQualityProduct[i] / CompOilList[i].Den * 1000;//十六烷值乘以体积
             }
 
-            double TotalAutoCETMass = Math.Round(AutoCETMass / AutoVolume, 2); 
+            double TotalAutoCETMass = Math.Round(AutoCETMass / AutoVolume, 1); 
 
             // 车柴50%回收温度 基于体积
             double AutoD50Mass = 0;
@@ -1052,7 +1052,7 @@ namespace OilBlendSystem.BLL.Implementation
                 AutoD50Mass = AutoD50Mass + CompOilList[i].D50 * AutoQualityProduct[i] / CompOilList[i].Den * 1000;//馏程乘以体积
             }
 
-            double TotalAutoD50Mass = Math.Round(AutoD50Mass / AutoVolume, 2); 
+            double TotalAutoD50Mass = Math.Round(AutoD50Mass / AutoVolume); 
 
             //double TotalAutoD50Mass = Math.Round((AutoD50Mass + SchemeBottomList[0].BottomMass * 1000 / SchemeBottomList[0].DenMass * SchemeBottomList[0].D50Mass) / (AutoVolume + SchemeBottomList[0].BottomMass * 1000 / SchemeBottomList[0].DenMass), 2);
 
@@ -1072,7 +1072,7 @@ namespace OilBlendSystem.BLL.Implementation
                 AutoDENMass = AutoDENMass + CompOilList[i].Den * AutoQualityProduct[i];//密度乘以质量
             }
            // double TotalAutoDENMass = Math.Round((AutoDENMass + AutoBottomMass * SchemeBottomList[0].DenMass) / (AutoMassProduct + AutoBottomMass), 2);
-            double TotalAutoDENMass = Math.Round(AutoDENMass / AutoMassProduct, 2);
+            double TotalAutoDENMass = Math.Round(AutoDENMass / AutoMassProduct, 1);
             # endregion
             
             #region 出口柴油
@@ -1102,7 +1102,7 @@ namespace OilBlendSystem.BLL.Implementation
                 ExpCETMass = ExpCETMass + CompOilList[i].Cet * ExpQualityProduct[i] / CompOilList[i].Den * 1000;//十六烷值乘以体积
             }
 
-            double TotalExpCETMass = Math.Round(ExpCETMass / ExpVolume, 2); 
+            double TotalExpCETMass = Math.Round(ExpCETMass / ExpVolume, 1); 
 
             // 出柴50%回收温度 基于体积
             double ExpD50Mass = 0;
@@ -1110,7 +1110,7 @@ namespace OilBlendSystem.BLL.Implementation
             {
                 ExpD50Mass = ExpD50Mass + CompOilList[i].D50 * ExpQualityProduct[i] / CompOilList[i].Den * 1000;//馏程乘以体积
             }
-            double TotalExpD50Mass = Math.Round(ExpD50Mass / ExpVolume, 2); 
+            double TotalExpD50Mass = Math.Round(ExpD50Mass / ExpVolume); 
             //double TotalExpD50Mass = Math.Round((ExpD50Mass + SchemeBottomList[1].BottomMass * 1000 / SchemeBottomList[1].DenMass * SchemeBottomList[1].D50Mass) / (ExpVolume + SchemeBottomList[1].BottomMass * 1000 / SchemeBottomList[1].DenMass), 2);
 
             // 多环芳烃含量 基于质量
@@ -1128,7 +1128,7 @@ namespace OilBlendSystem.BLL.Implementation
             {
                 ExpDENMass = ExpDENMass + CompOilList[i].Den * ExpQualityProduct[i];//密度乘以质量
             }
-            double TotalExpDENMass = Math.Round(ExpDENMass / ExpMassProduct, 2);
+            double TotalExpDENMass = Math.Round(ExpDENMass / ExpMassProduct, 1);
 
             #region 闪点和粘度
             //     //闪点
@@ -1188,7 +1188,7 @@ namespace OilBlendSystem.BLL.Implementation
                 Prod1CETMass = Prod1CETMass + CompOilList[i].Cet * Prod1QualityProduct[i] / CompOilList[i].Den * 1000;//十六烷值乘以体积
             }
 
-            double TotalProd1CETMass = Math.Round(Prod1CETMass / Prod1Volume, 2); 
+            double TotalProd1CETMass = Math.Round(Prod1CETMass / Prod1Volume, 1); 
 
             // 50%回收温度 基于体积
             double Prod1D50Mass = 0;
@@ -1197,7 +1197,7 @@ namespace OilBlendSystem.BLL.Implementation
                 Prod1D50Mass = Prod1D50Mass + CompOilList[i].D50 * Prod1QualityProduct[i] / CompOilList[i].Den * 1000;//馏程乘以体积
             }
 
-            double TotalProd1D50Mass = Math.Round(Prod1D50Mass / Prod1Volume, 2);
+            double TotalProd1D50Mass = Math.Round(Prod1D50Mass / Prod1Volume);
 
             // 多环芳烃含量 基于质量
             double Prod1POLMass = 0;
@@ -1214,7 +1214,7 @@ namespace OilBlendSystem.BLL.Implementation
             {
                 Prod1DENMass = Prod1DENMass + CompOilList[i].Den * Prod1QualityProduct[i];//密度乘以质量
             }
-            double TotalProd1DENMass = Math.Round(Prod1DENMass / Prod1MassProduct, 2);
+            double TotalProd1DENMass = Math.Round(Prod1DENMass / Prod1MassProduct, 1);
             
             #endregion 备用成品油1 end
 
@@ -1245,7 +1245,7 @@ namespace OilBlendSystem.BLL.Implementation
                 Prod2CETMass = Prod2CETMass + CompOilList[i].Cet * Prod2QualityProduct[i] / CompOilList[i].Den * 1000;//十六烷值乘以体积
             }
 
-            double TotalProd2CETMass = Math.Round(Prod2CETMass / Prod2Volume, 2); 
+            double TotalProd2CETMass = Math.Round(Prod2CETMass / Prod2Volume, 1); 
 
             // 50%回收温度 基于体积
             double Prod2D50Mass = 0;
@@ -1254,7 +1254,7 @@ namespace OilBlendSystem.BLL.Implementation
                 Prod2D50Mass = Prod2D50Mass + CompOilList[i].D50 * Prod2QualityProduct[i] / CompOilList[i].Den * 1000;//馏程乘以体积
             }
 
-            double TotalProd2D50Mass = Math.Round(Prod2D50Mass / Prod2Volume, 2);
+            double TotalProd2D50Mass = Math.Round(Prod2D50Mass / Prod2Volume);
 
             // 多环芳烃含量 基于质量
             double Prod2POLMass = 0;
@@ -1271,7 +1271,7 @@ namespace OilBlendSystem.BLL.Implementation
             {
                 Prod2DENMass = Prod2DENMass + CompOilList[i].Den * Prod2QualityProduct[i];//密度乘以质量
             }
-            double TotalProd2DENMass = Math.Round(Prod2DENMass / Prod2MassProduct, 2);
+            double TotalProd2DENMass = Math.Round(Prod2DENMass / Prod2MassProduct, 1);
             
             #endregion 备用成品油2 end           
             
@@ -1427,7 +1427,7 @@ namespace OilBlendSystem.BLL.Implementation
                 AutoCETVol = AutoCETVol + CompOilList[i].Cet * AutoVolumeProduct[i];//十六烷值乘以体积
             }
 
-            double TotalAutoCETVol = Math.Round(AutoCETVol / AutoVolProduct, 2); 
+            double TotalAutoCETVol = Math.Round(AutoCETVol / AutoVolProduct, 1); 
 
             // 车柴50%回收温度 基于体积
             double AutoD50Vol = 0;
@@ -1436,7 +1436,7 @@ namespace OilBlendSystem.BLL.Implementation
                 AutoD50Vol = AutoD50Vol + CompOilList[i].D50 * AutoVolumeProduct[i];//馏程乘以体积
             }
 
-            double TotalAutoD50Vol = Math.Round(AutoD50Vol / AutoVolProduct, 2);
+            double TotalAutoD50Vol = Math.Round(AutoD50Vol / AutoVolProduct);
 
             // 多环芳烃含量 基于质量
             double AutoPOLVol = 0;
@@ -1454,7 +1454,7 @@ namespace OilBlendSystem.BLL.Implementation
             {
                 AutoDENVol = AutoDENVol + CompOilList[i].Den * AutoVolumeProduct[i] * CompOilList[i].Den / 1000;//密度基于质量 单位吨
             }
-            double TotalAutoDENVol = Math.Round(AutoDENVol / AutoMass, 2);
+            double TotalAutoDENVol = Math.Round(AutoDENVol / AutoMass, 1);
             
             #endregion 车用柴油 end
             
@@ -1485,7 +1485,7 @@ namespace OilBlendSystem.BLL.Implementation
                 ExpCETVol = ExpCETVol + CompOilList[i].Cet * ExpVolumeProduct[i];//十六烷值乘以体积
             }
 
-            double TotalExpCETVol = Math.Round(ExpCETVol / ExpVolProduct, 2); 
+            double TotalExpCETVol = Math.Round(ExpCETVol / ExpVolProduct, 1); 
 
             // 出柴50%回收温度 基于体积
             double ExpD50Vol = 0;
@@ -1494,7 +1494,7 @@ namespace OilBlendSystem.BLL.Implementation
                 ExpD50Vol = ExpD50Vol + CompOilList[i].D50 * ExpVolumeProduct[i];//馏程乘以体积
             }
 
-            double TotalExpD50Vol = Math.Round(ExpD50Vol / ExpVolProduct, 2);
+            double TotalExpD50Vol = Math.Round(ExpD50Vol / ExpVolProduct);
 
             // 多环芳烃含量 基于质量
             double ExpPOLVol = 0;
@@ -1512,7 +1512,7 @@ namespace OilBlendSystem.BLL.Implementation
             {
                 ExpDENVol = ExpDENVol + CompOilList[i].Den * ExpVolumeProduct[i] * CompOilList[i].Den / 1000;//密度基于质量 单位吨
             }
-            double TotalExpDENVol = Math.Round(ExpDENVol / ExpMass, 2);
+            double TotalExpDENVol = Math.Round(ExpDENVol / ExpMass, 1);
             #endregion 出口柴油 end
 
             #region 备用成品油1
@@ -1543,7 +1543,7 @@ namespace OilBlendSystem.BLL.Implementation
                 Prod1CETVol = Prod1CETVol + CompOilList[i].Cet * Prod1VolumeProduct[i];//十六烷值乘以体积
             }
 
-            double TotalProd1CETVol = Math.Round(Prod1CETVol / Prod1VolProduct, 2); 
+            double TotalProd1CETVol = Math.Round(Prod1CETVol / Prod1VolProduct, 1); 
 
             // 50%回收温度 基于体积
             double Prod1D50Vol = 0;
@@ -1552,7 +1552,7 @@ namespace OilBlendSystem.BLL.Implementation
                 Prod1D50Vol = Prod1D50Vol + CompOilList[i].D50 * Prod1VolumeProduct[i];//馏程乘以体积
             }
 
-            double TotalProd1D50Vol = Math.Round(Prod1D50Vol / Prod1VolProduct, 2);
+            double TotalProd1D50Vol = Math.Round(Prod1D50Vol / Prod1VolProduct);
 
             // 多环芳烃含量 基于质量
             double Prod1POLVol = 0;
@@ -1570,7 +1570,7 @@ namespace OilBlendSystem.BLL.Implementation
             {
                 Prod1DENVol = Prod1DENVol + CompOilList[i].Den * Prod1VolumeProduct[i] * CompOilList[i].Den / 1000;//密度基于质量 单位吨
             }
-            double TotalProd1DENVol = Math.Round(Prod1DENVol / Prod1Mass, 2);
+            double TotalProd1DENVol = Math.Round(Prod1DENVol / Prod1Mass, 1);
             #endregion 备用成品油1 end
 
             #region 备用成品油2
@@ -1601,7 +1601,7 @@ namespace OilBlendSystem.BLL.Implementation
                 Prod2CETVol = Prod2CETVol + CompOilList[i].Cet * Prod2VolumeProduct[i];//十六烷值乘以体积
             }
 
-            double TotalProd2CETVol = Math.Round(Prod2CETVol / Prod2VolProduct, 2); 
+            double TotalProd2CETVol = Math.Round(Prod2CETVol / Prod2VolProduct, 1); 
 
             // 出柴50%回收温度 基于体积
             double Prod2D50Vol = 0;
@@ -1610,7 +1610,7 @@ namespace OilBlendSystem.BLL.Implementation
                 Prod2D50Vol = Prod2D50Vol + CompOilList[i].D50 * Prod2VolumeProduct[i];//馏程乘以体积
             }
 
-            double TotalProd2D50Vol = Math.Round(Prod2D50Vol / Prod2VolProduct, 2);
+            double TotalProd2D50Vol = Math.Round(Prod2D50Vol / Prod2VolProduct);
 
             // 多环芳烃含量 基于质量
             double Prod2POLVol = 0;
@@ -1628,7 +1628,7 @@ namespace OilBlendSystem.BLL.Implementation
             {
                 Prod2DENVol = Prod2DENVol + CompOilList[i].Den * Prod2VolumeProduct[i] * CompOilList[i].Den / 1000;//密度基于质量 单位吨
             }
-            double TotalProd2DENVol = Math.Round(Prod2DENVol / Prod2Mass, 2);
+            double TotalProd2DENVol = Math.Round(Prod2DENVol / Prod2Mass, 1);
             #endregion 备用成品油2 end
 
             #endregion 场景2——体积 end
@@ -2015,7 +2015,7 @@ namespace OilBlendSystem.BLL.Implementation
                 AutoCETMass = AutoCETMass + CompOilList[i].Cet * SchemeCompOilList[i].AutoFlowMass / CompOilList[i].Den * 1000;//十六烷值乘以体积
             }
 
-            double TotalAutoCETMass = Math.Round(AutoCETMass / AutoVolume, 2); 
+            double TotalAutoCETMass = Math.Round(AutoCETMass / AutoVolume, 1); 
             // 车柴50%回收温度 基于体积
             double AutoD50Mass = 0;
             for (int i = 0; i < CompOilList.Count; i++)
@@ -2023,7 +2023,7 @@ namespace OilBlendSystem.BLL.Implementation
                 AutoD50Mass = AutoD50Mass + CompOilList[i].D50 * SchemeCompOilList[i].AutoFlowMass / CompOilList[i].Den * 1000;//馏程乘以体积
             }
 
-            double TotalAutoD50Mass = Math.Round(AutoD50Mass / AutoVolume, 2);
+            double TotalAutoD50Mass = Math.Round(AutoD50Mass / AutoVolume);
 
             // 多环芳烃含量 基于质量
             double AutoPOLMass = 0;
@@ -2039,7 +2039,7 @@ namespace OilBlendSystem.BLL.Implementation
             {
                 AutoDENMass = AutoDENMass + CompOilList[i].Den * SchemeCompOilList[i].AutoFlowMass;//密度乘以质量
             }
-            double TotalAutoDENMass = Math.Round(AutoDENMass / AutoMassFlow, 2);
+            double TotalAutoDENMass = Math.Round(AutoDENMass / AutoMassFlow, 1);
             #endregion 车用柴油 end
 
             #region 出口柴油         
@@ -2064,7 +2064,7 @@ namespace OilBlendSystem.BLL.Implementation
                 ExpCETMass = ExpCETMass + CompOilList[i].Cet * SchemeCompOilList[i].ExpFlowMass / CompOilList[i].Den * 1000;//十六烷值乘以体积
             }
 
-            double TotalExpCETMass = Math.Round(ExpCETMass / ExpVolume, 2); 
+            double TotalExpCETMass = Math.Round(ExpCETMass / ExpVolume, 1); 
 
             // 出柴50%回收温度 基于体积
             double ExpD50Mass = 0;
@@ -2073,7 +2073,7 @@ namespace OilBlendSystem.BLL.Implementation
                 ExpD50Mass = ExpD50Mass + CompOilList[i].D50 * SchemeCompOilList[i].ExpFlowMass / CompOilList[i].Den * 1000;//馏程乘以体积
             }
 
-            double TotalExpD50Mass = Math.Round(ExpD50Mass / ExpVolume, 2);
+            double TotalExpD50Mass = Math.Round(ExpD50Mass / ExpVolume);
 
             // 多环芳烃含量 基于质量
             double ExpPOLMass = 0;
@@ -2089,7 +2089,7 @@ namespace OilBlendSystem.BLL.Implementation
             {
                 ExpDENMass = ExpDENMass + CompOilList[i].Den * SchemeCompOilList[i].ExpFlowMass;//密度乘以质量
             }
-            double TotalExpDENMass = Math.Round(ExpDENMass / ExpMassFlow, 2);
+            double TotalExpDENMass = Math.Round(ExpDENMass / ExpMassFlow, 1);
 
             #endregion 出口柴油 end
 
@@ -2115,7 +2115,7 @@ namespace OilBlendSystem.BLL.Implementation
                 Prod1CETMass = Prod1CETMass + CompOilList[i].Cet * SchemeCompOilList[i].Prod1FlowMass / CompOilList[i].Den * 1000;//十六烷值乘以体积
             }
 
-            double TotalProd1CETMass = Math.Round(Prod1CETMass / Prod1Volume, 2); 
+            double TotalProd1CETMass = Math.Round(Prod1CETMass / Prod1Volume, 1); 
 
             // 出柴50%回收温度 基于体积
             double Prod1D50Mass = 0;
@@ -2124,7 +2124,7 @@ namespace OilBlendSystem.BLL.Implementation
                 Prod1D50Mass = Prod1D50Mass + CompOilList[i].D50 * SchemeCompOilList[i].Prod1FlowMass / CompOilList[i].Den * 1000;//馏程乘以体积
             }
 
-            double TotalProd1D50Mass = Math.Round(Prod1D50Mass / Prod1Volume, 2);
+            double TotalProd1D50Mass = Math.Round(Prod1D50Mass / Prod1Volume);
 
             // 多环芳烃含量 基于质量
             double Prod1POLMass = 0;
@@ -2140,7 +2140,7 @@ namespace OilBlendSystem.BLL.Implementation
             {
                 Prod1DENMass = Prod1DENMass + CompOilList[i].Den * SchemeCompOilList[i].Prod1FlowMass;//密度乘以质量
             }
-            double TotalProd1DENMass = Math.Round(Prod1DENMass / Prod1MassFlow, 2);
+            double TotalProd1DENMass = Math.Round(Prod1DENMass / Prod1MassFlow, 1);
 
             #endregion 出口柴油 end
 
@@ -2166,7 +2166,7 @@ namespace OilBlendSystem.BLL.Implementation
                 Prod2CETMass = Prod2CETMass + CompOilList[i].Cet * SchemeCompOilList[i].Prod2FlowMass / CompOilList[i].Den * 1000;//十六烷值乘以体积
             }
 
-            double TotalProd2CETMass = Math.Round(Prod2CETMass / Prod2Volume, 2); 
+            double TotalProd2CETMass = Math.Round(Prod2CETMass / Prod2Volume, 1); 
 
             // 出柴50%回收温度 基于体积
             double Prod2D50Mass = 0;
@@ -2175,7 +2175,7 @@ namespace OilBlendSystem.BLL.Implementation
                 Prod2D50Mass = Prod2D50Mass + CompOilList[i].D50 * SchemeCompOilList[i].Prod2FlowMass / CompOilList[i].Den * 1000;//馏程乘以体积
             }
 
-            double TotalProd2D50Mass = Math.Round(Prod2D50Mass / Prod2Volume, 2);
+            double TotalProd2D50Mass = Math.Round(Prod2D50Mass / Prod2Volume);
 
             // 多环芳烃含量 基于质量
             double Prod2POLMass = 0;
@@ -2191,7 +2191,7 @@ namespace OilBlendSystem.BLL.Implementation
             {
                 Prod2DENMass = Prod2DENMass + CompOilList[i].Den * SchemeCompOilList[i].Prod2FlowMass;//密度乘以质量
             }
-            double TotalProd2DENMass = Math.Round(Prod2DENMass / Prod2MassFlow, 2);
+            double TotalProd2DENMass = Math.Round(Prod2DENMass / Prod2MassFlow, 1);
 
             #endregion 出口柴油 end
            
@@ -2342,7 +2342,7 @@ namespace OilBlendSystem.BLL.Implementation
                 AutoCETVol = AutoCETVol + CompOilList[i].Cet * SchemeCompOilList[i].AutoFlowVol;//十六烷值乘以体积
             }
 
-            double TotalAutoCETVol = Math.Round(AutoCETVol / AutoVolFlow, 2); 
+            double TotalAutoCETVol = Math.Round(AutoCETVol / AutoVolFlow, 1); 
 
             // 车柴50%回收温度 基于体积
             double AutoD50Vol = 0;
@@ -2351,7 +2351,7 @@ namespace OilBlendSystem.BLL.Implementation
                 AutoD50Vol = AutoD50Vol + CompOilList[i].D50 * SchemeCompOilList[i].AutoFlowVol;//馏程乘以体积
             }
 
-            double TotalAutoD50Vol = Math.Round(AutoD50Vol  / AutoVolFlow, 2);
+            double TotalAutoD50Vol = Math.Round(AutoD50Vol  / AutoVolFlow);
 
             // 多环芳烃含量 基于质量
             double AutoPOLVol = 0;
@@ -2367,7 +2367,7 @@ namespace OilBlendSystem.BLL.Implementation
             {
                 AutoDENVol = AutoDENVol + CompOilList[i].Den * SchemeCompOilList[i].AutoFlowVol * CompOilList[i].Den / 1000;//密度基于质量 单位吨
             }
-            double TotalAutoDENVol = Math.Round(AutoDENVol / AutoMass, 2);
+            double TotalAutoDENVol = Math.Round(AutoDENVol / AutoMass, 1);
             
             #endregion
 
@@ -2393,7 +2393,7 @@ namespace OilBlendSystem.BLL.Implementation
                 ExpCETVol = ExpCETVol + CompOilList[i].Cet * SchemeCompOilList[i].ExpFlowVol;//十六烷值乘以体积
             }
 
-            double TotalExpCETVol = Math.Round(ExpCETVol / ExpVolFlow, 2); 
+            double TotalExpCETVol = Math.Round(ExpCETVol / ExpVolFlow, 1); 
 
             // 出柴50%回收温度 基于体积
             double ExpD50Vol = 0;
@@ -2402,7 +2402,7 @@ namespace OilBlendSystem.BLL.Implementation
                 ExpD50Vol = ExpD50Vol + CompOilList[i].D50 * SchemeCompOilList[i].ExpFlowVol;//馏程乘以体积
             }
 
-            double TotalExpD50Vol = Math.Round(ExpD50Vol / ExpVolFlow, 2);
+            double TotalExpD50Vol = Math.Round(ExpD50Vol / ExpVolFlow);
 
             // 多环芳烃含量 基于质量
             double ExpPOLVol = 0;
@@ -2418,7 +2418,7 @@ namespace OilBlendSystem.BLL.Implementation
             {
                 ExpDENVol = ExpDENVol + CompOilList[i].Den * SchemeCompOilList[i].ExpFlowVol * CompOilList[i].Den / 1000;//密度基于质量 单位吨
             }
-            double TotalExpDENVol = Math.Round(ExpDENVol/ ExpMass, 2);
+            double TotalExpDENVol = Math.Round(ExpDENVol/ ExpMass, 1);
 
             #endregion 出口柴油 end
 
@@ -2444,7 +2444,7 @@ namespace OilBlendSystem.BLL.Implementation
                 Prod1CETVol = Prod1CETVol + CompOilList[i].Cet * SchemeCompOilList[i].Prod1FlowVol;//十六烷值乘以体积
             }
 
-            double TotalProd1CETVol = Math.Round(Prod1CETVol / Prod1VolFlow, 2); 
+            double TotalProd1CETVol = Math.Round(Prod1CETVol / Prod1VolFlow, 1); 
 
             // 50%回收温度 基于体积
             double Prod1D50Vol = 0;
@@ -2453,7 +2453,7 @@ namespace OilBlendSystem.BLL.Implementation
                 Prod1D50Vol = Prod1D50Vol + CompOilList[i].D50 * SchemeCompOilList[i].Prod1FlowVol;//馏程乘以体积
             }
 
-            double TotalProd1D50Vol = Math.Round(Prod1D50Vol / Prod1VolFlow, 2);
+            double TotalProd1D50Vol = Math.Round(Prod1D50Vol / Prod1VolFlow);
 
             // 多环芳烃含量 基于质量
             double Prod1POLVol = 0;
@@ -2469,7 +2469,7 @@ namespace OilBlendSystem.BLL.Implementation
             {
                 Prod1DENVol = Prod1DENVol + CompOilList[i].Den * SchemeCompOilList[i].Prod1FlowVol * CompOilList[i].Den / 1000;//密度基于质量 单位吨
             }
-            double TotalProd1DENVol = Math.Round(Prod1DENVol/ Prod1Mass, 2);
+            double TotalProd1DENVol = Math.Round(Prod1DENVol/ Prod1Mass, 1);
 
             #endregion 备用成品油1 end
 
@@ -2495,7 +2495,7 @@ namespace OilBlendSystem.BLL.Implementation
                 Prod2CETVol = Prod2CETVol + CompOilList[i].Cet * SchemeCompOilList[i].Prod2FlowVol;//十六烷值乘以体积
             }
 
-            double TotalProd2CETVol = Math.Round(Prod2CETVol / Prod2VolFlow, 2); 
+            double TotalProd2CETVol = Math.Round(Prod2CETVol / Prod2VolFlow, 1); 
 
             // 备用成品油2 50%回收温度 基于体积
             double Prod2D50Vol = 0;
@@ -2504,7 +2504,7 @@ namespace OilBlendSystem.BLL.Implementation
                 Prod2D50Vol = Prod2D50Vol + CompOilList[i].D50 * SchemeCompOilList[i].Prod2FlowVol;//馏程乘以体积
             }
 
-            double TotalProd2D50Vol = Math.Round(Prod2D50Vol / Prod2VolFlow, 2);
+            double TotalProd2D50Vol = Math.Round(Prod2D50Vol / Prod2VolFlow);
 
             // 多环芳烃含量 基于质量
             double Prod2POLVol = 0;
@@ -2520,7 +2520,7 @@ namespace OilBlendSystem.BLL.Implementation
             {
                 Prod2DENVol = Prod2DENVol + CompOilList[i].Den * SchemeCompOilList[i].Prod2FlowVol * CompOilList[i].Den / 1000;//密度基于质量 单位吨
             }
-            double TotalProd2DENVol = Math.Round(Prod2DENVol/ Prod2Mass, 2);
+            double TotalProd2DENVol = Math.Round(Prod2DENVol/ Prod2Mass, 1);
 
             #endregion 备用成品油2 end
 

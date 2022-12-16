@@ -2070,12 +2070,12 @@ namespace OilBlendSystem.BLL.Implementation
                 for(int j = 0; j < ComOilNum; j++){
                     prodCET = prodCET + CompOilList[j].Cet * percent[j, ProdOilList[i].Id - 1];
                 }
-                Result.ProdCET = (float)Math.Round(prodCET, 2);
+                Result.ProdCET = (float)Math.Round(prodCET, 1);
 
                 for(int j = 0; j < ComOilNum; j++){
                     prodD50 = prodD50 + CompOilList[j].D50 * percent[j, ProdOilList[i].Id - 1];
                 }
-                Result.ProdD50 = (float)Math.Round(prodD50, 2);
+                Result.ProdD50 = (float)Math.Round(prodD50);
 
                 for(int j = 0; j < ComOilNum; j++){
                     prodPOL = prodPOL + CompOilList[j].Pol * percent[j, ProdOilList[i].Id - 1];
@@ -2085,7 +2085,7 @@ namespace OilBlendSystem.BLL.Implementation
                 for(int j = 0; j < ComOilNum; j++){
                     prodDEN = prodDEN + CompOilList[j].Den * percent[j, ProdOilList[i].Id - 1];
                 }
-                Result.ProdDEN = (float)Math.Round(prodDEN, 2);
+                Result.ProdDEN = (float)Math.Round(prodDEN, 1);
 
                 Result.CETHighLimit = ProdOilList[i].CetHighLimit;
                 Result.CETLowLimit = ProdOilList[i].CetLowLimit;
@@ -2277,12 +2277,12 @@ namespace OilBlendSystem.BLL.Implementation
                 for(int j = 0; j < ComOilNum; j++){
                     prodCET = prodCET + CompOilList[j].Cet * percent[j, ProdOilList[i].Id - 1];
                 }
-                Result.ProdCET = (float)Math.Round(prodCET, 2);
+                Result.ProdCET = (float)Math.Round(prodCET, 1);
 
                 for(int j = 0; j < ComOilNum; j++){
                     prodD50 = prodD50 + CompOilList[j].D50 * percent[j, ProdOilList[i].Id - 1];
                 }
-                Result.ProdD50 = (float)Math.Round(prodD50, 2);
+                Result.ProdD50 = (float)Math.Round(prodD50);
 
                 for(int j = 0; j < ComOilNum; j++){
                     prodPOL = prodPOL + CompOilList[j].Pol * percent[j, ProdOilList[i].Id - 1];
@@ -2292,7 +2292,7 @@ namespace OilBlendSystem.BLL.Implementation
                 for(int j = 0; j < ComOilNum; j++){
                     prodDEN = prodDEN + CompOilList[j].Den * percent[j, ProdOilList[i].Id - 1];
                 }
-                Result.ProdDEN = (float)Math.Round(prodDEN, 2);
+                Result.ProdDEN = (float)Math.Round(prodDEN, 1);
 
                 Result.CETHighLimit = ProdOilList[i].CetHighLimit;
                 Result.CETLowLimit = ProdOilList[i].CetLowLimit;
@@ -2484,12 +2484,12 @@ namespace OilBlendSystem.BLL.Implementation
                 for(int j = 0; j < ComOilNum; j++){
                     prodCET = prodCET + CompOilList[j].Cet * percent[j, ProdOilList[i].Id - 1];
                 }
-                Result.ProdCET = (float)Math.Round(prodCET, 2);
+                Result.ProdCET = (float)Math.Round(prodCET, 1);
 
                 for(int j = 0; j < ComOilNum; j++){
                     prodD50 = prodD50 + CompOilList[j].D50 * percent[j, ProdOilList[i].Id - 1];
                 }
-                Result.ProdD50 = (float)Math.Round(prodD50, 2);
+                Result.ProdD50 = (float)Math.Round(prodD50);
 
                 for(int j = 0; j < ComOilNum; j++){
                     prodPOL = prodPOL + CompOilList[j].Pol * percent[j, ProdOilList[i].Id - 1];
@@ -2499,7 +2499,7 @@ namespace OilBlendSystem.BLL.Implementation
                 for(int j = 0; j < ComOilNum; j++){
                     prodDEN = prodDEN + CompOilList[j].Den * percent[j, ProdOilList[i].Id - 1];
                 }
-                Result.ProdDEN = (float)Math.Round(prodDEN, 2);
+                Result.ProdDEN = (float)Math.Round(prodDEN, 1);
 
                 Result.CETHighLimit = ProdOilList[i].CetHighLimit;
                 Result.CETLowLimit = ProdOilList[i].CetLowLimit;
