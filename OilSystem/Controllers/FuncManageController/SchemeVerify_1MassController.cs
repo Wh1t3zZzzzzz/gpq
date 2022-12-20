@@ -56,36 +56,36 @@ public class SchemeVerify_1MassController : ControllerBase
         var list1 = context.Recipecalc1s.ToList();
         var list2 = context.Compoilconfigs.ToList();
 
-        if(0 <= obj.AutoProduct && obj.AutoProduct <= 9999999999 && 0 <= obj.ExpProduct && obj.ExpProduct <= 9999999999 
-        && 0 <= obj.Prod1Product && obj.Prod1Product <= 9999999999 && 0 <= obj.Prod2Product && obj.Prod2Product <= 9999999999){
-            ProdOilProductList[obj.index].ComOilName = obj.ComOilName;
-            list1[obj.index].ComOilName = obj.ComOilName;
-            list2[obj.index].ComOilName = obj.ComOilName;
-            ProdOilProductList[obj.index].AutoQualityProduct = obj.AutoProduct;
-            ProdOilProductList[obj.index].ExpQualityProduct = obj.ExpProduct;
-            ProdOilProductList[obj.index].Prod1QualityProduct = obj.Prod1Product;
-            ProdOilProductList[obj.index].Prod2QualityProduct = obj.Prod2Product;
+        // if(0 <= obj.AutoProduct && obj.AutoProduct <= 9999999999 && 0 <= obj.ExpProduct && obj.ExpProduct <= 9999999999 
+        // && 0 <= obj.Prod1Product && obj.Prod1Product <= 9999999999 && 0 <= obj.Prod2Product && obj.Prod2Product <= 9999999999){
+        ProdOilProductList[obj.index].ComOilName = obj.ComOilName;
+        list1[obj.index].ComOilName = obj.ComOilName;
+        list2[obj.index].ComOilName = obj.ComOilName;
+        ProdOilProductList[obj.index].AutoQualityProduct = obj.AutoProduct;
+        ProdOilProductList[obj.index].ExpQualityProduct = obj.ExpProduct;
+        ProdOilProductList[obj.index].Prod1QualityProduct = obj.Prod1Product;
+        ProdOilProductList[obj.index].Prod2QualityProduct = obj.Prod2Product;
 
-            context.Schemeverify1s.Update(ProdOilProductList[obj.index]);
-            context.Recipecalc1s.Update(list1[obj.index]);
-            context.Compoilconfigs.Update(list2[obj.index]);
-            context.SaveChanges();
-        
-            return new ApiModel()
-            {
-            code = 200,
-            //data = JsonConvert.SerializeObject(list),
-            data = ProdOilProductList,
-            msg = "修改成功"
-            };
-        }else{
-            return new ApiModel(){
-                code = 500,
-                //data = JsonConvert.SerializeObject(list),
-                data = null,
-                msg = @"成品油天产量超出限制: [0,9999999999]"
-            };           
-        }
+        context.Schemeverify1s.Update(ProdOilProductList[obj.index]);
+        context.Recipecalc1s.Update(list1[obj.index]);
+        context.Compoilconfigs.Update(list2[obj.index]);
+        context.SaveChanges();
+    
+        return new ApiModel()
+        {
+        code = 200,
+        //data = JsonConvert.SerializeObject(list),
+        data = ProdOilProductList,
+        msg = "修改成功"
+        };
+        // }else{
+        //     return new ApiModel(){
+        //         code = 500,
+        //         //data = JsonConvert.SerializeObject(list),
+        //         data = null,
+        //         msg = @"成品油天产量超出限制: [0,9999999999]"
+        //     };           
+        // }
     }
 
     [HttpGet("Set/BottomInfo")]
@@ -124,45 +124,45 @@ public class SchemeVerify_1MassController : ControllerBase
         var list1 = context.Recipecalc3s.ToList();
         var list2 = context.Prodoilconfigs.ToList();
 
-        if(0 <= obj.BottomCapacity && obj.BottomCapacity <= 999999 
-        && 40 <= obj.BottomCET && obj.BottomCET <= 70 
-        && 200 <= obj.BottomD50 && obj.BottomD50 <= 300 
-        && 0 < obj.BottomPOL && obj.BottomPOL <= 7 
-        && 700 <= obj.BottomDEN && obj.BottomDEN <= 900){
-            BottomInfoList[obj.index].ProdOilName = obj.ProdOilName;
-            list1[obj.index].ProdOilName = obj.ProdOilName;
-            list2[obj.index].ProdOilName = obj.ProdOilName;
-            BottomInfoList[obj.index].BottomMass = obj.BottomCapacity;
-            BottomInfoList[obj.index].CetMass = obj.BottomCET;
-            BottomInfoList[obj.index].D50Mass = obj.BottomD50;
-            BottomInfoList[obj.index].PolMass = obj.BottomPOL;
-            BottomInfoList[obj.index].DenMass = obj.BottomDEN;
+        // if(0 <= obj.BottomCapacity && obj.BottomCapacity <= 999999 
+        // && 40 <= obj.BottomCET && obj.BottomCET <= 70 
+        // && 200 <= obj.BottomD50 && obj.BottomD50 <= 300 
+        // && 0 < obj.BottomPOL && obj.BottomPOL <= 7 
+        // && 700 <= obj.BottomDEN && obj.BottomDEN <= 900){
+        BottomInfoList[obj.index].ProdOilName = obj.ProdOilName;
+        list1[obj.index].ProdOilName = obj.ProdOilName;
+        list2[obj.index].ProdOilName = obj.ProdOilName;
+        BottomInfoList[obj.index].BottomMass = obj.BottomCapacity;
+        BottomInfoList[obj.index].CetMass = obj.BottomCET;
+        BottomInfoList[obj.index].D50Mass = obj.BottomD50;
+        BottomInfoList[obj.index].PolMass = obj.BottomPOL;
+        BottomInfoList[obj.index].DenMass = obj.BottomDEN;
 
-            context.Schemeverify2s.Update(BottomInfoList[obj.index]);
-            context.Recipecalc3s.Update(list1[obj.index]);
-            context.Prodoilconfigs.Update(list2[obj.index]);
-            context.SaveChanges();
-        
-            return new ApiModel()
-            {
-            code = 200,
-            //data = JsonConvert.SerializeObject(list),
-            data = BottomInfoList,
-            msg = "修改成功"
-            };
-        }else{
-            return new ApiModel(){
-                code = 500,
-                //data = JsonConvert.SerializeObject(list),
-                data = null,
-                msg = @"罐底油信息配置需遵循以下条件: 
-                1) 罐底油体积/质量: [0,999999]
-                2) 十六烷值指数: [40,70] 
-                3) 50%回收温度(℃): [200,300] 
-                4) 多环芳烃含量(wt%): (0,7] 
-                5) 密度(kg/m³): [700,900]"
-            };            
-        }
+        context.Schemeverify2s.Update(BottomInfoList[obj.index]);
+        context.Recipecalc3s.Update(list1[obj.index]);
+        context.Prodoilconfigs.Update(list2[obj.index]);
+        context.SaveChanges();
+    
+        return new ApiModel()
+        {
+        code = 200,
+        //data = JsonConvert.SerializeObject(list),
+        data = BottomInfoList,
+        msg = "修改成功"
+        };
+        // }else{
+        //     return new ApiModel(){
+        //         code = 500,
+        //         //data = JsonConvert.SerializeObject(list),
+        //         data = null,
+        //         msg = @"罐底油信息配置需遵循以下条件: 
+        //         1) 罐底油体积/质量: [0,999999]
+        //         2) 十六烷值指数: [40,70] 
+        //         3) 50%回收温度(℃): [200,300] 
+        //         4) 多环芳烃含量(wt%): (0,7] 
+        //         5) 密度(kg/m³): [700,900]"
+        //     };            
+        // }
     }
 
     [HttpGet("Set/TotalBlend")]
@@ -199,27 +199,27 @@ public class SchemeVerify_1MassController : ControllerBase
         var list2 = context.Prodoilconfigs.ToList();
         var list3 = context.Schemeverify2s.ToList();
 
-        if(list3[obj.index].BottomMass < obj.ProdTotalBlend && obj.ProdTotalBlend <= 9999999999){
-            TotalBlendList[obj.index].ProdOilName = obj.ProdOilName;
-            list1[obj.index].ProdOilName = obj.ProdOilName;
-            list2[obj.index].ProdOilName = obj.ProdOilName;
-            TotalBlendList[obj.index].TotalBlendMass = obj.ProdTotalBlend;
+        if(list3[obj.index].BottomMass < obj.ProdTotalBlend){
+        TotalBlendList[obj.index].ProdOilName = obj.ProdOilName;
+        list1[obj.index].ProdOilName = obj.ProdOilName;
+        list2[obj.index].ProdOilName = obj.ProdOilName;
+        TotalBlendList[obj.index].TotalBlendMass = obj.ProdTotalBlend;
 
-            context.Schemeverify2s.Update(TotalBlendList[obj.index]);
-            context.Recipecalc3s.Update(list1[obj.index]);
-            context.Prodoilconfigs.Update(list2[obj.index]);
-            context.SaveChanges();
-        
-            return new ApiModel()
-            {
-            code = 200,
-            //data = JsonConvert.SerializeObject(list),
-            data = TotalBlendList,
-            msg = "修改成功"
-            };
+        context.Schemeverify2s.Update(TotalBlendList[obj.index]);
+        context.Recipecalc3s.Update(list1[obj.index]);
+        context.Prodoilconfigs.Update(list2[obj.index]);
+        context.SaveChanges();
+    
+        return new ApiModel()
+        {
+        code = 200,
+        //data = JsonConvert.SerializeObject(list),
+        data = TotalBlendList,
+        msg = "修改成功"
+        };
         }else{
             return new ApiModel(){
-                code = 500,
+                code = 401,
                 //data = JsonConvert.SerializeObject(list),
                 data = null,
                 msg = @"成品油调合总量应大于罐底油体积/质量"

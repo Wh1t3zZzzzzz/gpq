@@ -65,87 +65,87 @@ public class CompOilConfigController : ControllerBase
             var list2 = context.Recipecalc1s.ToList();//recipecalc1表格
             var list3 = context.Schemeverify1s.ToList();//schemeverify1表格
 
-            if(40 <= obj.Cet && obj.Cet <= 70 
-            && 200 <= obj.D50 && obj.D50 <= 300 
-            && 0 < obj.Pol && obj.Pol <= 7 
-            && 700 <= obj.Den && obj.Den <= 900 
-            && 0 < obj.Price && obj.Price < 999999999){
-                list[obj.index].ComOilName = obj.ComOilName;
-                list2[obj.index].ComOilName = obj.ComOilName;
-                list3[obj.index].ComOilName = obj.ComOilName;
-                list[obj.index].Cet = obj.Cet;
-                list[obj.index].D50 = obj.D50;
-                list[obj.index].Pol = obj.Pol;
-                list[obj.index].Den = obj.Den;
-                list[obj.index].Price = obj.Price;
-                context.Compoilconfigs.Update(list[obj.index]);
-                context.Recipecalc1s.Update(list2[obj.index]);
-                context.Schemeverify1s.Update(list3[obj.index]);
-                context.SaveChanges();
-                var list1 = context.Compoilconfigs.ToList();//增加行并且修改后的表格数据         
-                return new ApiModel()
-                {
-                code = 200,
-                //data = JsonConvert.SerializeObject(list),
-                data = null,
-                msg = "增加成功"
-                };
-            }else{
-                return new ApiModel(){
-                    code = 500,
-                    //data = JsonConvert.SerializeObject(list),
-                    data = null,
-                    msg = @"组分油属性值应尽量满足: 
-                    十六烷值指数: [40,70]
-                    50%回收温度(℃): [200,300] 
-                    多环芳烃含量(wt%): (0,7] 
-                    密度(kg/m³): [700,900]"
-                };
-            }
+            // if(40 <= obj.Cet && obj.Cet <= 70 
+            // && 200 <= obj.D50 && obj.D50 <= 300 
+            // && 0 < obj.Pol && obj.Pol <= 7 
+            // && 700 <= obj.Den && obj.Den <= 900 
+            // && 0 < obj.Price && obj.Price < 999999999){
+            list[obj.index].ComOilName = obj.ComOilName;
+            list2[obj.index].ComOilName = obj.ComOilName;
+            list3[obj.index].ComOilName = obj.ComOilName;
+            list[obj.index].Cet = obj.Cet;
+            list[obj.index].D50 = obj.D50;
+            list[obj.index].Pol = obj.Pol;
+            list[obj.index].Den = obj.Den;
+            list[obj.index].Price = obj.Price;
+            context.Compoilconfigs.Update(list[obj.index]);
+            context.Recipecalc1s.Update(list2[obj.index]);
+            context.Schemeverify1s.Update(list3[obj.index]);
+            context.SaveChanges();
+            var list1 = context.Compoilconfigs.ToList();//增加行并且修改后的表格数据         
+            return new ApiModel()
+            {
+            code = 200,
+            //data = JsonConvert.SerializeObject(list),
+            data = null,
+            msg = "增加成功"
+            };
+            // }else{
+            //     return new ApiModel(){
+            //         code = 500,
+            //         //data = JsonConvert.SerializeObject(list),
+            //         data = null,
+            //         msg = @"组分油属性值应尽量满足: 
+            //         十六烷值指数: [40,70]
+            //         50%回收温度(℃): [200,300] 
+            //         多环芳烃含量(wt%): (0,7] 
+            //         密度(kg/m³): [700,900]"
+            //     };
+            // }
         }else{
             //更改保存操作
             var list = context.Compoilconfigs.ToList();//打印最新的表格数据
             var list2 = context.Recipecalc1s.ToList();//增加行过后的表格数据
             var list3 = context.Schemeverify1s.ToList();//增加行过后的表格数据
 
-            if(40 <= obj.Cet && obj.Cet <= 70 
-            && 200 <= obj.D50 && obj.D50 <= 300 
-            && 0 < obj.Pol && obj.Pol <= 7 
-            && 700 <= obj.Den && obj.Den <= 900
-            && 0 < obj.Price && obj.Price < 999999999){
-                list[obj.index].ComOilName = obj.ComOilName;
-                list2[obj.index].ComOilName = obj.ComOilName;
-                list3[obj.index].ComOilName = obj.ComOilName;
-                list[obj.index].Cet = obj.Cet;
-                list[obj.index].D50 = obj.D50;
-                list[obj.index].Pol = obj.Pol;
-                list[obj.index].Den = obj.Den;
-                list[obj.index].Price = obj.Price;
-                
-                context.Compoilconfigs.Update(list[obj.index]);
-                context.Recipecalc1s.Update(list2[obj.index]);
-                context.Schemeverify1s.Update(list3[obj.index]);
-                context.SaveChanges();
-                var list1 = _CompOilConfig.GetAllCompOilConfigList().ToList();
-                return new ApiModel()
-                {
-                code = 200,
-                //data = JsonConvert.SerializeObject(list),
-                data = list1,
-                msg = "修改成功"
-                };                    
-            }else{
-                return new ApiModel(){
-                    code = 500,
-                    //data = JsonConvert.SerializeObject(list),
-                    data = null,
-                    msg = @"组分油属性值应尽量满足: 
-                    十六烷值指数: [40,70] 
-                    50%回收温度(℃): [200,300] 
-                    多环芳烃含量(wt%): (0,7] 
-                    密度(kg/m³): [700,900]"
-                };
-            }
+            // if(40 <= obj.Cet && obj.Cet <= 70 
+            // && 200 <= obj.D50 && obj.D50 <= 300 
+            // && 0 < obj.Pol && obj.Pol <= 7 
+            // && 700 <= obj.Den && obj.Den <= 900
+            // && 0 < obj.Price && obj.Price < 999999999){
+            list[obj.index].ComOilName = obj.ComOilName;
+            list2[obj.index].ComOilName = obj.ComOilName;
+            list3[obj.index].ComOilName = obj.ComOilName;
+            list[obj.index].Cet = obj.Cet;
+            list[obj.index].D50 = obj.D50;
+            list[obj.index].Pol = obj.Pol;
+            list[obj.index].Den = obj.Den;
+            list[obj.index].Price = obj.Price;
+            
+            context.Compoilconfigs.Update(list[obj.index]);
+            context.Recipecalc1s.Update(list2[obj.index]);
+            context.Schemeverify1s.Update(list3[obj.index]);
+            context.SaveChanges();
+            var list1 = _CompOilConfig.GetAllCompOilConfigList().ToList();
+            return new ApiModel()
+            {
+            code = 200,
+            //data = JsonConvert.SerializeObject(list),
+            data = list1,
+            msg = "修改成功"
+            };                    
+            // }else{
+            //     return new ApiModel(){
+            //         code = 500,
+            //         //data = JsonConvert.SerializeObject(list),
+            //         data = null,
+            //         msg = @"组分油属性值应尽量满足: 
+            //         十六烷值指数: [40,70] 
+            //         50%回收温度(℃): [200,300] 
+            //         多环芳烃含量(wt%): (0,7] 
+            //         密度(kg/m³): [700,900]"
+            //     };
+            // }
         }     
 
     }
@@ -165,7 +165,7 @@ public class CompOilConfigController : ControllerBase
         if(list.Count == 2){
             return new ApiModel()
             {
-            code = 500,
+            code = 400,
             //data = JsonConvert.SerializeObject(list),
             data = null,
             msg = "组分油个数不允许小于两个"

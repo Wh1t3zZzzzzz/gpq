@@ -37,7 +37,7 @@ public class DispatchResController : ControllerBase
             };
         }else{
             return new ApiModel(){
-                code = 500,
+                code = 407,
                 data = list,
                 msg = "计算失败"
             };

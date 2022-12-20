@@ -56,60 +56,60 @@ public class SchemeVerify_2VolController : ControllerBase
         var list1 = context.Recipecalc1s.ToList();
         var list2 = context.Compoilconfigs.ToList();
 
-        if(0 <= obj.AutoPercent && obj.AutoPercent <= 100 
-        && 0 <= obj.ExpPercent && obj.ExpPercent <= 100 
-        && 0 <= obj.Prod1Percent && obj.Prod1Percent <= 100 
-        && 0 <= obj.Prod2Percent && obj.Prod2Percent <= 100){
+        // if(0 <= obj.AutoPercent && obj.AutoPercent <= 100 
+        // && 0 <= obj.ExpPercent && obj.ExpPercent <= 100 
+        // && 0 <= obj.Prod1Percent && obj.Prod1Percent <= 100 
+        // && 0 <= obj.Prod2Percent && obj.Prod2Percent <= 100){
 
-            ProdOilPercentList[obj.index].ComOilName = obj.ComOilName;
-            list1[obj.index].ComOilName = obj.ComOilName;
-            list2[obj.index].ComOilName = obj.ComOilName;
-            ProdOilPercentList[obj.index].AutoFlowPercentVol = obj.AutoPercent;
-            ProdOilPercentList[obj.index].ExpFlowPercentVol = obj.ExpPercent;
-            ProdOilPercentList[obj.index].Prod1FlowPercentVol = obj.Prod1Percent;
-            ProdOilPercentList[obj.index].Prod2FlowPercentVol = obj.Prod2Percent;
+        ProdOilPercentList[obj.index].ComOilName = obj.ComOilName;
+        list1[obj.index].ComOilName = obj.ComOilName;
+        list2[obj.index].ComOilName = obj.ComOilName;
+        ProdOilPercentList[obj.index].AutoFlowPercentVol = obj.AutoPercent;
+        ProdOilPercentList[obj.index].ExpFlowPercentVol = obj.ExpPercent;
+        ProdOilPercentList[obj.index].Prod1FlowPercentVol = obj.Prod1Percent;
+        ProdOilPercentList[obj.index].Prod2FlowPercentVol = obj.Prod2Percent;
 
-            context.Schemeverify1s.Update(ProdOilPercentList[obj.index]);
-            context.Recipecalc1s.Update(list1[obj.index]);
-            context.Compoilconfigs.Update(list2[obj.index]);
-            context.SaveChanges();
+        context.Schemeverify1s.Update(ProdOilPercentList[obj.index]);
+        context.Recipecalc1s.Update(list1[obj.index]);
+        context.Compoilconfigs.Update(list2[obj.index]);
+        context.SaveChanges();
 
-            float sum1 = 0;
-            float sum2 = 0;
-            float sum3 = 0;
-            float sum4 = 0;
+        float sum1 = 0;
+        float sum2 = 0;
+        float sum3 = 0;
+        float sum4 = 0;
 
-            for(int i = 0; i < ProdOilPercentList.Count; i++){
-                sum1 += ProdOilPercentList[i].AutoFlowPercentVol;
-                sum2 += ProdOilPercentList[i].ExpFlowPercentVol;
-                sum3 += ProdOilPercentList[i].Prod1FlowPercentVol;
-                sum4 += ProdOilPercentList[i].Prod2FlowPercentVol;
-            }
-                        
-            if(sum1 == 100 && sum2 == 100 && sum3 == 100 && sum4 == 100){
-                return new ApiModel()
-                {
-                code = 200,
-                //data = JsonConvert.SerializeObject(list),
-                data = null,
-                msg = "修改成功"
-                }; 
-            }else{
-                return new ApiModel(){
-                    code = 500,
-                    //data = JsonConvert.SerializeObject(list),
-                    data = null,
-                    msg = @"提示: 当前成品油参调比例之和不为100%, 请检查"
-                };         
-            }  
+        for(int i = 0; i < ProdOilPercentList.Count; i++){
+            sum1 += ProdOilPercentList[i].AutoFlowPercentVol;
+            sum2 += ProdOilPercentList[i].ExpFlowPercentVol;
+            sum3 += ProdOilPercentList[i].Prod1FlowPercentVol;
+            sum4 += ProdOilPercentList[i].Prod2FlowPercentVol;
+        }
+                    
+        if(sum1 == 100 && sum2 == 100 && sum3 == 100 && sum4 == 100){
+            return new ApiModel()
+            {
+            code = 200,
+            //data = JsonConvert.SerializeObject(list),
+            data = null,
+            msg = "修改成功"
+            }; 
         }else{
             return new ApiModel(){
-                code = 501,
+                code = 404,
                 //data = JsonConvert.SerializeObject(list),
                 data = null,
-                msg = @"参调比例范围应为[0,100%]"
+                msg = @"提示: 当前成品油参调比例之和不为100%, 请检查"
             };         
         }  
+        // }else{
+        //     return new ApiModel(){
+        //         code = 501,
+        //         //data = JsonConvert.SerializeObject(list),
+        //         data = null,
+        //         msg = @"参调比例范围应为[0,100%]"
+        //     };         
+        // }  
     }
 
     [HttpGet("Set/TotalBlend")]
@@ -142,32 +142,32 @@ public class SchemeVerify_2VolController : ControllerBase
         var TotalBlendList = context.Schemeverify2s.ToList();
         var list1 = context.Recipecalc3s.ToList();
         var list2 = context.Prodoilconfigs.ToList();
-        if(0 < obj.ProdTotalBlend && obj.ProdTotalBlend <= 9999999999){
-            TotalBlendList[obj.index].ProdOilName = obj.ProdOilName;
-            list1[obj.index].ProdOilName = obj.ProdOilName;
-            list2[obj.index].ProdOilName = obj.ProdOilName;
-            TotalBlendList[obj.index].TotalBlendVol2 = obj.ProdTotalBlend;
+        // if(0 < obj.ProdTotalBlend && obj.ProdTotalBlend <= 9999999999){
+        TotalBlendList[obj.index].ProdOilName = obj.ProdOilName;
+        list1[obj.index].ProdOilName = obj.ProdOilName;
+        list2[obj.index].ProdOilName = obj.ProdOilName;
+        TotalBlendList[obj.index].TotalBlendVol2 = obj.ProdTotalBlend;
 
-            context.Schemeverify2s.Update(TotalBlendList[obj.index]);
-            context.Recipecalc3s.Update(list1[obj.index]);
-            context.Prodoilconfigs.Update(list2[obj.index]);
-            context.SaveChanges();
-        
-            return new ApiModel()
-            {
-            code = 200,
-            //data = JsonConvert.SerializeObject(list),
-            data = TotalBlendList,
-            msg = "修改成功"
-            };            
-        }else{
-            return new ApiModel(){
-                code = 500,
-                //data = JsonConvert.SerializeObject(list),
-                data = null,
-                msg = @"成品油调合总量超出限制: (0,9999999999]"
-            };           
-        }
+        context.Schemeverify2s.Update(TotalBlendList[obj.index]);
+        context.Recipecalc3s.Update(list1[obj.index]);
+        context.Prodoilconfigs.Update(list2[obj.index]);
+        context.SaveChanges();
+    
+        return new ApiModel()
+        {
+        code = 200,
+        //data = JsonConvert.SerializeObject(list),
+        data = TotalBlendList,
+        msg = "修改成功"
+        };            
+        // }else{
+        //     return new ApiModel(){
+        //         code = 500,
+        //         //data = JsonConvert.SerializeObject(list),
+        //         data = null,
+        //         msg = @"成品油调合总量超出限制: (0,9999999999]"
+        //     };           
+        // }
     }
 
     [HttpGet("Res/Product")]

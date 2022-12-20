@@ -72,11 +72,7 @@ public class SchemeVerify_3MassController : ControllerBase
         sum3 = sum3 - ProdOilFlowList[obj.index].Prod1FlowMass + obj.Prod1Flow;
         sum4 = sum4 - ProdOilFlowList[obj.index].Prod2FlowMass + obj.Prod2Flow;
 
-        if(sum1 != 0  && sum2 != 0 && sum3 != 0 && sum4 != 0 &&       
-        0 <= obj.AutoFlow && obj.AutoFlow <= 9999999999 && 
-        0 <= obj.ExpFlow && obj.ExpFlow <= 9999999999 && 
-        0 <= obj.Prod1Flow && obj.Prod1Flow <= 9999999999 && 
-        0 <= obj.Prod2Flow && obj.Prod2Flow <= 9999999999){
+        if(sum1 != 0  && sum2 != 0 && sum3 != 0 && sum4 != 0){
             ProdOilFlowList[obj.index].ComOilName = obj.ComOilName;
             list1[obj.index].ComOilName = obj.ComOilName;
             list2[obj.index].ComOilName = obj.ComOilName;
@@ -99,16 +95,12 @@ public class SchemeVerify_3MassController : ControllerBase
             };            
         }else{
             return new ApiModel(){
-                code = 500,
+                code = 405,
                 //data = JsonConvert.SerializeObject(list),
                 data = null,
-                msg = @"成品油参调流量应满足如下条件: 
-                1) 成品油参调流量设置范围: [0,9999999999]
-                2) 每列成品油的参调流量之和不允许为0"
+                msg = @"每列成品油的参调流量之和不允许为0"
             };           
         }
-
-
 
     }
 
@@ -142,32 +134,32 @@ public class SchemeVerify_3MassController : ControllerBase
         var TotalBlendList = context.Schemeverify2s.ToList();
         var list1 = context.Recipecalc3s.ToList();
         var list2 = context.Prodoilconfigs.ToList();
-        if(0 < obj.ProdTotalBlend && obj.ProdTotalBlend <= 9999999999){
-            TotalBlendList[obj.index].ProdOilName = obj.ProdOilName;
-            list1[obj.index].ProdOilName = obj.ProdOilName;
-            list2[obj.index].ProdOilName = obj.ProdOilName;
-            TotalBlendList[obj.index].TotalBlendMass3 = obj.ProdTotalBlend;
+        // if(0 < obj.ProdTotalBlend && obj.ProdTotalBlend <= 9999999999){
+        TotalBlendList[obj.index].ProdOilName = obj.ProdOilName;
+        list1[obj.index].ProdOilName = obj.ProdOilName;
+        list2[obj.index].ProdOilName = obj.ProdOilName;
+        TotalBlendList[obj.index].TotalBlendMass3 = obj.ProdTotalBlend;
 
-            context.Schemeverify2s.Update(TotalBlendList[obj.index]);
-            context.Recipecalc3s.Update(list1[obj.index]);
-            context.Prodoilconfigs.Update(list2[obj.index]);
-            context.SaveChanges();
-        
-            return new ApiModel()
-            {
-            code = 200,
-            //data = JsonConvert.SerializeObject(list),
-            data = TotalBlendList,
-            msg = "查询成功"
-            };            
-        }else{
-            return new ApiModel(){
-                code = 500,
-                //data = JsonConvert.SerializeObject(list),
-                data = null,
-                msg = @"成品油调合总量超出限制: (0,9999999999]"
-            };                
-        }
+        context.Schemeverify2s.Update(TotalBlendList[obj.index]);
+        context.Recipecalc3s.Update(list1[obj.index]);
+        context.Prodoilconfigs.Update(list2[obj.index]);
+        context.SaveChanges();
+    
+        return new ApiModel()
+        {
+        code = 200,
+        //data = JsonConvert.SerializeObject(list),
+        data = TotalBlendList,
+        msg = "查询成功"
+        };            
+        // }else{
+        //     return new ApiModel(){
+        //         code = 500,
+        //         //data = JsonConvert.SerializeObject(list),
+        //         data = null,
+        //         msg = @"成品油调合总量超出限制: (0,9999999999]"
+        //     };                
+        // }
     }
 
     [HttpGet("Res/Time")]

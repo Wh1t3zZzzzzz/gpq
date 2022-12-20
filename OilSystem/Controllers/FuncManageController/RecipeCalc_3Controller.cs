@@ -189,7 +189,7 @@ public class RecipeCalc_3Controller : ControllerBase
             };
         }else{//计算失败
             return new ApiModel(){
-            code = 500,
+            code = 407,
             //data = JsonConvert.SerializeObject(list),
             data = list,
             msg = "求解失败"
