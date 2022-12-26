@@ -930,46 +930,46 @@ namespace OilBlendSystem.BLL.Implementation
                 if(i == 0){
                     Result.valueHigh = ProdOilList[0].CetHighLimit;
                     Result.valueLow = ProdOilList[0].CetLowLimit;
-                    Result.valueT1 = (float)ProdCET[0];
-                    Result.valueT2 = (float)ProdCET[1];
-                    Result.valueT3 = (float)ProdCET[2];
-                    Result.valueT4 = (float)ProdCET[3];
-                    Result.valueT5 = (float)ProdCET[4];
-                    Result.valueT6 = (float)ProdCET[5];
-                    Result.valueT7 = (float)ProdCET[6];
+                    Result.valueT1 = ProdCET[0].ToString("0.0");
+                    Result.valueT2 = ProdCET[1].ToString("0.0");
+                    Result.valueT3 = ProdCET[2].ToString("0.0");
+                    Result.valueT4 = ProdCET[3].ToString("0.0");
+                    Result.valueT5 = ProdCET[4].ToString("0.0");
+                    Result.valueT6 = ProdCET[5].ToString("0.0");
+                    Result.valueT7 = ProdCET[6].ToString("0.0");
                 }
                 if(i == 1){
                     Result.valueHigh = ProdOilList[0].D50HighLimit;
                     Result.valueLow = ProdOilList[0].D50LowLimit;
-                    Result.valueT1 = (float)ProdD50[0];
-                    Result.valueT2 = (float)ProdD50[1];
-                    Result.valueT3 = (float)ProdD50[2];
-                    Result.valueT4 = (float)ProdD50[3];
-                    Result.valueT5 = (float)ProdD50[4];
-                    Result.valueT6 = (float)ProdD50[5];
-                    Result.valueT7 = (float)ProdD50[6];
+                    Result.valueT1 = ProdD50[0].ToString("0");
+                    Result.valueT2 = ProdD50[1].ToString("0");
+                    Result.valueT3 = ProdD50[2].ToString("0");
+                    Result.valueT4 = ProdD50[3].ToString("0");
+                    Result.valueT5 = ProdD50[4].ToString("0");
+                    Result.valueT6 = ProdD50[5].ToString("0");
+                    Result.valueT7 = ProdD50[6].ToString("0");
                 }
                 if(i == 2){
                     Result.valueHigh = ProdOilList[0].PolHighLimit;
                     Result.valueLow = ProdOilList[0].PolLowLimit;
-                    Result.valueT1 = (float)ProdPOL[0];
-                    Result.valueT2 = (float)ProdPOL[1];
-                    Result.valueT3 = (float)ProdPOL[2];
-                    Result.valueT4 = (float)ProdPOL[3];
-                    Result.valueT5 = (float)ProdPOL[4];
-                    Result.valueT6 = (float)ProdPOL[5];
-                    Result.valueT7 = (float)ProdPOL[6];
+                    Result.valueT1 = ProdPOL[0].ToString("0.00");
+                    Result.valueT2 = ProdPOL[1].ToString("0.00");
+                    Result.valueT3 = ProdPOL[2].ToString("0.00");
+                    Result.valueT4 = ProdPOL[3].ToString("0.00");
+                    Result.valueT5 = ProdPOL[4].ToString("0.00");
+                    Result.valueT6 = ProdPOL[5].ToString("0.00");
+                    Result.valueT7 = ProdPOL[6].ToString("0.00");
                 }
                 if(i == 3){
                     Result.valueHigh = ProdOilList[0].DenHighLimit;
                     Result.valueLow = ProdOilList[0].DenLowLimit;
-                    Result.valueT1 = (float)ProdDEN[0];
-                    Result.valueT2 = (float)ProdDEN[1];
-                    Result.valueT3 = (float)ProdDEN[2];
-                    Result.valueT4 = (float)ProdDEN[3];
-                    Result.valueT5 = (float)ProdDEN[4];
-                    Result.valueT6 = (float)ProdDEN[5];
-                    Result.valueT7 = (float)ProdDEN[6];
+                    Result.valueT1 = ProdDEN[0].ToString("0.0");
+                    Result.valueT2 = ProdDEN[1].ToString("0.0");
+                    Result.valueT3 = ProdDEN[2].ToString("0.0");
+                    Result.valueT4 = ProdDEN[3].ToString("0.0");
+                    Result.valueT5 = ProdDEN[4].ToString("0.0");
+                    Result.valueT6 = ProdDEN[5].ToString("0.0");
+                    Result.valueT7 = ProdDEN[6].ToString("0.0");
                 }
                 ResultList.Add(Result);
             }
@@ -1152,46 +1152,46 @@ namespace OilBlendSystem.BLL.Implementation
                 if(i == 0){
                     Result.valueHigh = ProdOilList[1].CetHighLimit;
                     Result.valueLow = ProdOilList[1].CetLowLimit;
-                    Result.valueT1 = (float)ProdCET[0];
-                    Result.valueT2 = (float)ProdCET[1];
-                    Result.valueT3 = (float)ProdCET[2];
-                    Result.valueT4 = (float)ProdCET[3];
-                    Result.valueT5 = (float)ProdCET[4];
-                    Result.valueT6 = (float)ProdCET[5];
-                    Result.valueT7 = (float)ProdCET[6];
+                    Result.valueT1 = ProdCET[0].ToString("0.0");
+                    Result.valueT2 = ProdCET[1].ToString("0.0");
+                    Result.valueT3 = ProdCET[2].ToString("0.0");
+                    Result.valueT4 = ProdCET[3].ToString("0.0");
+                    Result.valueT5 = ProdCET[4].ToString("0.0");
+                    Result.valueT6 = ProdCET[5].ToString("0.0");
+                    Result.valueT7 = ProdCET[6].ToString("0.0");
                 }
                 if(i == 1){
                     Result.valueHigh = ProdOilList[1].D50HighLimit;
                     Result.valueLow = ProdOilList[1].D50LowLimit;
-                    Result.valueT1 = (float)ProdD50[0];
-                    Result.valueT2 = (float)ProdD50[1];
-                    Result.valueT3 = (float)ProdD50[2];
-                    Result.valueT4 = (float)ProdD50[3];
-                    Result.valueT5 = (float)ProdD50[4];
-                    Result.valueT6 = (float)ProdD50[5];
-                    Result.valueT7 = (float)ProdD50[6];
+                    Result.valueT1 = ProdD50[0].ToString("0");
+                    Result.valueT2 = ProdD50[1].ToString("0");
+                    Result.valueT3 = ProdD50[2].ToString("0");
+                    Result.valueT4 = ProdD50[3].ToString("0");
+                    Result.valueT5 = ProdD50[4].ToString("0");
+                    Result.valueT6 = ProdD50[5].ToString("0");
+                    Result.valueT7 = ProdD50[6].ToString("0");
                 }
                 if(i == 2){
                     Result.valueHigh = ProdOilList[1].PolHighLimit;
                     Result.valueLow = ProdOilList[1].PolLowLimit;
-                    Result.valueT1 = (float)ProdPOL[0];
-                    Result.valueT2 = (float)ProdPOL[1];
-                    Result.valueT3 = (float)ProdPOL[2];
-                    Result.valueT4 = (float)ProdPOL[3];
-                    Result.valueT5 = (float)ProdPOL[4];
-                    Result.valueT6 = (float)ProdPOL[5];
-                    Result.valueT7 = (float)ProdPOL[6];
+                    Result.valueT1 = ProdPOL[0].ToString("0.00");
+                    Result.valueT2 = ProdPOL[1].ToString("0.00");
+                    Result.valueT3 = ProdPOL[2].ToString("0.00");
+                    Result.valueT4 = ProdPOL[3].ToString("0.00");
+                    Result.valueT5 = ProdPOL[4].ToString("0.00");
+                    Result.valueT6 = ProdPOL[5].ToString("0.00");
+                    Result.valueT7 = ProdPOL[6].ToString("0.00");
                 }
                 if(i == 3){
                     Result.valueHigh = ProdOilList[1].DenHighLimit;
                     Result.valueLow = ProdOilList[1].DenLowLimit;
-                    Result.valueT1 = (float)ProdDEN[0];
-                    Result.valueT2 = (float)ProdDEN[1];
-                    Result.valueT3 = (float)ProdDEN[2];
-                    Result.valueT4 = (float)ProdDEN[3];
-                    Result.valueT5 = (float)ProdDEN[4];
-                    Result.valueT6 = (float)ProdDEN[5];
-                    Result.valueT7 = (float)ProdDEN[6];
+                    Result.valueT1 = ProdDEN[0].ToString("0.0");
+                    Result.valueT2 = ProdDEN[1].ToString("0.0");
+                    Result.valueT3 = ProdDEN[2].ToString("0.0");
+                    Result.valueT4 = ProdDEN[3].ToString("0.0");
+                    Result.valueT5 = ProdDEN[4].ToString("0.0");
+                    Result.valueT6 = ProdDEN[5].ToString("0.0");
+                    Result.valueT7 = ProdDEN[6].ToString("0.0");
                 }
                 ResultList.Add(Result);
             }
@@ -1374,46 +1374,46 @@ namespace OilBlendSystem.BLL.Implementation
                 if(i == 0){
                     Result.valueHigh = ProdOilList[2].CetHighLimit;
                     Result.valueLow = ProdOilList[2].CetLowLimit;
-                    Result.valueT1 = (float)ProdCET[0];
-                    Result.valueT2 = (float)ProdCET[1];
-                    Result.valueT3 = (float)ProdCET[2];
-                    Result.valueT4 = (float)ProdCET[3];
-                    Result.valueT5 = (float)ProdCET[4];
-                    Result.valueT6 = (float)ProdCET[5];
-                    Result.valueT7 = (float)ProdCET[6];
+                    Result.valueT1 = ProdCET[0].ToString("0.0");
+                    Result.valueT2 = ProdCET[1].ToString("0.0");
+                    Result.valueT3 = ProdCET[2].ToString("0.0");
+                    Result.valueT4 = ProdCET[3].ToString("0.0");
+                    Result.valueT5 = ProdCET[4].ToString("0.0");
+                    Result.valueT6 = ProdCET[5].ToString("0.0");
+                    Result.valueT7 = ProdCET[6].ToString("0.0");
                 }
                 if(i == 1){
                     Result.valueHigh = ProdOilList[2].D50HighLimit;
                     Result.valueLow = ProdOilList[2].D50LowLimit;
-                    Result.valueT1 = (float)ProdD50[0];
-                    Result.valueT2 = (float)ProdD50[1];
-                    Result.valueT3 = (float)ProdD50[2];
-                    Result.valueT4 = (float)ProdD50[3];
-                    Result.valueT5 = (float)ProdD50[4];
-                    Result.valueT6 = (float)ProdD50[5];
-                    Result.valueT7 = (float)ProdD50[6];
+                    Result.valueT1 = ProdD50[0].ToString("0");
+                    Result.valueT2 = ProdD50[1].ToString("0");
+                    Result.valueT3 = ProdD50[2].ToString("0");
+                    Result.valueT4 = ProdD50[3].ToString("0");
+                    Result.valueT5 = ProdD50[4].ToString("0");
+                    Result.valueT6 = ProdD50[5].ToString("0");
+                    Result.valueT7 = ProdD50[6].ToString("0");
                 }
                 if(i == 2){
                     Result.valueHigh = ProdOilList[2].PolHighLimit;
                     Result.valueLow = ProdOilList[2].PolLowLimit;
-                    Result.valueT1 = (float)ProdPOL[0];
-                    Result.valueT2 = (float)ProdPOL[1];
-                    Result.valueT3 = (float)ProdPOL[2];
-                    Result.valueT4 = (float)ProdPOL[3];
-                    Result.valueT5 = (float)ProdPOL[4];
-                    Result.valueT6 = (float)ProdPOL[5];
-                    Result.valueT7 = (float)ProdPOL[6];
+                    Result.valueT1 = ProdPOL[0].ToString("0.00");
+                    Result.valueT2 = ProdPOL[1].ToString("0.00");
+                    Result.valueT3 = ProdPOL[2].ToString("0.00");
+                    Result.valueT4 = ProdPOL[3].ToString("0.00");
+                    Result.valueT5 = ProdPOL[4].ToString("0.00");
+                    Result.valueT6 = ProdPOL[5].ToString("0.00");
+                    Result.valueT7 = ProdPOL[6].ToString("0.00");
                 }
                 if(i == 3){
                     Result.valueHigh = ProdOilList[3].DenHighLimit;
                     Result.valueLow = ProdOilList[3].DenLowLimit;
-                    Result.valueT1 = (float)ProdDEN[0];
-                    Result.valueT2 = (float)ProdDEN[1];
-                    Result.valueT3 = (float)ProdDEN[2];
-                    Result.valueT4 = (float)ProdDEN[3];
-                    Result.valueT5 = (float)ProdDEN[4];
-                    Result.valueT6 = (float)ProdDEN[5];
-                    Result.valueT7 = (float)ProdDEN[6];
+                    Result.valueT1 = ProdDEN[0].ToString("0.0");
+                    Result.valueT2 = ProdDEN[1].ToString("0.0");
+                    Result.valueT3 = ProdDEN[2].ToString("0.0");
+                    Result.valueT4 = ProdDEN[3].ToString("0.0");
+                    Result.valueT5 = ProdDEN[4].ToString("0.0");
+                    Result.valueT6 = ProdDEN[5].ToString("0.0");
+                    Result.valueT7 = ProdDEN[6].ToString("0.0");
                 }
                 ResultList.Add(Result);
             }
@@ -1596,46 +1596,46 @@ namespace OilBlendSystem.BLL.Implementation
                 if(i == 0){
                     Result.valueHigh = ProdOilList[3].CetHighLimit;
                     Result.valueLow = ProdOilList[3].CetLowLimit;
-                    Result.valueT1 = (float)ProdCET[0];
-                    Result.valueT2 = (float)ProdCET[1];
-                    Result.valueT3 = (float)ProdCET[2];
-                    Result.valueT4 = (float)ProdCET[3];
-                    Result.valueT5 = (float)ProdCET[4];
-                    Result.valueT6 = (float)ProdCET[5];
-                    Result.valueT7 = (float)ProdCET[6];
+                    Result.valueT1 = ProdCET[0].ToString("0.0");
+                    Result.valueT2 = ProdCET[1].ToString("0.0");
+                    Result.valueT3 = ProdCET[2].ToString("0.0");
+                    Result.valueT4 = ProdCET[3].ToString("0.0");
+                    Result.valueT5 = ProdCET[4].ToString("0.0");
+                    Result.valueT6 = ProdCET[5].ToString("0.0");
+                    Result.valueT7 = ProdCET[6].ToString("0.0");
                 }
                 if(i == 1){
                     Result.valueHigh = ProdOilList[3].D50HighLimit;
                     Result.valueLow = ProdOilList[3].D50LowLimit;
-                    Result.valueT1 = (float)ProdD50[0];
-                    Result.valueT2 = (float)ProdD50[1];
-                    Result.valueT3 = (float)ProdD50[2];
-                    Result.valueT4 = (float)ProdD50[3];
-                    Result.valueT5 = (float)ProdD50[4];
-                    Result.valueT6 = (float)ProdD50[5];
-                    Result.valueT7 = (float)ProdD50[6];
+                    Result.valueT1 = ProdD50[0].ToString("0");
+                    Result.valueT2 = ProdD50[1].ToString("0");
+                    Result.valueT3 = ProdD50[2].ToString("0");
+                    Result.valueT4 = ProdD50[3].ToString("0");
+                    Result.valueT5 = ProdD50[4].ToString("0");
+                    Result.valueT6 = ProdD50[5].ToString("0");
+                    Result.valueT7 = ProdD50[6].ToString("0");
                 }
                 if(i == 2){
                     Result.valueHigh = ProdOilList[3].PolHighLimit;
                     Result.valueLow = ProdOilList[3].PolLowLimit;
-                    Result.valueT1 = (float)ProdPOL[0];
-                    Result.valueT2 = (float)ProdPOL[1];
-                    Result.valueT3 = (float)ProdPOL[2];
-                    Result.valueT4 = (float)ProdPOL[3];
-                    Result.valueT5 = (float)ProdPOL[4];
-                    Result.valueT6 = (float)ProdPOL[5];
-                    Result.valueT7 = (float)ProdPOL[6];
+                    Result.valueT1 = ProdPOL[0].ToString("0.00");
+                    Result.valueT2 = ProdPOL[1].ToString("0.00");
+                    Result.valueT3 = ProdPOL[2].ToString("0.00");
+                    Result.valueT4 = ProdPOL[3].ToString("0.00");
+                    Result.valueT5 = ProdPOL[4].ToString("0.00");
+                    Result.valueT6 = ProdPOL[5].ToString("0.00");
+                    Result.valueT7 = ProdPOL[6].ToString("0.00");
                 }
                 if(i == 3){
                     Result.valueHigh = ProdOilList[3].DenHighLimit;
                     Result.valueLow = ProdOilList[3].DenLowLimit;
-                    Result.valueT1 = (float)ProdDEN[0];
-                    Result.valueT2 = (float)ProdDEN[1];
-                    Result.valueT3 = (float)ProdDEN[2];
-                    Result.valueT4 = (float)ProdDEN[3];
-                    Result.valueT5 = (float)ProdDEN[4];
-                    Result.valueT6 = (float)ProdDEN[5];
-                    Result.valueT7 = (float)ProdDEN[6];
+                    Result.valueT1 = ProdDEN[0].ToString("0.0");
+                    Result.valueT2 = ProdDEN[1].ToString("0.0");
+                    Result.valueT3 = ProdDEN[2].ToString("0.0");
+                    Result.valueT4 = ProdDEN[3].ToString("0.0");
+                    Result.valueT5 = ProdDEN[4].ToString("0.0");
+                    Result.valueT6 = ProdDEN[5].ToString("0.0");
+                    Result.valueT7 = ProdDEN[6].ToString("0.0");
                 }
                 ResultList.Add(Result);
             }

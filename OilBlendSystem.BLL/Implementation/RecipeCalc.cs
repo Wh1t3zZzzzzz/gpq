@@ -15,7 +15,6 @@ namespace OilBlendSystem.BLL.Implementation
            context = _context;
         }
 
-        //oilblendContext context = new();
         public IEnumerable<Recipecalc1> GetRecipeCalc1()
         {
             context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
@@ -2070,22 +2069,22 @@ namespace OilBlendSystem.BLL.Implementation
                 for(int j = 0; j < ComOilNum; j++){
                     prodCET = prodCET + CompOilList[j].Cet * percent[j, ProdOilList[i].Id - 1];
                 }
-                Result.ProdCET = (float)Math.Round(prodCET, 1);
+                Result.ProdCET = Math.Round(prodCET, 1).ToString("0.0");
 
                 for(int j = 0; j < ComOilNum; j++){
                     prodD50 = prodD50 + CompOilList[j].D50 * percent[j, ProdOilList[i].Id - 1];
                 }
-                Result.ProdD50 = (float)Math.Round(prodD50);
+                Result.ProdD50 = Math.Round(prodD50).ToString("0");
 
                 for(int j = 0; j < ComOilNum; j++){
                     prodPOL = prodPOL + CompOilList[j].Pol * percent[j, ProdOilList[i].Id - 1];
                 }
-                Result.ProdPOL = (float)Math.Round(prodPOL, 2);
+                Result.ProdPOL = Math.Round(prodPOL, 2).ToString("0.00");
 
                 for(int j = 0; j < ComOilNum; j++){
                     prodDEN = prodDEN + CompOilList[j].Den * percent[j, ProdOilList[i].Id - 1];
                 }
-                Result.ProdDEN = (float)Math.Round(prodDEN, 1);
+                Result.ProdDEN = Math.Round(prodDEN, 1).ToString("0.0");
 
                 Result.CETHighLimit = ProdOilList[i].CetHighLimit;
                 Result.CETLowLimit = ProdOilList[i].CetLowLimit;
@@ -2277,22 +2276,22 @@ namespace OilBlendSystem.BLL.Implementation
                 for(int j = 0; j < ComOilNum; j++){
                     prodCET = prodCET + CompOilList[j].Cet * percent[j, ProdOilList[i].Id - 1];
                 }
-                Result.ProdCET = (float)Math.Round(prodCET, 1);
+                Result.ProdCET = Math.Round(prodCET, 1).ToString("0.0");
 
                 for(int j = 0; j < ComOilNum; j++){
                     prodD50 = prodD50 + CompOilList[j].D50 * percent[j, ProdOilList[i].Id - 1];
                 }
-                Result.ProdD50 = (float)Math.Round(prodD50);
+                Result.ProdD50 = Math.Round(prodD50).ToString("0");
 
                 for(int j = 0; j < ComOilNum; j++){
                     prodPOL = prodPOL + CompOilList[j].Pol * percent[j, ProdOilList[i].Id - 1];
                 }
-                Result.ProdPOL = (float)Math.Round(prodPOL, 2);
+                Result.ProdPOL = Math.Round(prodPOL, 2).ToString("0.00");
 
                 for(int j = 0; j < ComOilNum; j++){
                     prodDEN = prodDEN + CompOilList[j].Den * percent[j, ProdOilList[i].Id - 1];
                 }
-                Result.ProdDEN = (float)Math.Round(prodDEN, 1);
+                Result.ProdDEN = Math.Round(prodDEN, 1).ToString("0.0");
 
                 Result.CETHighLimit = ProdOilList[i].CetHighLimit;
                 Result.CETLowLimit = ProdOilList[i].CetLowLimit;
@@ -2484,22 +2483,22 @@ namespace OilBlendSystem.BLL.Implementation
                 for(int j = 0; j < ComOilNum; j++){
                     prodCET = prodCET + CompOilList[j].Cet * percent[j, ProdOilList[i].Id - 1];
                 }
-                Result.ProdCET = (float)Math.Round(prodCET, 1);
+                Result.ProdCET = Math.Round(prodCET, 1).ToString("0.0");
 
                 for(int j = 0; j < ComOilNum; j++){
                     prodD50 = prodD50 + CompOilList[j].D50 * percent[j, ProdOilList[i].Id - 1];
                 }
-                Result.ProdD50 = (float)Math.Round(prodD50);
+                Result.ProdD50 = Math.Round(prodD50).ToString("0");
 
                 for(int j = 0; j < ComOilNum; j++){
                     prodPOL = prodPOL + CompOilList[j].Pol * percent[j, ProdOilList[i].Id - 1];
                 }
-                Result.ProdPOL = (float)Math.Round(prodPOL, 2);
+                Result.ProdPOL = Math.Round(prodPOL, 2).ToString("0.00");
 
                 for(int j = 0; j < ComOilNum; j++){
                     prodDEN = prodDEN + CompOilList[j].Den * percent[j, ProdOilList[i].Id - 1];
                 }
-                Result.ProdDEN = (float)Math.Round(prodDEN, 1);
+                Result.ProdDEN = Math.Round(prodDEN, 1).ToString("0.0");
 
                 Result.CETHighLimit = ProdOilList[i].CetHighLimit;
                 Result.CETLowLimit = ProdOilList[i].CetLowLimit;
