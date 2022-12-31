@@ -57,7 +57,7 @@ CREATE TABLE `compoilconfig` (
   `prod2Low2` float DEFAULT NULL,
   `prod2High2` float DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -114,7 +114,7 @@ CREATE TABLE `menulist` (
   `menuCode` varchar(128) DEFAULT NULL,
   `menuType` varchar(128) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -123,7 +123,7 @@ CREATE TABLE `menulist` (
 
 LOCK TABLES `menulist` WRITE;
 /*!40000 ALTER TABLE `menulist` DISABLE KEYS */;
-INSERT INTO `menulist` VALUES (1,'方案配置','CreditCard','/schemeconfig','0','0','0','0','0','1'),(2,'成品油配置','Apple','/schemeconfig/refinedoil','/schemeconfig/refinedoil','1','101','1','0','1'),(3,'组分油配置','Apple','/schemeconfig/partoil','/schemeconfig/partoil','1','102','1','0','1'),(4,'属性配置','Apple','/schemeconfig/property','/schemeconfig/property','1','103','1','0','1'),(5,'方案验证','Histogram','/schemetest','0','0','0','0','0','1'),(6,'调合计算','Apple','/schemetest/blendcalc','/schemetest/blendcalc','5','201','1','0','1'),(7,'结果可视化','Apple','/schemetest/pie','/schemetest/pie','5','202','1','0','1'),(8,'配方优化','List','/formulaopti','0','0','0','0','0','1'),(9,'配方计算','Apple','/formulaopti/formulacalc','/formulaopti/formulacalc','8','103','1','0','1'),(10,'结果展示','Apple','/formulaopti/result','/formulaopti/result','8','104','1','0','1'),(11,'配方可视化','Apple','/formulaopti/visual','/formulaopti/visual','8','104','1','0','1'),(12,'智能决策','Guide','/intelligentdec','0','0','0','0','0','1'),(13,'决策计算','Apple','/intelligentdec/decisioncalc','/intelligentdec/decisioncalc','12','104','1','0','1'),(14,'决策方案','Apple','/intelligentdec/decisionsche','/intelligentdec/decisionsche','12','104','1','0','1'),(15,'系统管理','Stamp','/system','0','0','0','0','0','1'),(16,'用户管理','Apple','/system/decisionsche','/schemeconfig/user','15','105','1','0','1'),(17,'角色管理','Apple','/system/role','/schemeconfig/user','15','105','1','0','1'),(18,'菜单权限','Apple','/system/log','/schemeconfig/user','15','105','1','0','1'),(19,'日志管理','Apple','/system/menupermi','/system/menupermi','15','105','1','0','1');
+INSERT INTO `menulist` VALUES (1,'方案配置','CreditCard','/schemeconfig/schemeTab','0','0','0','0','0','2'),(5,'方案验证','Histogram','/schemetest/blendcalc','0','0','0','0','0','2'),(8,'配方优化','List','/formulaopti/formulacalc','0','0','0','0','0','2'),(12,'智能决策','Guide','/intelligentdec','0','0','0','0','0','1'),(13,'参数设置','None','/intelligentdec/parameter','/intelligentdec/parameter','12','104','1','0','1'),(14,'决策方案','None','/intelligentdec/decisionsche','/intelligentdec/decisionsche','12','104','1','0','1'),(15,'系统管理','Stamp','/system','0','0','0','0','0','1'),(16,'用户管理','Apple','/system/decisionsche','/schemeconfig/user','15','105','1','0','1'),(17,'角色管理','Apple','/system/role','/schemeconfig/user','15','105','1','0','1'),(18,'菜单权限','Apple','/system/log','/schemeconfig/user','15','105','1','0','1'),(19,'日志管理','Apple','/system/menupermi','/system/menupermi','15','105','1','0','1'),(20,'测试','Apple','/system/test','/system/test','15','105','1','0','1'),(21,'首页','House','/welcome','0','0','0','0','0','2');
 /*!40000 ALTER TABLE `menulist` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -226,7 +226,7 @@ CREATE TABLE `recipecalc1` (
   `volumeHigh` float DEFAULT NULL,
   `volumeLow` float DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -383,7 +383,7 @@ CREATE TABLE `schemeverify1` (
   `prod1FlowVol` float DEFAULT NULL,
   `prod2FlowVol` float DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -453,4 +453,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-12-07 15:07:49
+-- Dump completed on 2022-12-31 17:44:25

@@ -291,7 +291,7 @@ for t in range(T):
     for n in range(N):
         lhs4 = lhs4 + x[t][1][n] * pro[n][0]
         sum_f2 = sum_f2 + x[t][1][n]
-        lhs4 = lhs4 - pro_low[1][0] * sum_f2
+    lhs4 = lhs4 - pro_low[1][0] * sum_f2
     pro_sl.append(lhs4)
 
 # 计算车柴产量

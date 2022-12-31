@@ -558,6 +558,8 @@ namespace OilBlendSystem.BLL.Implementation
                 //第一行Comp_le，单位是t/m³，乘以需要计算得出的体积m³，等于第一个组分油的产量Comp_rl，单位为t
             }
 
+            Array.Clear(Row, 0, Row.Length);//用完row数组对其清空（之前没有清空是因为每一次都重新赋值给覆盖了）          
+
             //不等式约束
             //
             for (int i = 0; i < ProdOilNum; i++)
@@ -592,6 +594,8 @@ namespace OilBlendSystem.BLL.Implementation
                 Row[0] = 0;
                 lpsolve.add_constraint(lp, Row, lpsolve.lpsolve_constr_types.GE, bge[i]);//GE低限
             }
+
+            Array.Clear(Row, 0, Row.Length);//用完row数组对其清空   
             //库存高限
 
             // //流速上下限 即需要求解变量的上下限
@@ -1195,7 +1199,7 @@ namespace OilBlendSystem.BLL.Implementation
                 Row[0] = 0;
                 lpsolve.add_constraint(lp, Row, lpsolve.lpsolve_constr_types.LE, ble[i]);//LE高限
             }
-
+ 
             //属性低限
             for (int i = 0; i < 4 * ProdOilNum; i++)
             {
@@ -1206,6 +1210,7 @@ namespace OilBlendSystem.BLL.Implementation
                 Row[0] = 0;
                 lpsolve.add_constraint(lp, Row, lpsolve.lpsolve_constr_types.GE, bge[i]);//GE低限
             }
+ 
             //库存高限
 
             // //流速上下限 即需要求解变量的上下限
@@ -1799,6 +1804,7 @@ namespace OilBlendSystem.BLL.Implementation
                 
                 //
             }
+ 
 
             //属性高限
             for (int i = 0; i < 4 * ProdOilNum; i++)
@@ -1811,6 +1817,7 @@ namespace OilBlendSystem.BLL.Implementation
                 lpsolve.add_constraint(lp, Row, lpsolve.lpsolve_constr_types.LE, ble[i]);//LE高限
             }
 
+
             //属性低限
             for (int i = 0; i < 4 * ProdOilNum; i++)
             {
@@ -1821,6 +1828,7 @@ namespace OilBlendSystem.BLL.Implementation
                 Row[0] = 0;
                 lpsolve.add_constraint(lp, Row, lpsolve.lpsolve_constr_types.GE, bge[i]);//GE低限
             }
+ 
             //库存高限
 
             // //流速上下限 即需要求解变量的上下限
