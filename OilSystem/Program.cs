@@ -1,9 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using OilSystem.Configuration;
-using OilBlendSystem.Models.DataBaseModel;
-using OilBlendSystem.Models.ConstructModel;
-using OilBlendSystem.BLL.Interface;
-using OilBlendSystem.BLL.Implementation;
+using OilBlendSystem.Models;
 
 IConfiguration configuration = new ConfigurationBuilder()
                             .AddJsonFile("appsettings.json")

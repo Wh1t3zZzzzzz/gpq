@@ -13,7 +13,7 @@ conn = pymysql.connect(host='localhost', user='root', port=3306, password='53566
 # 使用cursor()方法获取操作游标
 cursor = conn.cursor()
 # txt文件存储位置
-self_FilePath = r"E:\Python_env"
+self_FilePath = r"E:\Python_env\diesel_txt"
 
 # 数据库获取
 
@@ -211,6 +211,7 @@ for t in range(T):
             model.addVar(lb=p_dmin[t][p], ub=p_dmax[t][p], vtype="C", name="提货量_" + str(t) + "_" + str(p)))
     lp.append(lp1)
 
+# 10e2 == 1e3
 M = 10e5
 # 约束组分油参调0-1变量
 for t in range(T):
@@ -291,6 +292,7 @@ for t in range(T):
     for n in range(N):
         lhs4 = lhs4 + x[t][1][n] * pro[n][0]
         sum_f2 = sum_f2 + x[t][1][n]
+        # lhs4 = lhs4 - pro_low[1][0] * sum_f2
     lhs4 = lhs4 - pro_low[1][0] * sum_f2
     pro_sl.append(lhs4)
 
@@ -302,6 +304,7 @@ for t in range(T):
         for n in range(N):
             lhs5 = lhs5 + x[t][0][n]
         flow_che.append(lhs5)
+# print(flow_che)
 # 计算出柴产量
 flow_chu = []
 for t in range(T):
@@ -328,6 +331,10 @@ model.setObjective(
 # model.hideOutput(True)  # 隐藏求解日志
 model.optimize()
 scip_status = model.getStatus()  # 求解标志位
+# for t in range(T):
+#     for p in range(P):
+#         for n in range(N):
+#             print(model.getVal(y[t][p][n]))
 # print(model.getStatus)
 # print("目标函数值:", model.getObjVal())
 

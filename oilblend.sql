@@ -57,7 +57,7 @@ CREATE TABLE `compoilconfig` (
   `prod2Low2` float DEFAULT NULL,
   `prod2High2` float DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,8 +66,63 @@ CREATE TABLE `compoilconfig` (
 
 LOCK TABLES `compoilconfig` WRITE;
 /*!40000 ALTER TABLE `compoilconfig` DISABLE KEYS */;
-INSERT INTO `compoilconfig` VALUES (1,'6#加氢柴油',46,280,4,842,5000,100,5000,0,5000,0,5000,0,5000,200,8000,200,2000,2000,2000,2000,2000,2000,2000,0,5000,0,5000,0,5000,0,5000),(2,'7#加氢柴油',47,310,4,842,5000,0,5000,0,5000,0,5000,0,5000,200,8000,200,2500,2500,2500,2500,2500,2500,2500,0,5000,0,5000,0,5000,0,5000),(3,'3#加氢柴油',48,280,3,842,5500,300,5000,0,5000,0,5000,0,5000,200,8000,200,2500,2500,2500,2500,2500,2500,2500,0,5000,0,5000,0,5000,0,5000),(4,'VI柴油加氢',48,280,7,837,6550,200,5000,0,5000,0,5000,0,5000,200,8000,200,2500,2500,2500,2500,2500,2500,2500,0,5000,0,5000,0,5000,0,5000),(5,'航空煤油',47,300,5,847,1000,0,6000,0,5000,0,5000,0,5000,200,8000,200,2500,2500,2500,2500,2500,2500,2500,0,5000,0,5000,0,5000,0,5000),(6,'1#加氢减一线',48,300,4,842,1000,100,1000,0,5000,0,5000,0,5000,200,8000,200,2500,2500,2500,2500,2500,2500,2500,0,5000,0,5000,0,5000,0,5000),(7,'1#加氢减二线',48,300,3,842,1000,100,5000,0,5000,0,5000,0,5000,200,8000,200,2500,2500,2500,2500,2500,2500,2500,0,5000,0,5000,0,5000,0,5000);
+INSERT INTO `compoilconfig` VALUES (1,'6#加氢柴油',42,280,1,842,5000,0,5000,0,5000,0,5000,0,5000,200,8000,200,2000,2000,2000,2000,2000,2000,2000,0,5000,0,5000,0,5000,0,5000),(2,'7#加氢柴油',47,300,4,842,5000,0,5000,0,5000,0,5000,0,5000,200,8000,200,2500,2500,2500,2500,2500,2500,2500,0,5000,0,5000,0,5000,0,5000),(3,'3#加氢柴油',44,290,3,842,5500,0,5000,0,5000,0,5000,0,5000,200,8000,200,2500,2500,2500,2500,2500,2500,2500,0,5000,0,5000,0,5000,0,5000),(4,'VI柴油加氢',45,280,4,837,6550,0,5000,0,5000,0,5000,0,5000,200,8000,200,2500,2500,2500,2500,2500,2500,2500,0,5000,0,5000,0,5000,0,5000),(5,'航空煤油',47,300,5,847,1000,0,6000,0,5000,0,5000,0,5000,200,8000,200,2500,2500,2500,2500,2500,2500,2500,0,5000,0,5000,0,5000,0,5000),(6,'1#加氢减一线',40,300,1,842,1000,0,1000,0,5000,0,5000,0,5000,200,8000,200,2500,2500,2500,2500,2500,2500,2500,0,5000,0,5000,0,5000,0,5000),(7,'1#加氢减二线',49,300,7,842,1000,0,5000,0,5000,0,5000,0,5000,200,8000,200,2500,2500,2500,2500,2500,2500,2500,0,5000,0,5000,0,5000,0,5000);
 /*!40000 ALTER TABLE `compoilconfig` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `compoilconfig_gas`
+--
+
+DROP TABLE IF EXISTS `compoilconfig_gas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `compoilconfig_gas` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `comOilName` varchar(128) DEFAULT NULL,
+  `ron` float DEFAULT NULL,
+  `t50` float DEFAULT NULL,
+  `suf` float DEFAULT NULL,
+  `den` float DEFAULT NULL,
+  `price` float DEFAULT NULL,
+  `gas92Low1` float DEFAULT NULL,
+  `gas92High1` float DEFAULT NULL,
+  `gas95Low1` float DEFAULT NULL,
+  `gas95High1` float DEFAULT NULL,
+  `gas92Low2` float DEFAULT NULL,
+  `gas92High2` float DEFAULT NULL,
+  `gas95Low2` float DEFAULT NULL,
+  `gas95High2` float DEFAULT NULL,
+  `iniVolume` float DEFAULT NULL,
+  `highVolume` float DEFAULT NULL,
+  `lowVolume` float DEFAULT NULL,
+  `planProduct1` float DEFAULT NULL,
+  `planProduct2` float DEFAULT NULL,
+  `planProduct3` float DEFAULT NULL,
+  `planProduct4` float DEFAULT NULL,
+  `planProduct5` float DEFAULT NULL,
+  `planProduct6` float DEFAULT NULL,
+  `planProduct7` float DEFAULT NULL,
+  `gas98Low1` float DEFAULT NULL,
+  `gas98High1` float DEFAULT NULL,
+  `gasSelfLow1` float DEFAULT NULL,
+  `gasSelfHigh1` float DEFAULT NULL,
+  `gas98Low2` float DEFAULT NULL,
+  `gas98High2` float DEFAULT NULL,
+  `gasSelfLow2` float DEFAULT NULL,
+  `gasSelfHigh2` float DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `compoilconfig_gas`
+--
+
+LOCK TABLES `compoilconfig_gas` WRITE;
+/*!40000 ALTER TABLE `compoilconfig_gas` DISABLE KEYS */;
+INSERT INTO `compoilconfig_gas` VALUES (1,'重整汽油',100,121,0.1,760,5000,0,5000,0,5000,0,5000,0,5000,200,10000,200,2000,2000,2000,2500,2500,2500,2500,0,5000,0,5000,0,5000,0,5000),(2,'MTBE',116,50,3,727,5000,0,5000,0,5000,0,5000,0,5000,200,10000,200,2500,2500,2500,2500,2500,2500,2500,0,5000,0,5000,0,5000,0,5000),(3,'非芳汽油',84,100,0.2,689,5500,0,5000,0,5000,0,5000,0,5000,200,10000,200,2500,2500,2500,2500,2500,2500,2500,0,5000,0,5000,0,5000,0,5000),(4,'催化汽油',92,82,4,736,6550,0,5000,0,5000,0,5000,0,5000,200,10000,200,2500,2500,2500,2500,2500,2500,2500,0,5000,0,5000,0,5000,0,5000),(5,'C5',86,68,0.3,732,2000,0,6000,0,5000,0,5000,0,5000,200,10000,200,2500,2500,2500,2500,2500,2500,2500,0,5000,0,5000,0,5000,0,5000),(6,'烷基化油',96,104,1.2,692,5200,0,5000,0,5000,0,5000,0,5000,200,10000,200,2500,2500,2500,2500,2500,2500,2500,0,5000,0,5000,0,5000,0,5000),(7,'加氢裂化石脑油',85.6,54,1,661,4800,0,5000,0,5000,0,5000,0,5000,200,10000,200,2500,2500,2500,2500,2500,2500,2500,0,5000,0,5000,0,5000,0,5000);
+/*!40000 ALTER TABLE `compoilconfig_gas` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -93,6 +148,31 @@ LOCK TABLES `dispatchweight` WRITE;
 /*!40000 ALTER TABLE `dispatchweight` DISABLE KEYS */;
 INSERT INTO `dispatchweight` VALUES (1,'调度周期',7),(2,'车用柴油产量最大权值',1),(3,'出口柴油十六烷值卡边权值',1),(4,'出口柴油产量最大权值',0),(5,'调度方案切换权值',1),(6,'成品油个数',2);
 /*!40000 ALTER TABLE `dispatchweight` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `dispatchweight_gas`
+--
+
+DROP TABLE IF EXISTS `dispatchweight_gas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `dispatchweight_gas` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `weightName` varchar(128) DEFAULT NULL,
+  `weight` float DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `dispatchweight_gas`
+--
+
+LOCK TABLES `dispatchweight_gas` WRITE;
+/*!40000 ALTER TABLE `dispatchweight_gas` DISABLE KEYS */;
+INSERT INTO `dispatchweight_gas` VALUES (1,'调度周期',7),(2,'92#汽油产量最大权值',1),(3,'95#汽油辛烷值卡边权值',1),(4,'95#汽油产量最大权值',0),(5,'调度方案切换权值',1),(6,'成品油个数',2);
+/*!40000 ALTER TABLE `dispatchweight_gas` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -125,6 +205,38 @@ LOCK TABLES `menulist` WRITE;
 /*!40000 ALTER TABLE `menulist` DISABLE KEYS */;
 INSERT INTO `menulist` VALUES (1,'方案配置','CreditCard','/schemeconfig/schemeTab','0','0','0','0','0','2'),(5,'方案验证','Histogram','/schemetest/blendcalc','0','0','0','0','0','2'),(8,'配方优化','List','/formulaopti/formulacalc','0','0','0','0','0','2'),(12,'智能决策','Guide','/intelligentdec','0','0','0','0','0','1'),(13,'参数设置','None','/intelligentdec/parameter','/intelligentdec/parameter','12','104','1','0','1'),(14,'决策方案','None','/intelligentdec/decisionsche','/intelligentdec/decisionsche','12','104','1','0','1'),(15,'系统管理','Stamp','/system','0','0','0','0','0','1'),(16,'用户管理','Apple','/system/decisionsche','/schemeconfig/user','15','105','1','0','1'),(17,'角色管理','Apple','/system/role','/schemeconfig/user','15','105','1','0','1'),(18,'菜单权限','Apple','/system/log','/schemeconfig/user','15','105','1','0','1'),(19,'日志管理','Apple','/system/menupermi','/system/menupermi','15','105','1','0','1'),(20,'测试','Apple','/system/test','/system/test','15','105','1','0','1'),(21,'首页','House','/welcome','0','0','0','0','0','2');
 /*!40000 ALTER TABLE `menulist` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `menulist_gas`
+--
+
+DROP TABLE IF EXISTS `menulist_gas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `menulist_gas` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `menuName` varchar(128) DEFAULT NULL,
+  `icon` varchar(128) DEFAULT NULL,
+  `path` varchar(128) DEFAULT NULL,
+  `component` varchar(128) DEFAULT NULL,
+  `childID` varchar(128) DEFAULT NULL,
+  `parentID` varchar(128) DEFAULT NULL,
+  `menuState` varchar(128) DEFAULT NULL,
+  `menuCode` varchar(128) DEFAULT NULL,
+  `menuType` varchar(128) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `menulist_gas`
+--
+
+LOCK TABLES `menulist_gas` WRITE;
+/*!40000 ALTER TABLE `menulist_gas` DISABLE KEYS */;
+INSERT INTO `menulist_gas` VALUES (1,'方案配置','CreditCard','/schemeconfig/schemeTab','0','0','0','0','0','2'),(5,'方案验证','Histogram','/schemetest/blendcalc','0','0','0','0','0','2'),(8,'配方优化','List','/formulaopti/formulacalc','0','0','0','0','0','2'),(12,'智能决策','Guide','/intelligentdec','0','0','0','0','0','1'),(13,'参数设置','None','/intelligentdec/parameter','/intelligentdec/parameter','12','104','1','0','1'),(14,'决策方案','None','/intelligentdec/decisionsche','/intelligentdec/decisionsche','12','104','1','0','1'),(15,'系统管理','Stamp','/system','0','0','0','0','0','1'),(16,'用户管理','Apple','/system/decisionsche','/schemeconfig/user','15','105','1','0','1'),(17,'角色管理','Apple','/system/role','/schemeconfig/user','15','105','1','0','1'),(18,'菜单权限','Apple','/system/log','/schemeconfig/user','15','105','1','0','1'),(19,'日志管理','Apple','/system/menupermi','/system/menupermi','15','105','1','0','1'),(20,'测试','Apple','/system/test','/system/test','15','105','1','0','1'),(21,'首页','House','/welcome','0','0','0','0','0','2');
+/*!40000 ALTER TABLE `menulist_gas` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -173,8 +285,58 @@ CREATE TABLE `prodoilconfig` (
 
 LOCK TABLES `prodoilconfig` WRITE;
 /*!40000 ALTER TABLE `prodoilconfig` DISABLE KEYS */;
-INSERT INTO `prodoilconfig` VALUES (1,'车用柴油',43,60,250,350,3,10,830,870,200,200,10000,2000,10000,2000,10000,2000,10000,2000,10000,2000,10000,2000,10000,2000,10000,1),(2,'出口柴油',43,60,250,350,3,10,830,870,200,200,10000,2000,10000,2000,10000,2000,10000,2000,10000,2000,10000,2000,10000,2000,10000,1),(3,'备用成品油1',43,60,250,350,3,10,830,870,200,200,10000,2000,10000,2000,10000,2000,10000,2000,10000,2000,10000,2000,10000,2000,10000,0),(4,'备用成品油2',43,60,250,350,3,10,830,870,200,200,10000,2000,10000,2000,10000,2000,10000,2000,10000,2000,10000,2000,10000,2000,10000,1);
+INSERT INTO `prodoilconfig` VALUES (1,'车用柴油',47,60,255,300,1,7,830,870,200,200,10000,2000,10000,2000,10000,2000,10000,2000,10000,2000,10000,2000,10000,2000,10000,1),(2,'出口柴油',43,60,250,300,1,5,830,870,200,200,10000,2000,10000,2000,10000,2000,10000,2000,10000,2000,10000,2000,10000,2000,10000,1),(3,'备用成品油1',43,60,250,300,1,7,830,870,200,200,10000,2000,10000,2000,10000,2000,10000,2000,10000,2000,10000,2000,10000,2000,10000,1),(4,'备用成品油2',43,60,250,300,1,7,830,870,200,200,10000,2000,10000,2000,10000,2000,10000,2000,10000,2000,10000,2000,10000,2000,10000,0);
 /*!40000 ALTER TABLE `prodoilconfig` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `prodoilconfig_gas`
+--
+
+DROP TABLE IF EXISTS `prodoilconfig_gas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `prodoilconfig_gas` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `prodOilName` varchar(128) DEFAULT NULL,
+  `ronLowLimit` float DEFAULT NULL,
+  `ronHighLimit` float DEFAULT NULL,
+  `t50LowLimit` float DEFAULT NULL,
+  `t50HighLimit` float DEFAULT NULL,
+  `sufLowLimit` float DEFAULT NULL,
+  `sufHighLimit` float DEFAULT NULL,
+  `denLowLimit` float DEFAULT NULL,
+  `denHighLimit` float DEFAULT NULL,
+  `iniVolume` float DEFAULT NULL,
+  `prodVolumeLowLimit` float DEFAULT NULL,
+  `prodVolumeHighLimit` float DEFAULT NULL,
+  `demand1LowLimit` float DEFAULT NULL,
+  `demand1HighLimit` float DEFAULT NULL,
+  `demand2LowLimit` float DEFAULT NULL,
+  `demand2HighLimit` float DEFAULT NULL,
+  `demand3LowLimit` float DEFAULT NULL,
+  `demand3HighLimit` float DEFAULT NULL,
+  `demand4LowLimit` float DEFAULT NULL,
+  `demand4HighLimit` float DEFAULT NULL,
+  `demand5LowLimit` float DEFAULT NULL,
+  `demand5HighLimit` float DEFAULT NULL,
+  `demand6LowLimit` float DEFAULT NULL,
+  `demand6HighLimit` float DEFAULT NULL,
+  `demand7LowLimit` float DEFAULT NULL,
+  `demand7HighLimit` float DEFAULT NULL,
+  `Apply` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `prodoilconfig_gas`
+--
+
+LOCK TABLES `prodoilconfig_gas` WRITE;
+/*!40000 ALTER TABLE `prodoilconfig_gas` DISABLE KEYS */;
+INSERT INTO `prodoilconfig_gas` VALUES (1,'92#汽油',92,93,50,110,0,5,700,775,200,200,12000,8000,10000,8000,10000,8000,10000,8000,10000,8000,10000,8000,10000,8000,10000,1),(2,'95#汽油',95,96,50,110,0,5,700,775,200,200,12000,8000,10000,8000,10000,8000,10000,8000,10000,8000,10000,8000,10000,8000,10000,1),(3,'98#汽油',98,99,50,110,0,5,700,775,200,200,10000,8000,10000,8000,10000,8000,10000,8000,10000,8000,10000,8000,10000,8000,10000,0),(4,'自定义牌号汽油',90,100,50,110,0,5,700,775,200,200,10000,8000,10000,8000,10000,8000,10000,8000,10000,8000,10000,8000,10000,8000,10000,0);
+/*!40000 ALTER TABLE `prodoilconfig_gas` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -198,8 +360,33 @@ CREATE TABLE `property` (
 
 LOCK TABLES `property` WRITE;
 /*!40000 ALTER TABLE `property` DISABLE KEYS */;
-INSERT INTO `property` VALUES (1,'十六烷值指数',1),(2,'初馏点（℃）',1),(3,'多芳烃含量（wt%）',1),(4,'密度（kg/m³）',1);
+INSERT INTO `property` VALUES (1,'十六烷值指数',1),(2,'50%回收温度（℃）',1),(3,'多环芳烃含量（wt%）',1),(4,'密度（kg/m³）',1);
 /*!40000 ALTER TABLE `property` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `property_gas`
+--
+
+DROP TABLE IF EXISTS `property_gas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `property_gas` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `propertyName` varchar(128) DEFAULT NULL,
+  `apply` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `property_gas`
+--
+
+LOCK TABLES `property_gas` WRITE;
+/*!40000 ALTER TABLE `property_gas` DISABLE KEYS */;
+INSERT INTO `property_gas` VALUES (1,'研究法辛烷值（RON）',1),(2,'50%蒸发温度（℃）',1),(3,'硫含量（mg/kg）',1),(4,'密度（kg/m³）',1);
+/*!40000 ALTER TABLE `property_gas` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -226,7 +413,7 @@ CREATE TABLE `recipecalc1` (
   `volumeHigh` float DEFAULT NULL,
   `volumeLow` float DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -235,8 +422,45 @@ CREATE TABLE `recipecalc1` (
 
 LOCK TABLES `recipecalc1` WRITE;
 /*!40000 ALTER TABLE `recipecalc1` DISABLE KEYS */;
-INSERT INTO `recipecalc1` VALUES (1,'6#加氢柴油',5000,1000,30,10,30,10,30,10,30,10,200,8000,100),(2,'7#加氢柴油',4000,2000,20,10,20,10,20,10,20,10,200,8000,100),(3,'3#加氢柴油',3000,1000,20,10,20,10,20,10,20,10,200,8000,100),(4,'VI柴油加氢',3000,1000,30,10,30,14,30,10,30,10,200,8000,100),(5,'航空煤油',3000,1000,15,10,15,10,15,10,15,10,200,8000,100),(6,'1#加氢减一线',6000,1000,15,10,15,10,15,10,15,10,200,8000,100),(7,'1#加氢减二线',2000,1000,25,10,25,10,25,10,25,10,200,8000,100);
+INSERT INTO `recipecalc1` VALUES (1,'6#加氢柴油',5000,5000,50,0,50,0,50,0,50,0,200,8000,100),(2,'7#加氢柴油',4000,4000,45,0,45,0,45,0,45,0,200,8000,100),(3,'3#加氢柴油',5000,5000,45,0,45,0,45,0,45,0,200,8000,100),(4,'VI柴油加氢',5000,5000,40,0,40,0,40,0,40,0,200,8000,100),(5,'航空煤油',3000,3000,40,0,40,0,40,0,40,0,200,8000,100),(6,'1#加氢减一线',6000,6000,40,0,40,0,40,0,40,0,200,8000,100),(7,'1#加氢减二线',5000,5000,35,0,35,0,35,0,35,0,200,8000,100);
 /*!40000 ALTER TABLE `recipecalc1` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `recipecalc1_gas`
+--
+
+DROP TABLE IF EXISTS `recipecalc1_gas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `recipecalc1_gas` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `comOilName` varchar(128) DEFAULT NULL,
+  `comOilProductHigh` float DEFAULT NULL,
+  `comOilProductLow` float DEFAULT NULL,
+  `gas92FlowHigh` float DEFAULT NULL,
+  `gas92FlowLow` float DEFAULT NULL,
+  `gas95FlowHigh` float DEFAULT NULL,
+  `gas95FlowLow` float DEFAULT NULL,
+  `gas98FlowHigh` float DEFAULT NULL,
+  `gas98FlowLow` float DEFAULT NULL,
+  `gasSelfFlowHigh` float DEFAULT NULL,
+  `gasSelfFlowLow` float DEFAULT NULL,
+  `iniVolume` float DEFAULT NULL,
+  `volumeHigh` float DEFAULT NULL,
+  `volumeLow` float DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `recipecalc1_gas`
+--
+
+LOCK TABLES `recipecalc1_gas` WRITE;
+/*!40000 ALTER TABLE `recipecalc1_gas` DISABLE KEYS */;
+INSERT INTO `recipecalc1_gas` VALUES (1,'重整汽油',5000,1000,45,0,45,0,44,0,46,0,200,8000,100),(2,'MTBE',4000,2000,46,0,46,0,42,0,45,0,200,8000,100),(3,'非芳汽油',3000,1000,48,0,49,0,46,0,48,0,200,8000,100),(4,'催化汽油',3000,1000,50,0,52,0,48,0,47,0,200,8000,100),(5,'C5',3000,1000,43,0,51,0,36,0,52,0,200,8000,100),(6,'烷基化油',6000,1000,40,0,48,0,38,0,30,0,200,8000,100),(7,'加氢裂化石脑油',2000,1000,42,0,39,0,39,0,60,0,200,8000,100);
+/*!40000 ALTER TABLE `recipecalc1_gas` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -262,7 +486,7 @@ CREATE TABLE `recipecalc2` (
 
 LOCK TABLES `recipecalc2` WRITE;
 /*!40000 ALTER TABLE `recipecalc2` DISABLE KEYS */;
-INSERT INTO `recipecalc2` VALUES (1,'车柴产量最大权值',1,1,1),(2,'出柴产量最大权值',0,2,1),(3,'备用成品油1产量最大权值',0,3,0),(4,'备用成品油2产量最大权值',1,4,1),(5,'车柴十六烷值权值',0,1,1),(6,'出柴十六烷值权值',1,2,1),(7,'备用成品油1十六烷值权值',0,3,0),(8,'备用成品油2十六烷值权值',0,4,1),(9,'车柴多芳烃权值',0,1,1),(10,'出柴多芳烃权值',1,2,1),(11,'备用成品油1多芳烃权值',1,3,0),(12,'备用成品油2多芳烃权值',0,4,1);
+INSERT INTO `recipecalc2` VALUES (1,'车柴产量最大权值',5,1,1),(2,'出柴产量最大权值',8,2,1),(3,'备用成品油1产量最大权值',10,3,1),(4,'备用成品油2产量最大权值',5,4,0),(5,'车柴十六烷值权值',0,1,1),(6,'出柴十六烷值权值',1,2,1),(7,'备用成品油1十六烷值权值',0,3,1),(8,'备用成品油2十六烷值权值',0,4,0),(9,'车柴多芳烃权值',0,1,1),(10,'出柴多芳烃权值',1,2,1),(11,'备用成品油1多芳烃权值',0,3,1),(12,'备用成品油2多芳烃权值',0,4,0);
 /*!40000 ALTER TABLE `recipecalc2` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -289,8 +513,35 @@ CREATE TABLE `recipecalc2_2` (
 
 LOCK TABLES `recipecalc2_2` WRITE;
 /*!40000 ALTER TABLE `recipecalc2_2` DISABLE KEYS */;
-INSERT INTO `recipecalc2_2` VALUES (1,'车柴产量最大权值',1,1,1),(2,'出柴产量最大权值',0,2,1),(3,'备用成品油1产量最大权值',0,3,0),(4,'备用成品油2产量最大权值',1,4,1),(5,'车柴十六烷值权值',0,1,1),(6,'出柴十六烷值权值',1,2,1),(7,'备用成品油1十六烷值权值',0,3,0),(8,'备用成品油2十六烷值权值',0,4,1),(9,'车柴多芳烃权值',0,1,1),(10,'出柴多芳烃权值',1,2,1),(11,'备用成品油1多芳烃权值',1,3,0),(12,'备用成品油2多芳烃权值',0,4,1);
+INSERT INTO `recipecalc2_2` VALUES (1,'车柴产量最大权值',1,1,1),(2,'出柴产量最大权值',1,2,1),(3,'备用成品油1产量最大权值',0,3,1),(4,'备用成品油2产量最大权值',1,4,0),(5,'车柴十六烷值权值',0,1,1),(6,'出柴十六烷值权值',1,2,1),(7,'备用成品油1十六烷值权值',0,3,1),(8,'备用成品油2十六烷值权值',0,4,0),(9,'车柴多芳烃权值',0,1,1),(10,'出柴多芳烃权值',1,2,1),(11,'备用成品油1多芳烃权值',1,3,1),(12,'备用成品油2多芳烃权值',0,4,0);
 /*!40000 ALTER TABLE `recipecalc2_2` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `recipecalc2_2_gas`
+--
+
+DROP TABLE IF EXISTS `recipecalc2_2_gas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `recipecalc2_2_gas` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `weightName` varchar(128) DEFAULT NULL,
+  `weight` float DEFAULT NULL,
+  `ProdOilStatus` int DEFAULT NULL,
+  `Apply` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `recipecalc2_2_gas`
+--
+
+LOCK TABLES `recipecalc2_2_gas` WRITE;
+/*!40000 ALTER TABLE `recipecalc2_2_gas` DISABLE KEYS */;
+INSERT INTO `recipecalc2_2_gas` VALUES (1,'92#汽油产量最大权值',1,1,1),(2,'95#汽油产量最大权值',0,2,1),(3,'98#汽油产量最大权值',0,3,0),(4,'自定义牌号汽油产量最大权值',0,4,0),(5,'92#汽油辛烷值卡边权值',0,1,1),(6,'95#汽油辛烷值卡边权值',1,2,1),(7,'98#汽油辛烷值卡边权值',0,3,0),(8,'自定义牌号汽油辛烷值卡边权值',0,4,0),(9,'92#汽油硫含量最小权值',0,1,1),(10,'95#汽油硫含量最小权值',1,2,1),(11,'98#汽油硫含量最小权值',0,3,0),(12,'自定义牌号汽油硫含量最小权值',0,4,0);
+/*!40000 ALTER TABLE `recipecalc2_2_gas` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -316,8 +567,62 @@ CREATE TABLE `recipecalc2_3` (
 
 LOCK TABLES `recipecalc2_3` WRITE;
 /*!40000 ALTER TABLE `recipecalc2_3` DISABLE KEYS */;
-INSERT INTO `recipecalc2_3` VALUES (1,'车柴产量最大权值',1,1,1),(2,'出柴产量最大权值',0,2,1),(3,'备用成品油1产量最大权值',0,3,0),(4,'备用成品油2产量最大权值',1,4,1),(5,'车柴十六烷值权值',0,1,1),(6,'出柴十六烷值权值',1,2,1),(7,'备用成品油1十六烷值权值',0,3,0),(8,'备用成品油2十六烷值权值',0,4,1),(9,'车柴多芳烃权值',0,1,1),(10,'出柴多芳烃权值',1,2,1),(11,'备用成品油1多芳烃权值',1,3,0),(12,'备用成品油2多芳烃权值',0,4,1);
+INSERT INTO `recipecalc2_3` VALUES (1,'车柴产量最大权值',1,1,1),(2,'出柴产量最大权值',0,2,1),(3,'备用成品油1产量最大权值',0,3,1),(4,'备用成品油2产量最大权值',1,4,0),(5,'车柴十六烷值权值',0,1,1),(6,'出柴十六烷值权值',0,2,1),(7,'备用成品油1十六烷值权值',0,3,1),(8,'备用成品油2十六烷值权值',1,4,0),(9,'车柴多芳烃权值',0,1,1),(10,'出柴多芳烃权值',0,2,1),(11,'备用成品油1多芳烃权值',0,3,1),(12,'备用成品油2多芳烃权值',0,4,0);
 /*!40000 ALTER TABLE `recipecalc2_3` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `recipecalc2_3_gas`
+--
+
+DROP TABLE IF EXISTS `recipecalc2_3_gas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `recipecalc2_3_gas` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `weightName` varchar(128) DEFAULT NULL,
+  `weight` float DEFAULT NULL,
+  `ProdOilStatus` int DEFAULT NULL,
+  `Apply` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `recipecalc2_3_gas`
+--
+
+LOCK TABLES `recipecalc2_3_gas` WRITE;
+/*!40000 ALTER TABLE `recipecalc2_3_gas` DISABLE KEYS */;
+INSERT INTO `recipecalc2_3_gas` VALUES (1,'92#汽油产量最大权值',1,1,1),(2,'95#汽油产量最大权值',0,2,1),(3,'98#汽油产量最大权值',0,3,0),(4,'自定义牌号汽油产量最大权值',0,4,0),(5,'92#汽油辛烷值卡边权值',0,1,1),(6,'95#汽油辛烷值卡边权值',1,2,1),(7,'98#汽油辛烷值卡边权值',0,3,0),(8,'自定义牌号汽油辛烷值卡边权值',0,4,0),(9,'92#汽油硫含量最小权值',0,1,1),(10,'95#汽油硫含量最小权值',1,2,1),(11,'98#汽油硫含量最小权值',0,3,0),(12,'自定义牌号汽油硫含量最小权值',0,4,0);
+/*!40000 ALTER TABLE `recipecalc2_3_gas` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `recipecalc2_gas`
+--
+
+DROP TABLE IF EXISTS `recipecalc2_gas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `recipecalc2_gas` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `weightName` varchar(128) DEFAULT NULL,
+  `weight` float DEFAULT NULL,
+  `ProdOilStatus` int DEFAULT NULL,
+  `Apply` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `recipecalc2_gas`
+--
+
+LOCK TABLES `recipecalc2_gas` WRITE;
+/*!40000 ALTER TABLE `recipecalc2_gas` DISABLE KEYS */;
+INSERT INTO `recipecalc2_gas` VALUES (1,'92#汽油产量最大权值',1,1,1),(2,'95#汽油产量最大权值',1,2,1),(3,'98#汽油产量最大权值',0,3,0),(4,'自定义牌号汽油产量最大权值',0,4,0),(5,'92#汽油辛烷值卡边权值',0,1,1),(6,'95#汽油辛烷值卡边权值',1,2,1),(7,'98#汽油辛烷值卡边权值',0,3,0),(8,'自定义牌号汽油辛烷值卡边权值',0,4,0),(9,'92#汽油硫含量最小权值',0,1,1),(10,'95#汽油硫含量最小权值',1,2,1),(11,'98#汽油硫含量最小权值',0,3,0),(12,'自定义牌号汽油硫含量最小权值',0,4,0);
+/*!40000 ALTER TABLE `recipecalc2_gas` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -344,8 +649,36 @@ CREATE TABLE `recipecalc3` (
 
 LOCK TABLES `recipecalc3` WRITE;
 /*!40000 ALTER TABLE `recipecalc3` DISABLE KEYS */;
-INSERT INTO `recipecalc3` VALUES (1,'车用柴油',15000,20000,20000,1),(2,'出口柴油',10000,16000,16000,1),(3,'备用成品油1',20000,16000,16000,0),(4,'备用成品油2',20000,16000,16000,1);
+INSERT INTO `recipecalc3` VALUES (1,'车用柴油',20000,20000,20000,1),(2,'出口柴油',12000,16000,16000,1),(3,'备用成品油2',12000,16000,16000,1),(4,'备用成品油2',10000,16000,10000,0);
 /*!40000 ALTER TABLE `recipecalc3` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `recipecalc3_gas`
+--
+
+DROP TABLE IF EXISTS `recipecalc3_gas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `recipecalc3_gas` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `prodOilName` varchar(128) DEFAULT NULL,
+  `prodOilProduct` float DEFAULT NULL,
+  `totalFlow` float DEFAULT NULL,
+  `totalFlow2` float DEFAULT NULL,
+  `Apply` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `recipecalc3_gas`
+--
+
+LOCK TABLES `recipecalc3_gas` WRITE;
+/*!40000 ALTER TABLE `recipecalc3_gas` DISABLE KEYS */;
+INSERT INTO `recipecalc3_gas` VALUES (1,'92#汽油',5000,20000,20000,1),(2,'95#汽油',8000,16000,16000,1),(3,'98#汽油',10000,16000,16000,0),(4,'自定义牌号汽油',10000,16000,16000,0);
+/*!40000 ALTER TABLE `recipecalc3_gas` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -383,7 +716,7 @@ CREATE TABLE `schemeverify1` (
   `prod1FlowVol` float DEFAULT NULL,
   `prod2FlowVol` float DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -394,6 +727,54 @@ LOCK TABLES `schemeverify1` WRITE;
 /*!40000 ALTER TABLE `schemeverify1` DISABLE KEYS */;
 INSERT INTO `schemeverify1` VALUES (1,'6#加氢柴油',22,25,22,25,15,10,15,10,30,70,30,40,15,15,15,15,16,16,16,16,10,20,10,20),(2,'7#加氢柴油',30,12,30,12,20,15,20,15,30,60,70,70,21,11,21,11,21,11,21,11,10,10,10,10),(3,'3#加氢柴油',10,15,10,15,10,20,10,20,40,50,50,50,12,21,12,21,12,21,12,21,10,20,10,20),(4,'VI柴油加氢',8,6,8,6,13,18,13,18,50,40,60,60,10,13,10,13,10,13,10,13,10,10,10,10),(5,'航空煤油',7,0,7,0,18,13,18,13,60,30,40,30,9,14,9,14,9,14,9,14,10,20,10,20),(6,'1#加氢减一线',0,0,0,0,7,9,7,9,70,30,30,30,8,5,8,5,8,5,8,5,10,10,10,10),(7,'1#加氢减二线',0,25,0,25,9,7,9,7,30,80,30,80,8,6,8,6,8,6,8,6,10,20,10,20);
 /*!40000 ALTER TABLE `schemeverify1` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `schemeverify1_gas`
+--
+
+DROP TABLE IF EXISTS `schemeverify1_gas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `schemeverify1_gas` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `comOilName` varchar(128) DEFAULT NULL,
+  `gas92QualityProduct` float DEFAULT NULL,
+  `gas95QualityProduct` float DEFAULT NULL,
+  `gas98QualityProduct` float DEFAULT NULL,
+  `gasSelfQualityProduct` float DEFAULT NULL,
+  `gas92FlowPercentMass` float DEFAULT NULL,
+  `gas95FlowPercentMass` float DEFAULT NULL,
+  `gas98FlowPercentMass` float DEFAULT NULL,
+  `gasSelfFlowPercentMass` float DEFAULT NULL,
+  `gas92FlowMass` float DEFAULT NULL,
+  `gas95FlowMass` float DEFAULT NULL,
+  `gas98FlowMass` float DEFAULT NULL,
+  `gasSelfFlowMass` float DEFAULT NULL,
+  `gas92VolumeProduct` float DEFAULT NULL,
+  `gas95VolumeProduct` float DEFAULT NULL,
+  `gas98VolumeProduct` float DEFAULT NULL,
+  `gasSelfVolumeProduct` float DEFAULT NULL,
+  `gas92FlowPercentVol` float DEFAULT NULL,
+  `gas95FlowPercentVol` float DEFAULT NULL,
+  `gas98FlowPercentVol` float DEFAULT NULL,
+  `gasSelfFlowPercentVol` float DEFAULT NULL,
+  `gas92FlowVol` float DEFAULT NULL,
+  `gas95FlowVol` float DEFAULT NULL,
+  `gas98FlowVol` float DEFAULT NULL,
+  `gasSelfFlowVol` float DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `schemeverify1_gas`
+--
+
+LOCK TABLES `schemeverify1_gas` WRITE;
+/*!40000 ALTER TABLE `schemeverify1_gas` DISABLE KEYS */;
+INSERT INTO `schemeverify1_gas` VALUES (1,'重整汽油',22,25,22,25,15,10,15,10,30,70,30,40,15,15,15,15,16,16,16,16,10,20,10,20),(2,'MTBE',30,12,30,12,20,15,20,15,30,60,70,70,21,11,21,11,21,11,21,11,10,10,10,10),(3,'非芳汽油',10,15,10,15,10,20,10,20,40,50,50,50,12,21,12,21,12,21,12,21,10,20,10,20),(4,'催化汽油',8,6,8,6,13,18,13,18,50,40,60,60,10,13,10,13,10,13,10,13,10,10,10,10),(5,'C5',7,0,7,0,18,13,18,13,60,30,40,30,9,14,9,14,9,14,9,14,10,20,10,20),(6,'烷基化油',0,0,0,0,7,9,7,9,70,30,30,30,8,5,8,5,8,5,8,5,10,10,10,10),(7,'加氢裂化石脑油',0,25,0,25,9,7,9,7,30,80,30,80,8,6,8,6,8,6,8,6,10,20,10,20);
+/*!40000 ALTER TABLE `schemeverify1_gas` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -437,6 +818,46 @@ INSERT INTO `schemeverify2` VALUES (1,'车用柴油',10,46,280,7,820,2000,1000,4
 UNLOCK TABLES;
 
 --
+-- Table structure for table `schemeverify2_gas`
+--
+
+DROP TABLE IF EXISTS `schemeverify2_gas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `schemeverify2_gas` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `prodOilName` varchar(128) DEFAULT NULL,
+  `bottomVolume` float DEFAULT NULL,
+  `ronVol` float DEFAULT NULL,
+  `t50Vol` float DEFAULT NULL,
+  `sufVol` float DEFAULT NULL,
+  `denVol` float DEFAULT NULL,
+  `totalBlendVol` float DEFAULT NULL,
+  `totalBlendVol2` float DEFAULT NULL,
+  `totalBlendVol3` float DEFAULT NULL,
+  `bottomMass` float DEFAULT NULL,
+  `ronMass` float DEFAULT NULL,
+  `t50Mass` float DEFAULT NULL,
+  `sufMass` float DEFAULT NULL,
+  `denMass` float DEFAULT NULL,
+  `totalBlendMass` float DEFAULT NULL,
+  `totalBlendMass2` float DEFAULT NULL,
+  `totalBlendMass3` float DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `schemeverify2_gas`
+--
+
+LOCK TABLES `schemeverify2_gas` WRITE;
+/*!40000 ALTER TABLE `schemeverify2_gas` DISABLE KEYS */;
+INSERT INTO `schemeverify2_gas` VALUES (1,'92#汽油',10,92,105,3,730,2000,1000,4000,50,92,106,1,725,2200,1000,4000),(2,'95#汽油',20,95,108,2,745,2000,500,2000,60,95,107,4,740,2500,2000,5000),(3,'98#汽油',20,98,110,4,738,2000,500,2000,60,98,108,3,748,2500,2000,5000),(4,'自定义牌号汽油',20,90,110,1,750,2000,500,2000,60,90,109,2,765,2500,2000,5000);
+/*!40000 ALTER TABLE `schemeverify2_gas` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Dumping events for database 'oilblend'
 --
 
@@ -453,4 +874,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-12-31 17:44:25
+-- Dump completed on 2023-01-10 17:44:18
