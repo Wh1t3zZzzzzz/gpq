@@ -235,7 +235,7 @@ CREATE TABLE `menulist_gas` (
 
 LOCK TABLES `menulist_gas` WRITE;
 /*!40000 ALTER TABLE `menulist_gas` DISABLE KEYS */;
-INSERT INTO `menulist_gas` VALUES (1,'方案配置','CreditCard','/schemeconfig/schemeTab','0','0','0','0','0','2'),(5,'方案验证','Histogram','/schemetest/blendcalc','0','0','0','0','0','2'),(8,'配方优化','List','/formulaopti/formulacalc','0','0','0','0','0','2'),(12,'智能决策','Guide','/intelligentdec','0','0','0','0','0','1'),(13,'参数设置','None','/intelligentdec/parameter','/intelligentdec/parameter','12','104','1','0','1'),(14,'决策方案','None','/intelligentdec/decisionsche','/intelligentdec/decisionsche','12','104','1','0','1'),(15,'系统管理','Stamp','/system','0','0','0','0','0','1'),(16,'用户管理','Apple','/system/decisionsche','/schemeconfig/user','15','105','1','0','1'),(17,'角色管理','Apple','/system/role','/schemeconfig/user','15','105','1','0','1'),(18,'菜单权限','Apple','/system/log','/schemeconfig/user','15','105','1','0','1'),(19,'日志管理','Apple','/system/menupermi','/system/menupermi','15','105','1','0','1'),(20,'测试','Apple','/system/test','/system/test','15','105','1','0','1'),(21,'首页','House','/welcome','0','0','0','0','0','2');
+INSERT INTO `menulist_gas` VALUES (1,'首页','House','/patrolWelcome','0','0','0','0','0','2'),(2,'方案配置','CreditCard','/schemeconfigp/schemeTabp','0','0','0','0','0','2'),(5,'方案验证','Histogram','/schemetestp/blendcalcp','0','0','0','0','0','2'),(6,'配方优化','List','/formulaoptip/formulacalcp','0','0','0','0','0','2'),(12,'智能决策','Guide','/intelligentdecp','0','0','0','0','0','1'),(13,'参数设置','None','/intelligentdecp/parameterp','/intelligentdecp/parameterp','12','104','1','0','1'),(14,'决策方案','None','/intelligentdecp/decisioncalcp','/intelligentdecp/decisioncalcp','12','104','1','0','1'),(15,'系统管理','Stamp','/system','0','0','0','0','0','1'),(16,'用户管理','Apple','/system/decisionsche','/schemeconfig/user','15','105','1','0','1'),(17,'角色管理','Apple','/system/role','/schemeconfig/user','15','105','1','0','1'),(18,'菜单权限','Apple','/system/log','/schemeconfig/user','15','105','1','0','1'),(19,'日志管理','Apple','/system/menupermi','/system/menupermi','15','105','1','0','1'),(20,'测试','Apple','/system/test','/system/test','15','105','1','0','1');
 /*!40000 ALTER TABLE `menulist_gas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -486,7 +486,7 @@ CREATE TABLE `recipecalc2` (
 
 LOCK TABLES `recipecalc2` WRITE;
 /*!40000 ALTER TABLE `recipecalc2` DISABLE KEYS */;
-INSERT INTO `recipecalc2` VALUES (1,'车柴产量最大权值',5,1,1),(2,'出柴产量最大权值',8,2,1),(3,'备用成品油1产量最大权值',10,3,1),(4,'备用成品油2产量最大权值',5,4,0),(5,'车柴十六烷值权值',0,1,1),(6,'出柴十六烷值权值',1,2,1),(7,'备用成品油1十六烷值权值',0,3,1),(8,'备用成品油2十六烷值权值',0,4,0),(9,'车柴多芳烃权值',0,1,1),(10,'出柴多芳烃权值',1,2,1),(11,'备用成品油1多芳烃权值',0,3,1),(12,'备用成品油2多芳烃权值',0,4,0);
+INSERT INTO `recipecalc2` VALUES (1,'车柴产量最大权值',1,1,1),(2,'出柴产量最大权值',0,2,1),(3,'备用成品油1产量最大权值',0,3,1),(4,'备用成品油2产量最大权值',1,4,0),(5,'车柴十六烷值权值',0,1,1),(6,'出柴十六烷值权值',1,2,1),(7,'备用成品油1十六烷值权值',0,3,1),(8,'备用成品油2十六烷值权值',0,4,0),(9,'车柴多芳烃权值',0,1,1),(10,'出柴多芳烃权值',1,2,1),(11,'备用成品油1多芳烃权值',0,3,1),(12,'备用成品油2多芳烃权值',0,4,0);
 /*!40000 ALTER TABLE `recipecalc2` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -567,7 +567,7 @@ CREATE TABLE `recipecalc2_3` (
 
 LOCK TABLES `recipecalc2_3` WRITE;
 /*!40000 ALTER TABLE `recipecalc2_3` DISABLE KEYS */;
-INSERT INTO `recipecalc2_3` VALUES (1,'车柴产量最大权值',1,1,1),(2,'出柴产量最大权值',0,2,1),(3,'备用成品油1产量最大权值',0,3,1),(4,'备用成品油2产量最大权值',1,4,0),(5,'车柴十六烷值权值',0,1,1),(6,'出柴十六烷值权值',0,2,1),(7,'备用成品油1十六烷值权值',0,3,1),(8,'备用成品油2十六烷值权值',1,4,0),(9,'车柴多芳烃权值',0,1,1),(10,'出柴多芳烃权值',0,2,1),(11,'备用成品油1多芳烃权值',0,3,1),(12,'备用成品油2多芳烃权值',0,4,0);
+INSERT INTO `recipecalc2_3` VALUES (1,'车柴产量最大权值',1,1,1),(2,'出柴产量最大权值',0,2,1),(3,'备用成品油1产量最大权值',0,3,1),(4,'备用成品油2产量最大权值',0,4,0),(5,'车柴十六烷值权值',0,1,1),(6,'出柴十六烷值权值',0,2,1),(7,'备用成品油1十六烷值权值',0,3,1),(8,'备用成品油2十六烷值权值',1,4,0),(9,'车柴多芳烃权值',0,1,1),(10,'出柴多芳烃权值',0,2,1),(11,'备用成品油1多芳烃权值',0,3,1),(12,'备用成品油2多芳烃权值',0,4,0);
 /*!40000 ALTER TABLE `recipecalc2_3` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -621,7 +621,7 @@ CREATE TABLE `recipecalc2_gas` (
 
 LOCK TABLES `recipecalc2_gas` WRITE;
 /*!40000 ALTER TABLE `recipecalc2_gas` DISABLE KEYS */;
-INSERT INTO `recipecalc2_gas` VALUES (1,'92#汽油产量最大权值',1,1,1),(2,'95#汽油产量最大权值',1,2,1),(3,'98#汽油产量最大权值',0,3,0),(4,'自定义牌号汽油产量最大权值',0,4,0),(5,'92#汽油辛烷值卡边权值',0,1,1),(6,'95#汽油辛烷值卡边权值',1,2,1),(7,'98#汽油辛烷值卡边权值',0,3,0),(8,'自定义牌号汽油辛烷值卡边权值',0,4,0),(9,'92#汽油硫含量最小权值',0,1,1),(10,'95#汽油硫含量最小权值',1,2,1),(11,'98#汽油硫含量最小权值',0,3,0),(12,'自定义牌号汽油硫含量最小权值',0,4,0);
+INSERT INTO `recipecalc2_gas` VALUES (1,'92#汽油产量最大权值',1,1,1),(2,'95#汽油产量最大权值',1,2,1),(3,'98#汽油产量最大权值',0,3,0),(4,'自定义牌号汽油产量最大权值',0,4,0),(5,'92#汽油辛烷值卡边权值',1,1,1),(6,'95#汽油辛烷值卡边权值',1,2,1),(7,'98#汽油辛烷值卡边权值',0,3,0),(8,'自定义牌号汽油辛烷值卡边权值',0,4,0),(9,'92#汽油硫含量最小权值',1,1,1),(10,'95#汽油硫含量最小权值',1,2,1),(11,'98#汽油硫含量最小权值',0,3,0),(12,'自定义牌号汽油硫含量最小权值',0,4,0);
 /*!40000 ALTER TABLE `recipecalc2_gas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -636,6 +636,7 @@ CREATE TABLE `recipecalc3` (
   `id` int NOT NULL AUTO_INCREMENT,
   `prodOilName` varchar(128) DEFAULT NULL,
   `prodOilProduct` float DEFAULT NULL,
+  `prodOilProductLow` float DEFAULT NULL,
   `totalFlow` float DEFAULT NULL,
   `totalFlow2` float DEFAULT NULL,
   `Apply` int DEFAULT NULL,
@@ -649,7 +650,7 @@ CREATE TABLE `recipecalc3` (
 
 LOCK TABLES `recipecalc3` WRITE;
 /*!40000 ALTER TABLE `recipecalc3` DISABLE KEYS */;
-INSERT INTO `recipecalc3` VALUES (1,'车用柴油',20000,20000,20000,1),(2,'出口柴油',12000,16000,16000,1),(3,'备用成品油2',12000,16000,16000,1),(4,'备用成品油2',10000,16000,10000,0);
+INSERT INTO `recipecalc3` VALUES (1,'车用柴油',20000,2000,20000,20000,1),(2,'出口柴油',12000,2000,16000,16000,1),(3,'备用成品油1',12000,2000,16000,16000,1),(4,'备用成品油2',10000,2000,16000,10000,0);
 /*!40000 ALTER TABLE `recipecalc3` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -874,4 +875,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-01-10 17:44:18
+-- Dump completed on 2023-01-14 20:24:39

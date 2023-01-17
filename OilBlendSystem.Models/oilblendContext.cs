@@ -372,6 +372,8 @@ namespace OilBlendSystem.Models
 
                 entity.Property(e => e.ProdOilProduct).HasColumnName("prodOilProduct");
 
+                entity.Property(e => e.ProdOilProductLow).HasColumnName("prodOilProductLow");
+
                 entity.Property(e => e.TotalFlow).HasColumnName("totalFlow");
 
                 entity.Property(e => e.TotalFlow2).HasColumnName("totalFlow2");

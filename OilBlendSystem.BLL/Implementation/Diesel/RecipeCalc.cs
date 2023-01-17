@@ -73,7 +73,7 @@ namespace OilBlendSystem.BLL.Implementation.Diesel
             float[] f = new float[iNum];
             for(int i = 0; i < ComOilNum; i++){//成品油的目标函数(产量最大 + 十六烷值 + 多芳烃)
                 for(int j = 0; j < ProdOilNum; j++){
-                    f[ProdOilNum * i + j] = -Weight[j].Weight * CompOilList[i].Den / 1000 * 10000 + Weight[ProdOilNum + j].Weight * (CompOilList[i].Cet - ProdOilList[j].CetLowLimit) * 1000 - Weight[ProdOilNum * 2 + j].Weight * (CompOilList[i].Pol - ProdOilList[j].PolHighLimit) * 1000 ; 
+                    f[ProdOilNum * i + j] = -Weight[j].Weight * CompOilList[i].Den / 1000 * 10000 + Weight[ProdOilNum + j].Weight * (CompOilList[i].Cet - ProdOilList[j].CetLowLimit) * 1000 - Weight[ProdOilNum * 2 + j].Weight * (CompOilList[i].Pol - ProdOilList[j].PolHighLimit) * 1000; 
                 }
             }
             // f[0] = -Weight[0].Weight * CompOilList[0].Den / 1000 * 10000 ;//质量产量乘以10000，质量指标乘以1000
@@ -171,10 +171,15 @@ namespace OilBlendSystem.BLL.Implementation.Diesel
             // 成品油产量不等式约束
 
             Double[,] Prod_le = new Double[ProdOilNum, iNum_Uncontain];//2行16列矩阵 带变量和系数的计算式
-            Double[] Prod_rle = new Double[ProdOilNum];
+            Double[] Prod_rle = new Double[ProdOilNum];//高限
+            Double[] Prod_ple = new Double[ProdOilNum];//低限
 
             for(int i = 0; i < ProdOilNum; i++){
-                Prod_rle[i] = ProdOilProduct[i].ProdOilProduct;//成品油产量限制 
+                Prod_rle[i] = ProdOilProduct[i].ProdOilProduct;//成品油产量限制高限
+            }
+
+            for(int i = 0; i < ProdOilNum; i++){
+                Prod_ple[i] = ProdOilProduct[i].ProdOilProductLow;//成品油产量限制低限
             }
 
             for(int i = 0; i < ProdOilNum; i++){
@@ -570,7 +575,18 @@ namespace OilBlendSystem.BLL.Implementation.Diesel
                     Row[j + 1] = Prod_le[i, j];
                 }
                 Row[0] = 0;
-                lpsolve.add_constraint(lp, Row, lpsolve.lpsolve_constr_types.LE, Prod_rle[i]);//成品油产量不等式约束
+                lpsolve.add_constraint(lp, Row, lpsolve.lpsolve_constr_types.LE, Prod_rle[i]);//成品油产量不等式约束高限
+                //
+            }
+
+            for (int i = 0; i < ProdOilNum; i++)
+            {
+                for (int j = 0; j < iNum_Uncontain; j++)
+                {
+                    Row[j + 1] = Prod_le[i, j];
+                }
+                Row[0] = 0;
+                lpsolve.add_constraint(lp, Row, lpsolve.lpsolve_constr_types.GE, Prod_ple[i]);//成品油产量不等式约束低限
                 //
             }
 
